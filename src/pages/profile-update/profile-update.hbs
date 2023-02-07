@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./profile-update.pcss">
+    <link rel="stylesheet" href="../../index.pcss">
+
+    <title>Profile</title>
+</head>
+<body>
+<div class="profile_update-container">
+    <div class="navigation">
+        <img class="navigation-arrow" src="../../../static/nav_arrow.png" alt="nav arrow">
+    </div>
+    <div class="profile_update-content">
+        <div class="avatar">
+            <img class="avatar-img" src="../../../static/ava_blank.png" alt="avatar">
+            <p class="avatar-name">Name</p>
+        </div>
+        <div class="form">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br>
+            <label for="login">Login:</label><br>
+            <input type="text" id="login" name="login"><br>
+            <label for="first_name">First name:</label><br>
+            <input type="text" id="first_name" name="first_name"><br>
+            <label for="second_name">Last name:</label><br>
+            <input type="text" id="second_name" name="second_name"><br>
+            <label for="phone">Phone:</label><br>
+            <input type="text" id="phone" name="phone"><br>
+        </div>
+        <div class="controls">
+            {{> button/button label='Update'}}
+        </div>
+    </div>
+</div>
+</body>
+</html>

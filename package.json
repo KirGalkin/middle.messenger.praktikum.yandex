@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "messenger for study project",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "parcel index.hbs",
+    "build": "parcel build index.hbs"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/KirGalkin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "parcel": "^2.8.3"
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "parcel": "^2.8.3",
+    "postcss": "^8.4.21",
+    "postcss-custom-properties": "^13.1.1",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.0",
+    "postcss-url": "^10.1.3"
   }
 }
