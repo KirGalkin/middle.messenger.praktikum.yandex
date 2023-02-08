@@ -4,6 +4,7 @@
   "description": "messenger for study project",
   "scripts": {
     "dev": "parcel index.hbs",
+    "start": "npm run build & node server.js",
     "build": "parcel build index.hbs"
   },
   "repository": {
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/KirGalkin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "express": "^4.18.2",
     "parcel": "^2.8.3",
     "postcss": "^8.4.21",
     "postcss-custom-properties": "^13.1.1",
