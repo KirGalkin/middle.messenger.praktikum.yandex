@@ -10,14 +10,14 @@
 </head>
 <body>
 <ul>
-    <li><a href="./src/pages/signIn/signIn.hbs">Sign in</a></li>
-    <li><a href="./src/pages/signUp/signUp.hbs">Sign up</a></li>
-    <li><a href="./src/pages/profile/profile.hbs">Profile</a></li>
-    <li><a href="./src/pages/profile-update/profile-update.hbs">Profile update</a></li>
-    <li><a href="./src/pages/password-update/password-update.hbs">Password update</a></li>
-    <li><a href="./src/pages/500/500.hbs">500</a></li>
-    <li><a href="./src/pages/404/404.hbs">404</a></li>
-    <li><a href="./src/pages/chat/chat.hbs">Chat</a></li>
+    {{> link/link link='./src/pages/signIn/signIn.hbs' label='Sign in' }}
+    {{> link/link link='./src/pages/signUp/signUp.hbs' label='Sign up' }}
+    {{> link/link link='./src/pages/profile/profile.hbs' label='Profile' }}
+    {{> link/link link='./src/pages/profile-update/profile-update.hbs' label='Profile update' }}
+    {{> link/link link='./src/pages/password-update/password-update.hbs' label='Password update' }}
+    {{> link/link link='./src/pages/chat/chat.hbs' label='Chat' }}
+    {{> link/link link='./src/pages/500/500.hbs' label='500' }}
+    {{> link/link link='./src/pages/404/404.hbs' label='404' }}
 </ul>
 </body>
 </html>

@@ -21,16 +21,19 @@
             <p class="avatar-name">Name</p>
         </div>
         <div class="form">
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br>
-            <label for="login">Login:</label><br>
-            <input type="text" id="login" name="login"><br>
-            <label for="first_name">First name:</label><br>
-            <input type="text" id="first_name" name="first_name"><br>
-            <label for="second_name">Last name:</label><br>
-            <input type="text" id="second_name" name="second_name"><br>
-            <label for="phone">Phone:</label><br>
-            <input type="text" id="phone" name="phone"><br>
+            {{> updateField/updateField id='email' label='Email' type='email' }}
+            {{> line/line }}
+
+            {{> updateField/updateField id='login' label='Login' type='login' }}
+            {{> line/line }}
+
+            {{> updateField/updateField id='first_name' label='First name' type='first_name' }}
+            {{> line/line }}
+
+            {{> updateField/updateField id='second_name' label='Last name' type='second_name' }}
+            {{> line/line }}
+
+            {{> updateField/updateField id='phone' label='Phone' type='phone' }}
         </div>
         <div class="controls">
             {{> button/button label='Update'}}

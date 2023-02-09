@@ -5,8 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!--    <link rel="stylesheet" href="./signUp.pcss">-->
-<!--    <link rel="stylesheet" href="./styles.pcss">-->
     <link rel="stylesheet" href="../../index.pcss">
     <title>Sign Up</title>
 </head>
@@ -16,21 +14,20 @@
     <div class="signup-form">
         <h2>Sign up</h2>
 
-        <form>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br>
-            <label for="login">Login:</label><br>
-            <input type="text" id="login" name="login"><br>
-            <label for="first_name">First name:</label><br>
-            <input type="text" id="first_name" name="first_name"><br>
-            <label for="second_name">Last name:</label><br>
-            <input type="text" id="second_name" name="second_name"><br>
-            <label for="phone">Phone:</label><br>
-            <input type="text" id="phone" name="phone"><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password"><br>
-            <label for="password">Password (one more time):</label><br>
-            <input type="text" id="password" name="password"><br><br>
+        <form class="signup-form_inputs">
+            {{> input/input type='email' label='Email:' id='email' style='margin-bottom: 16px'}}
+
+            {{> input/input type='text' label='Login:' id='login' style='margin-bottom: 16px'}}
+
+            {{> input/input type='text' label='First name:' id='first_name' style='margin-bottom: 16px'}}
+
+            {{> input/input type='text' label='Last name:' id='second_name' style='margin-bottom: 16px'}}
+
+            {{> input/input type='text' label='Phone:' id='phone' style='margin-bottom: 16px'}}
+
+            {{> input/input type='password' label='Password:' id='password' style='margin-bottom: 16px'}}
+
+            {{> input/input type='password' label='Password (one more time):' id='second_password' style='margin-bottom: 16px'}}
         </form>
 
         <div class="buttons">
