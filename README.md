@@ -10,3 +10,6 @@ https://www.figma.com/file/W2RLTCx9zxwhhJekrrZDAV/Chat-(Copy)?t=p1y7nqJtWGfci0Qd
 - npm run dev: запускает проект в режиме разработке с hot reload
 - npm run build: сборка проекта
 - npm run start: сборка проекта и запуск сервера express
+
+### Netlify
+https://capable-beijinho-e7296a.netlify.app/
