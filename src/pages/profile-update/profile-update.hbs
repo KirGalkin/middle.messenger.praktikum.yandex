@@ -20,24 +20,26 @@
             <img class="avatar-img" src="../../../static/ava_blank.png" alt="avatar">
             <p class="avatar-name">Name</p>
         </div>
-        <div class="form">
-            {{> updateField/updateField id='email' label='Email' type='email' }}
-            {{> line/line }}
+        <form>
+            <div class="form">
+                {{> updateField/updateField id='email' label='Email' type='email' }}
+                {{> line/line }}
 
-            {{> updateField/updateField id='login' label='Login' type='login' }}
-            {{> line/line }}
+                {{> updateField/updateField id='login' label='Login' type='login' }}
+                {{> line/line }}
 
-            {{> updateField/updateField id='first_name' label='First name' type='first_name' }}
-            {{> line/line }}
+                {{> updateField/updateField id='first_name' label='First name' type='first_name' }}
+                {{> line/line }}
 
-            {{> updateField/updateField id='second_name' label='Last name' type='second_name' }}
-            {{> line/line }}
+                {{> updateField/updateField id='second_name' label='Last name' type='second_name' }}
+                {{> line/line }}
 
-            {{> updateField/updateField id='phone' label='Phone' type='phone' }}
-        </div>
-        <div class="controls">
-            {{> button/button label='Update'}}
-        </div>
+                {{> updateField/updateField id='phone' label='Phone' type='phone' }}
+            </div>
+            <div class="controls">
+                {{> button/button label='Update'}}
+            </div>
+        </form>
     </div>
 </main>
 </body>

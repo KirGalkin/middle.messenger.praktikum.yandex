@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "messenger for study project",
   "scripts": {
-    "dev": "parcel index.hbs",
+    "dev": "parcel index.hbs --open",
     "start": "npm run build & node server.js",
     "build": "parcel build index.hbs"
   },
