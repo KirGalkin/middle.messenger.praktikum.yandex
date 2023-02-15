@@ -1,0 +1,63 @@
+.profile-container {
+    height: 100%;
+
+    .navigation {
+        height: 100%;
+        width: 64px;
+        position: absolute;
+        left: 0;
+        background: #00065F;
+        border-right: 1px solid #44f0f8;
+        display: flex;
+
+        .navigation-arrow {
+            margin: auto;
+            cursor: pointer;
+        }
+    }
+
+    .profile-content {
+        display: flex;
+        flex-direction: column;
+        color: #FAFEFF;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+        font-size: 13px;
+
+        .avatar {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            .avatar-img {
+                margin-bottom: 16px;
+                cursor: pointer;
+            }
+
+            .avatar-name {
+                font-size: 16px;
+            }
+        }
+
+        .form {
+            width: 510px;
+            margin: 0 auto 60px;
+
+            input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        .controls {
+            width: 510px;
+            margin: 0 auto;
+
+            .exit-control {
+                color: #FE5B4A;
+            }
+        }
+    }
+}

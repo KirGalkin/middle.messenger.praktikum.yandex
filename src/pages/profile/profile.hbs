@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./profile.pcss">
+    <link rel="stylesheet" href="../../index.pcss">
+    <title>Profile</title>
+</head>
+<body>
+<main class="profile-container">
+    <div class="navigation">
+        <img class="navigation-arrow" src="../../../static/nav_arrow.png" alt="nav arrow">
+    </div>
+    <div class="profile-content">
+        <div class="avatar">
+            <img class="avatar-img" src="../../../static/ava_blank.png" alt="avatar">
+            <p class="avatar-name">Ivan</p>
+        </div>
+        <div class="form">
+            {{> readonlyField/readonlyField label='Email' value='pochta@yandex.ru'}}
+            {{> line/line }}
+            {{> readonlyField/readonlyField label='Login' value='ivanivanov'}}
+            {{> line/line }}
+            {{> readonlyField/readonlyField label='First name' value='Ivan'}}
+            {{> line/line }}
+            {{> readonlyField/readonlyField label='Last name' value='Ivanov'}}
+            {{> line/line }}
+            {{> readonlyField/readonlyField label='Phone' value='+7 (909) 967 30 30'}}
+        </div>
+        <div class="controls">
+            {{> link/link label='Update profile' link='#' style='color: #44f0f8' }}
+            {{> line/line }}
+            {{> link/link label='Update password' link='#' style='color: #44f0f8' }}
+            {{> line/line }}
+            {{> link/link label='Exit' link='#' style='color: #FE5B4A' }}
+        </div>
+    </div>
+</main>
+</body>
+</html>
