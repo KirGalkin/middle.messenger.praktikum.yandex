@@ -1,7 +1,4 @@
-
 @import "./partials/button/button.pcss";
-@import "./pages/signUp/signUp.pcss";
-@import "./pages/signIn/signIn.pcss";
 @import "./partials/errorMessage/errorMessage.pcss";
 @import "./partials/input/input.pcss";
 @import "./partials/readonlyField/readonlyField.pcss";
@@ -9,12 +6,24 @@
 @import "./partials/link/link.pcss";
 @import "./partials/updateField/updateField.pcss";
 
+@import "./pages/chat/chat.pcss";
+@import "./pages/password-update/password-update.pcss";
+@import "./pages/profile/profile.pcss";
+@import "./pages/profile-update/profile-update.pcss";
+@import "./pages/signUp/signUp.pcss";
+@import "./pages/signIn/signIn.pcss";
+
 html, body, main {
     padding: 0;
     margin: 0;
     height: 100%;
     background-color: #000337;
     font-family: 'Roboto', sans-serif;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
 }
 
 h2, p, a {

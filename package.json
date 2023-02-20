@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "messenger for study project",
   "scripts": {
-    "dev": "parcel index.hbs --open",
+    "dev": "parcel index.html",
     "start": "npm run build & node server.js",
     "build": "parcel build index.hbs",
     "stylelint": "npx stylelint \"**/*.pcss\"",
@@ -21,11 +21,13 @@
   "homepage": "https://github.com/KirGalkin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "eslint": "^8.34.0",
     "eslint-config-airbnb": "^19.0.4",
     "express": "^4.18.2",
+    "handlebars": "^4.7.7",
     "parcel": "^2.8.3",
     "postcss": "^8.4.21",
     "postcss-custom-properties": "^13.1.1",
