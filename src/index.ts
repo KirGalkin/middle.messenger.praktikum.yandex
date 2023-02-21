@@ -16,6 +16,8 @@ import line from '../src/partials/line/line.hbs';
 import readonlyField from '../src/partials/readonlyField/readonlyField.hbs';
 import updateField from '../src/partials/updateField/updateField.hbs';
 
+
+// @ts-ignore
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 
 Handlebars.registerPartial('link', link);
@@ -26,7 +28,7 @@ Handlebars.registerPartial('line', line);
 Handlebars.registerPartial('readonlyField', readonlyField);
 Handlebars.registerPartial('updateField', updateField);
 
-const ROUTES = {
+const ROUTES: {[key: string]: any} = {
     'nav': index,
     '404': page404,
     '500': page500,
@@ -36,16 +38,17 @@ const ROUTES = {
     'profileUpdate': profileUpdate,
     'signIn': signIn,
     'signUp': signUp,
+};
 
-}
-
-window.goToPage = function (page) {
+window.goToPage = function (page: string): void {
     render(ROUTES[page]);
 }
 
-function render(html) {
+function render(html: () => string): void {
     const root = document.querySelector('#root');
-    root.innerHTML = html();
+    if(root) {
+        root.innerHTML = html();
+    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
