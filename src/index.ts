@@ -16,7 +16,6 @@ import line from '../src/partials/line/line.hbs';
 import readonlyField from '../src/partials/readonlyField/readonlyField.hbs';
 import updateField from '../src/partials/updateField/updateField.hbs';
 
-
 // @ts-ignore
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 
@@ -52,7 +51,7 @@ function render(html: () => string): void {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    window.goToPage('nav');
+    window.goToPage('chat');
 })
 
 

@@ -7,16 +7,164 @@
         width: 25%;
         background: #00065F;
         border-right: 1px solid #44F0F8;
+
+        .chat-list_head {
+            display: flex;
+            flex-direction: column;
+
+            .chat-list_profile {
+                color: #FAFEFF;
+                margin: 21px 10px 21px auto;
+                font-size: 12px;
+                line-height: 12px;
+            }
+
+            .chat-list_input {
+                width: 90%;
+                margin: 0 auto 14px;
+                height: 32px;
+                padding: 0 10px;
+                border-radius: 16px;
+                outline: none;
+                border: none;
+            }
+        }
+
+        .chat-list_body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 10px;
+
+            .chat-list_card {
+                color: #FAFEFF;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 0;
+
+                .card-avatar {
+                    height: 47px;
+                    width: 47px;
+                    background: aliceblue;
+                    border-radius: 23px;
+                    margin: 10px
+                }
+
+                .card-body {
+                    width: 75%;
+                    margin: 0 8px 0 0;
+
+                    .card-body_name {
+                        margin: 0 0 4px 0;
+                        color: #44f0f8;
+                    }
+                    .card-body_message {
+                        font-size: 14px;
+                        overflow: hidden;
+                        display: inline-block;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                    }
+                }
+
+                .card-info {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 100%;
+                    font-size: 12px;
+                    align-items: center;
+                    padding-right: 8px;
+
+                    .card-info_time {
+                        margin-bottom: 14px;
+                    }
+                    .card-info_new-msg {
+                        color: #000337;
+                        height: 20px;
+                        width: 20px;
+                        background: #44f0f8;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
     }
 
     .chat-main {
         display: flex;
         height: 100%;
         width: 75%;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0 20px;
 
-        p {
-            color: #FAFEFF;
-            margin: auto;
+        .chat-main_messages {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            height: 100%;
+            padding-bottom: 14px;
+
+            > * {
+                margin-bottom: 16px;
+            }
+
+
+            .received-message {
+                max-width: 50%;
+                background: #E2F195;
+                padding: 14px;
+                border-radius: 2px 26px 26px 26px;
+                align-self: flex-start;
+                width: fit-content;
+            }
+
+            .sent-message {
+                max-width: 50%;
+                background: #44f0f8;
+                padding: 14px;
+                border-radius: 26px 26px 2px 26px;
+                width: fit-content;
+                align-self: flex-end;
+            }
         }
+
+        .chat-main_controls {
+            height: 54px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            border-top: 1px solid #44f0f8;
+
+            .controls-attach {
+                height: 32px;
+                width: 32px;
+                background: #FAFEFF;
+            }
+
+            .controls-message {
+                width: 100%;
+                height: 32px;
+                margin: 0 10px;
+                outline: none;
+                border-radius: 16px;
+                border: none;
+                padding: 0 10px;
+            }
+
+            .controls-send {
+                height: 32px;
+                width: 32px;
+                background: #44f0f8;
+            }
+        }
+
     }
 }
