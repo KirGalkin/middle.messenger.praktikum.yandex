@@ -1,4 +1,5 @@
 import {EventBus} from "./eventBus";
+import {v4 as makeUUID} from 'uuid';
 
 export enum EVENTS {
     INIT = 'init',
@@ -12,17 +13,26 @@ export abstract class Block {
     private readonly meta: {tagName: string, props: any};
     private el?: HTMLElement;
     private readonly eventBus: EventBus;
-    private readonly props: any;
+    protected readonly props: any;
+    children: Record<string, Block> = {}
+
+    private readonly id: string;
 
     get element(): HTMLElement | undefined {
         return this.el;
     }
 
-    constructor(tagName: string = 'div', props: any) {
+    constructor(tagName: string = 'div', propsWithChildren: any = {}) {
         const eventBus = new EventBus();
+
+        const {children, props} = this.getChildrenAndProps(propsWithChildren)
+
         this.meta = {tagName, props};
 
-        this.props = this.makePropsProxy(props);
+        this.id = makeUUID();
+
+        this.children = children;
+        this.props = this.makePropsProxy({...props, id: this.id});
 
         //TODO why?
         this.eventBus = eventBus;
@@ -57,8 +67,34 @@ export abstract class Block {
         this.element.style.display = 'none';
     }
 
-    protected render(): string {
-        return '';
+
+    protected compile(template: (context: any) => string, props: any) {
+        const propsAndStubs = {...props};
+
+        Object.entries(this.children).forEach(([key, child]) => {
+            propsAndStubs[key] = `<div data-id="${child.id}"></div>`
+        })
+
+        const html = template(propsAndStubs);
+
+        const fragment = this.createDocumentElement('template') as HTMLTemplateElement;
+
+        fragment.innerHTML = html;
+
+        Object.values(this.children).forEach(child => {
+            const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+            if(!stub) {
+                return;
+            }
+
+            stub.replaceWith(child.element!);
+        })
+
+        return fragment.content;
+    }
+
+    protected render(): DocumentFragment {
+        return new DocumentFragment();
     }
 
     protected componentDidMount(): void {
@@ -89,6 +125,10 @@ export abstract class Block {
 
     private componentDidMountInternal(): void {
         this.componentDidMount();
+
+        Object.values(this.children).forEach(child => {
+            child.dispatchComponentDidMount();
+        })
     }
 
     private componentDidUpdateInternal(oldProps: any, newProps: any): void {
@@ -105,14 +145,23 @@ export abstract class Block {
 
         this.removeEvents();
 
-        this.element.innerHTML = block
+        // this.element.innerHTML = block
+        this.element.innerHTML = '';
+
+        this.element.appendChild(block);
 
         this.addEvents();
     }
 
     private createResources(): void {
         const {tagName} = this.meta;
-        this.el = document.createElement(tagName);
+        this.el = this.createDocumentElement(tagName);
+    }
+
+    private createDocumentElement(tagName: string): HTMLElement {
+        const element = document.createElement(tagName);
+        element.setAttribute('data-id', this.id);
+        return element;
     }
 
     private makePropsProxy(props: any) {
@@ -152,6 +201,21 @@ export abstract class Block {
         Object.keys(events).forEach(eventName => {
             this.element?.removeEventListener(eventName, events[eventName]);
         })
+    }
+
+    private getChildrenAndProps(propsAndChildren: any): {children: Record<string, Block>, props: Record<string, any>} {
+        const children: Record<string, Block> = {};
+        const props: Record<string, any> = {};
+
+        Object.entries(propsAndChildren).forEach(([key, value]) => {
+            if (value instanceof Block) {
+                children[key] = value;
+            } else {
+                props[key] = value;
+            }
+        })
+
+        return {children, props};
     }
 
 }

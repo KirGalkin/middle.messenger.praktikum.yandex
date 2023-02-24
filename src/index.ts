@@ -18,6 +18,7 @@ import updateField from '../src/partials/updateField/updateField.hbs';
 
 // @ts-ignore
 import Handlebars from 'handlebars/dist/handlebars.runtime';
+import {HomePage} from "./pages/home";
 
 Handlebars.registerPartial('link', link);
 Handlebars.registerPartial('button', button);
@@ -51,7 +52,14 @@ function render(html: () => string): void {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    window.goToPage('chat');
+    // window.goToPage('chat');
+    const root = document.querySelector('#root')!;
+
+    const homePage = new HomePage({ title: 'Home p21312age' });
+
+    root.append(homePage.element!);
+
+    homePage.dispatchComponentDidMount();
 })
 
 
