@@ -1,0 +1,22 @@
+import template from './errorMessage.hbs';
+import {Block} from '../../utils/block';
+
+interface ErrorMessageProps {
+    code: string,
+    message: string,
+    link: string
+}
+
+export class ErrorMessage extends Block {
+    constructor(props: ErrorMessageProps) {
+        super('div', props);
+    }
+
+    protected init() {
+        this.element?.classList.add('error-message_container')
+    }
+
+    protected render(): DocumentFragment {
+        return this.compile(template, this.props);
+    }
+}

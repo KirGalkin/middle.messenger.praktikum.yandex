@@ -13,6 +13,10 @@ export class Button extends Block {
         super('button', props);
     }
 
+    protected init() {
+        this.element?.classList.add('main-button');
+    }
+
     render() {
         return this.compile(template, this.props);
     }

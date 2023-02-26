@@ -1,29 +1,20 @@
-<main class="signup-container">
+<div class="signup-form">
+    <h2>Sign up</h2>
 
-    <div class="signup-form">
-        <h2>Sign up</h2>
+    <form>
+        <div class="signup-form_inputs">
+            {{{inputEmail}}}
+            {{{inputLogin}}}
+            {{{inputFirstName}}}
+            {{{inputLastName}}}
+            {{{inputPhone}}}
+            {{{inputPassword}}}
+            {{{inputPasswordRepeat}}}
+        </div>
+        <div class="buttons">
+            {{{button}}}
+            <a href="../signIn/signIn.hbs">Sign in</a>
+        </div>
+    </form>
 
-        <form>
-            <div class="signup-form_inputs">
-                {{> input type='email' label='Email:' id='email' style='margin-bottom: 16px'}}
-
-                {{> input type='text' label='Login:' id='login' style='margin-bottom: 16px'}}
-
-                {{> input type='text' label='First name:' id='first_name' style='margin-bottom: 16px'}}
-
-                {{> input type='text' label='Last name:' id='second_name' style='margin-bottom: 16px'}}
-
-                {{> input type='text' label='Phone:' id='phone' style='margin-bottom: 16px'}}
-
-                {{> input type='password' label='Password:' id='password' style='margin-bottom: 16px'}}
-
-                {{> input type='password' label='Password (one more time):' id='second_password' style='margin-bottom: 16px'}}
-            </div>
-            <div class="buttons">
-                {{> button label='Sign up'}}
-                <a href="../signIn/signIn.hbs">Sign in</a>
-            </div>
-        </form>
-
-    </div>
-</main>
+</div>

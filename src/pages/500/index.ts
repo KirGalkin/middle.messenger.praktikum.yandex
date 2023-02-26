@@ -1,16 +1,16 @@
-import template from './404.hbs';
+import template from './500.hbs';
 import {Block} from "../../utils/block";
-import {ErrorMessage} from "../../components/errorMessage";
+import {ErrorMessage} from '../../components/errorMessage/index'
 
-export class NotFoundErrorPage extends Block {
+export class ServerErrorPage extends Block {
     constructor(props: any) {
         super('main', props);
     }
 
     protected init() {
         this.children.errorMessage = new ErrorMessage({
-            code: '404',
-            message: 'Something gone wrong!',
+            code: '500',
+            message: 'We will fix it',
             link: '#'
         })
     }
@@ -18,4 +18,9 @@ export class NotFoundErrorPage extends Block {
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
+
 }
+
+
+
+

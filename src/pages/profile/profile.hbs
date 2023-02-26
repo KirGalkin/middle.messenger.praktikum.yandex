@@ -1,30 +1,35 @@
-<main class="profile-container">
-    <div class="navigation">
-        <img class="navigation-arrow" src="../../../static/nav_arrow.png" alt="nav arrow">
+<div class="navigation">
+    <img class="navigation-arrow" src="../../../static/nav_arrow.png" alt="nav arrow">
+</div>
+<div class="profile-content">
+    <div class="avatar">
+        <!--            TODO пофиксать картинки-->
+        <img class="avatar-img" src="../../../static/ava_blank.png" alt="avatar">
+        <p class="avatar-name">Ivan</p>
     </div>
-    <div class="profile-content">
-        <div class="avatar">
-<!--            TODO пофиксать картинки-->
-            <img class="avatar-img" src="../../../static/ava_blank.png" alt="avatar">
-            <p class="avatar-name">Ivan</p>
-        </div>
-        <div class="form">
-            {{> readonlyField label='Email' value='pochta@yandex.ru'}}
-            {{> line }}
-            {{> readonlyField label='Login' value='ivanivanov'}}
-            {{> line }}
-            {{> readonlyField label='First name' value='Ivan'}}
-            {{> line }}
-            {{> readonlyField label='Last name' value='Ivanov'}}
-            {{> line }}
-            {{> readonlyField label='Phone' value='+7 (909) 967 30 30'}}
-        </div>
-        <div class="controls">
-            {{> link label='Update profile' link='#' style='color: #44f0f8' }}
-            {{> line }}
-            {{> link label='Update password' link='#' style='color: #44f0f8' }}
-            {{> line }}
-            {{> link label='Exit' link='#' style='color: #FE5B4A' }}
-        </div>
+    <div class="form">
+
+        {{{readonlyFieldEmail}}}
+        <div class="line"></div>
+        {{{readonlyFieldLogin}}}
+        <div class="line"></div>
+        {{{readonlyFieldFirstName}}}
+
+        <div class="line"></div>
+        {{{readonlyFieldLastName}}}
+        <div class="line"></div>
+        {{{readonlyFieldPhone}}}
+
     </div>
-</main>
+    <div class="controls">
+
+        {{{linkUpdateProfile}}}
+
+        <div class="line"></div>
+        {{{linkUpdatePassword}}}
+
+        <div class="line"></div>
+        {{{linkExit}}}
+
+    </div>
+</div>

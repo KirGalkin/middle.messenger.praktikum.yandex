@@ -18,6 +18,12 @@ export class HomePage extends Block {
                 click: () => console.log('clicked'),
             },
         });
+        this.children.button2 = new Button({
+            label: 'Click me2',
+            events: {
+                click: () => console.log('clicked2'),
+            },
+        });
     }
 
     render() {

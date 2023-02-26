@@ -8,25 +8,18 @@ import profileUpdate from '../src/pages/profile-update/profile-update.hbs';
 import signIn from '../src/pages/signIn/signIn.hbs';
 import signUp from '../src/pages/signUp/signUp.hbs';
 
-import link from '../src/partials/link/link.hbs';
-import button from '../src/partials/button/button.hbs';
-import errorMessage from '../src/partials/errorMessage/errorMessage.hbs';
-import input from '../src/partials/input/input.hbs';
-import line from '../src/partials/line/line.hbs';
-import readonlyField from '../src/partials/readonlyField/readonlyField.hbs';
-import updateField from '../src/partials/updateField/updateField.hbs';
-
-// @ts-ignore
-import Handlebars from 'handlebars/dist/handlebars.runtime';
+// import {HomePage} from "./pages/home";
+// import {NotFoundErrorPage} from "./pages/404";
+import {ServerErrorPage} from "./pages/500";
+import {renderDOM} from "./utils/renderDOM";
+import {NotFoundErrorPage} from "./pages/404";
 import {HomePage} from "./pages/home";
-
-Handlebars.registerPartial('link', link);
-Handlebars.registerPartial('button', button);
-Handlebars.registerPartial('errorMessage', errorMessage);
-Handlebars.registerPartial('input', input);
-Handlebars.registerPartial('line', line);
-Handlebars.registerPartial('readonlyField', readonlyField);
-Handlebars.registerPartial('updateField', updateField);
+import {SignInPage} from "./pages/signIn";
+import {PasswordUpdate} from "./pages/password-update";
+import {Profile, ProfilePage} from "./pages/profile";
+import {ProfileUpdatePage} from "./pages/profile-update";
+import {SignUpPage} from "./pages/signUp";
+import {ChatPage} from "./pages/chat";
 
 const ROUTES: {[key: string]: any} = {
     'nav': index,
@@ -46,20 +39,21 @@ window.goToPage = function (page: string): void {
 
 function render(html: () => string): void {
     const root = document.querySelector('#root');
-    if(root) {
+    if (root) {
         root.innerHTML = html();
     }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    // window.goToPage('chat');
-    const root = document.querySelector('#root')!;
+    // window.goToPage('signUp');
+    // const homePage = new HomePage({ title: 'Home p21312age' });
+    // const notFoundErrorPage = new NotFoundErrorPage({});
+    const page = new ChatPage({});
 
-    const homePage = new HomePage({ title: 'Home p21312age' });
+    renderDOM('#root', page);
+    // root.appendChild(serverErrorPage.element!);
 
-    root.append(homePage.element!);
-
-    homePage.dispatchComponentDidMount();
+    // serverErrorPage.dispatchComponentDidMount();
 })
 
 

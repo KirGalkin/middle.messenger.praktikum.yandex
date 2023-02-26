@@ -1,31 +1,29 @@
-<main class="profile_update-container">
-    <div class="navigation">
-        <img class="navigation-arrow" src="../../../static/nav_arrow.png" alt="nav arrow">
+<div class="navigation">
+    <img class="navigation-arrow" src="../../../static/nav_arrow.png" alt="nav arrow">
+</div>
+<div class="profile_update-content">
+    <div class="avatar">
+        <img class="avatar-img" src="../../../static/ava_blank.png" alt="avatar">
+        <p class="avatar-name">Name</p>
     </div>
-    <div class="profile_update-content">
-        <div class="avatar">
-            <img class="avatar-img" src="../../../static/ava_blank.png" alt="avatar">
-            <p class="avatar-name">Name</p>
+    <form>
+        <div class="form">
+            {{{ updateFieldEmail }}}
+            <div class="line"></div>
+
+            {{{ updateFieldLogin }}}
+            <div class="line"></div>
+
+            {{{ updateFieldFirstName }}}
+            <div class="line"></div>
+
+            {{{ updateFieldLastName }}}
+            <div class="line"></div>
+
+            {{{ updateFieldPhone }}}
         </div>
-        <form>
-            <div class="form">
-                {{> updateField id='email' label='Email' type='email' }}
-                {{> line }}
-
-                {{> updateField id='login' label='Login' type='login' }}
-                {{> line }}
-
-                {{> updateField id='first_name' label='First name' type='first_name' }}
-                {{> line }}
-
-                {{> updateField id='second_name' label='Last name' type='second_name' }}
-                {{> line }}
-
-                {{> updateField id='phone' label='Phone' type='phone' }}
-            </div>
-            <div class="controls">
-                {{> button label='Update'}}
-            </div>
-        </form>
-    </div>
-</main>
+        <div class="controls">
+            {{{button}}}
+        </div>
+    </form>
+</div>
