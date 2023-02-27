@@ -1,7 +1,7 @@
 import {Block} from "../../utils/block";
 import template from './signUp.hbs';
 import {Button} from "../../components/button";
-import {Input} from "../../components/input";
+import {InputField} from "../../components/inputField";
 
 export class SignUpPage extends Block {
     constructor(props: {}) {
@@ -19,44 +19,44 @@ export class SignUpPage extends Block {
             label: 'Sign up'
         });
 
-        this.children.inputEmail = new Input({
-            id: 'email',
+        this.children.inputEmail = new InputField({
+            htmlId: 'email',
             label: 'Email:',
             type: 'email'
         });
 
-        this.children.inputLogin = new Input({
-            id: 'login',
+        this.children.inputLogin = new InputField({
+            htmlId: 'login',
             label: 'Login:',
             type: 'text'
         });
 
-        this.children.inputFirstName = new Input({
-            id: 'first_name',
+        this.children.inputFirstName = new InputField({
+            htmlId: 'first_name',
             label: 'First name:',
             type: 'text'
         })
 
-        this.children.inputLastName = new Input({
-            id: 'second_name',
+        this.children.inputLastName = new InputField({
+            htmlId: 'second_name',
             label: 'Last name:',
             type: 'text'
         })
 
-        this.children.inputPhone = new Input({
-            id: 'phone',
+        this.children.inputPhone = new InputField({
+            htmlId: 'phone',
             label: 'Phone:',
             type: 'tel'
         })
 
-        this.children.inputPassword = new Input({
-            id: 'password',
+        this.children.inputPassword = new InputField({
+            htmlId: 'password',
             label: 'Password:',
             type: 'password'
         })
 
-        this.children.inputPasswordRepeat = new Input({
-            id: 'second_password',
+        this.children.inputPasswordRepeat = new InputField({
+            htmlId: 'second_password',
             label: 'Password (one more time):',
             type: 'password'
         })

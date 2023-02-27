@@ -1,7 +1,7 @@
 import {Block} from "../../utils/block";
 import template from './signIn.hbs';
 import {Button} from "../../components/button";
-import {Input} from "../../components/input";
+import {InputField} from "../../components/inputField";
 
 export class SignInPage extends Block {
     constructor(props: {}) {
@@ -11,22 +11,25 @@ export class SignInPage extends Block {
     protected init() {
         this.element?.classList.add('signin-container');
 
-        this.children.button = new Button({
-            label: 'Sign in',
-            events: {
-                click: function () {
-                }
-            }
-        });
-        this.children.inputLogin = new Input({
-            id: 'login',
+        this.children.inputLogin = new InputField({
+            htmlId: 'login',
             label: 'Login:',
             type: 'text'
         });
-        this.children.inputPass = new Input({
-            id: 'password',
+        this.children.inputPass = new InputField({
+            htmlId: 'password',
             label: 'Password:',
             type: 'password'
+        });
+
+        this.children.button = new Button({
+            label: 'Sign in',
+            events: {
+                click: (event) => {
+                    event.preventDefault();
+                    console.log((this.children.inputLogin as InputField).value);
+                }
+            }
         });
     }
 
