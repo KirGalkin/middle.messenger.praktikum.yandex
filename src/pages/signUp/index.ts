@@ -13,7 +13,9 @@ export class SignUpPage extends Block {
 
         this.children.button = new Button({
             events: {
-                click: function () {
+                click: (event) => {
+                    event.preventDefault();
+                    console.log((this.children.inputEmail as InputField).value);
                 }
             },
             label: 'Sign up'

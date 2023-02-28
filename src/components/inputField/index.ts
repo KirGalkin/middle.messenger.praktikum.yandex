@@ -2,6 +2,7 @@ import {Block} from "../../utils/block";
 import template from './inputField.hbs';
 import {Label} from "./label";
 import {Input} from "./input";
+import {InputError} from "./error";
 
 interface InputProps {
     htmlId: string,
@@ -31,6 +32,10 @@ export class InputField extends Block {
             type: this.props.type
         });
 
+        const error = (this.children.input as Input)?.value?.trim().length ? undefined : 'ERRROROROROOOROROROROR';
+        this.children.error = new InputError({
+            message: error
+        });
     }
 
     protected render(): DocumentFragment {
