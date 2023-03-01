@@ -1,37 +1,35 @@
-<!--<main class="chat-content">-->
-    <div class="chat-list">
-        <div class="chat-list_head">
-            <a class="chat-list_profile">Profile ></a>
-            <input class="chat-list_input" type="text" placeholder="Search">
-        </div>
-        <div class="chat-list_body">
-            <div class="line"></div>
-
-            {{{chat}}}
-
-            <div class="line"></div>
-
-            {{{chat1}}}
-
-            <div class="line"></div>
-
-            {{{chat2}}}
-
-            <div class="line"></div>
-
-            {{{chat3}}}
-
-        </div>
+<div class="chat-list">
+    <div class="chat-list_head">
+        <a class="chat-list_profile">Profile ></a>
+        <input class="chat-list_input" type="text" placeholder="Search">
     </div>
-    <div class="chat-main">
-        <div class="chat-main_messages">
-            {{{receivedMessage}}}
-            {{{sentMessage}}}
-        </div>
-        <div class="chat-main_controls">
-            <div class="controls-attach"></div>
-            <input class="controls-message" type="text" placeholder="Message" id="message" name="message">
-            <div class="controls-send"></div>
-        </div>
+    <div class="chat-list_body">
+        <div class="line"></div>
+
+        {{{chat}}}
+
+        <div class="line"></div>
+
+        {{{chat1}}}
+
+        <div class="line"></div>
+
+        {{{chat2}}}
+
+        <div class="line"></div>
+
+        {{{chat3}}}
+
     </div>
-<!--</main>-->
+</div>
+<div class="chat-main">
+    <div class="chat-main_messages">
+        {{{receivedMessage}}}
+        {{{sentMessage}}}
+    </div>
+    <div class="chat-main_controls">
+        <div class="controls-attach"></div>
+        {{{message}}}
+        <div class="controls-send"></div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import template from './chat.hbs';
 import {Chat} from "../../components/chat";
 import {ReceivedMessage} from "../../components/receivedMessage";
 import {SentMessage} from "../../components/sentMessage";
+import {Message} from "../../components/message";
 
 export class ChatPage extends Block {
     constructor(props: {}) {
@@ -53,6 +54,13 @@ export class ChatPage extends Block {
 
         this.children.sentMessage = new SentMessage({
             message: 'Lorem ipsum!!'
+        })
+
+        this.children.message = new Message({
+            htmlId: 'message',
+            type: 'text',
+            placeholder: 'Message',
+            events: {}
         })
 
     }

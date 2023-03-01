@@ -2,6 +2,7 @@ import {Block} from "../../utils/block";
 import template from './signIn.hbs';
 import {Button} from "../../components/button";
 import {InputField} from "../../components/inputField";
+import {ValidationService} from "../../utils/validationService";
 
 export class SignInPage extends Block {
     constructor(props: {}) {
@@ -14,12 +15,14 @@ export class SignInPage extends Block {
         this.children.inputLogin = new InputField({
             htmlId: 'login',
             label: 'Login:',
-            type: 'text'
+            type: 'text',
+            validationFn: ValidationService.validateLogin
         });
         this.children.inputPass = new InputField({
             htmlId: 'password',
             label: 'Password:',
-            type: 'password'
+            type: 'password',
+            validationFn: ValidationService.validatePassword
         });
 
         this.children.button = new Button({
@@ -27,7 +30,11 @@ export class SignInPage extends Block {
             events: {
                 click: (event) => {
                     event.preventDefault();
-                    console.log((this.children.inputLogin as InputField).value);
+                    const login = (this.children.inputLogin as InputField).value;
+                    const password = (this.children.inputPass as InputField).value;
+                    console.log(
+                        `Login: ${login}, ${ValidationService.validateLogin(login || '') || 'is valid'}\n`,
+                        `Password: ${password}, ${ValidationService.validatePassword(password || '') || 'is valid'}\n`);
                 }
             }
         });

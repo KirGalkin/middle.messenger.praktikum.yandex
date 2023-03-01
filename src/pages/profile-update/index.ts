@@ -2,6 +2,7 @@ import {Block} from "../../utils/block";
 import template from './profile-update.hbs';
 import {Button} from "../../components/button";
 import {UpdateField} from "../../components/updateField";
+import {ValidationService} from "../../utils/validationService";
 
 export class ProfileUpdatePage extends Block {
     constructor(props: {}) {
@@ -14,39 +15,58 @@ export class ProfileUpdatePage extends Block {
         this.children.button = new Button({
             label: 'Update',
             events: {
-                click: function () {
+                click: (event) => {
+                    event.preventDefault();
+                    const email = (this.children.updateFieldEmail as UpdateField)?.value;
+                    const login = (this.children.updateFieldLogin as UpdateField)?.value;
+                    const firstName = (this.children.updateFieldFirstName as UpdateField)?.value;
+                    const lastName = (this.children.updateFieldLastName as UpdateField)?.value;
+                    const phone = (this.children.updateFieldPhone as UpdateField)?.value;
+
+                    console.log(
+                        `Email: ${email}, ${ValidationService.validateEmail(email || '') || 'is valid'}\n`,
+                        `Login: ${login}, ${ValidationService.validateLogin(login || '') || 'is valid'}\n`,
+                        `FirstName: ${firstName}, ${ValidationService.validateName(firstName || '') || 'is valid'}\n`,
+                        `LastName: ${lastName}, ${ValidationService.validateName(lastName || '') || 'is valid'}\n`,
+                        `Phone: ${phone}, ${ValidationService.validatePhone(phone || '') || 'is valid'}\n`,
+                    )
                 }
             }
         });
 
         this.children.updateFieldEmail = new UpdateField({
-            id: 'email',
+            htmlId: 'email',
             label: 'Email',
-            type: 'email'
+            type: 'email',
+            validationFn: ValidationService.validateEmail
         })
 
         this.children.updateFieldLogin = new UpdateField({
-            id: 'login',
+            htmlId: 'login',
             label: 'Login',
-            type: 'text'
+            type: 'text',
+            validationFn: ValidationService.validateLogin
         })
 
         this.children.updateFieldFirstName = new UpdateField({
-            id: 'first_name',
+            htmlId: 'first_name',
             label: 'First name',
-            type: 'text'
+            type: 'text',
+            validationFn: ValidationService.validateName
         })
 
         this.children.updateFieldLastName = new UpdateField({
-            id: 'second_name',
+            htmlId: 'second_name',
             label: 'Last name',
-            type: 'text'
+            type: 'text',
+            validationFn: ValidationService.validateName
         })
 
         this.children.updateFieldPhone = new UpdateField({
-            id: 'phone',
+            htmlId: 'phone',
             label: 'Phone',
-            type: 'tel'
+            type: 'tel',
+            validationFn: ValidationService.validatePhone
         })
 
     }

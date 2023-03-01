@@ -14,6 +14,12 @@ export class InputError extends Block {
     }
 
     protected render(): DocumentFragment {
+        if (!this.props?.message) {
+            this.hide();
+        } else {
+            this.show();
+        }
+
         return this.compile(template, this.props);
     }
 }

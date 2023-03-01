@@ -1,13 +1,14 @@
 import {Block} from "../../utils/block";
 import template from './inputField.hbs';
-import {Label} from "./label";
-import {Input} from "./input";
-import {InputError} from "./error";
+import {Label} from "../shared/label";
+import {Input} from "../shared/input";
+import {InputError} from "../shared/error";
 
 interface InputProps {
     htmlId: string,
     label: string,
-    type: string
+    type: string,
+    validationFn?: (value: string) => string | undefined
 }
 export class InputField extends Block {
 
@@ -20,8 +21,9 @@ export class InputField extends Block {
     }
 
     protected init() {
-        console.log(this.props)
         this.element?.classList.add('input');
+
+        this.children.error = new InputError({});
 
         this.children.label = new Label({
             label: this.props.label
@@ -29,16 +31,25 @@ export class InputField extends Block {
 
         this.children.input = new Input({
             htmlId: this.props.htmlId,
-            type: this.props.type
-        });
-
-        const error = (this.children.input as Input)?.value?.trim().length ? undefined : 'ERRROROROROOOROROROROR';
-        this.children.error = new InputError({
-            message: error
+            type: this.props.type,
+            events: {
+                focus: () => {
+                    this.validateField();
+                },
+                blur: () => {
+                    this.validateField();
+                }
+            }
         });
     }
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
+    }
+
+    private validateField(): void {
+        const {validationFn} = this.props;
+        const message = validationFn ? validationFn((this.children.input as Input)?.value) : undefined;
+        this.children.error.setProps({message});
     }
 }

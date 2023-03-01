@@ -1,10 +1,14 @@
-import {Block} from "../../../utils/block";
-
+import {Block} from "../../utils/block";
 interface InputProps {
     htmlId: string,
-    type: string
+    type: string,
+    placeholder?: string,
+    events: {
+        focus?: (...args: any[]) => void;
+        blur?: (...args: any[]) => void;
+    };
 }
-export class Input extends Block {
+export class Message extends Block {
     get value(): string | undefined {
         return (this.element as HTMLInputElement | undefined)?.value;
     }
@@ -14,8 +18,9 @@ export class Input extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('input_field')
+        this.element?.classList.add('message')
         this.element?.setAttribute('id', this.props.htmlId);
         this.element?.setAttribute('type', this.props.type);
+        this.element?.setAttribute('placeholder', this.props.placeholder);
     }
 }
