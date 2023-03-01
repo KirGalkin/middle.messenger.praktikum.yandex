@@ -5,7 +5,7 @@ import {UpdateField} from "../../components/updateField";
 import {ValidationService} from "../../utils/validationService";
 
 export class ProfileUpdatePage extends Block {
-    constructor(props: {}) {
+    constructor(props: unknown) {
         super('main', props);
     }
 
@@ -24,11 +24,16 @@ export class ProfileUpdatePage extends Block {
                     const phone = (this.children.updateFieldPhone as UpdateField)?.value;
 
                     console.log(
-                        `Email: ${email}, ${ValidationService.validateEmail(email || '') || 'is valid'}\n`,
-                        `Login: ${login}, ${ValidationService.validateLogin(login || '') || 'is valid'}\n`,
-                        `FirstName: ${firstName}, ${ValidationService.validateName(firstName || '') || 'is valid'}\n`,
-                        `LastName: ${lastName}, ${ValidationService.validateName(lastName || '') || 'is valid'}\n`,
-                        `Phone: ${phone}, ${ValidationService.validatePhone(phone || '') || 'is valid'}\n`,
+                        `Email: ${email}, 
+                            ${ValidationService.validateEmail(email || '') || 'is valid'}\n`,
+                        `Login: ${login}, 
+                            ${ValidationService.validateLogin(login || '') || 'is valid'}\n`,
+                        `FirstName: ${firstName}, 
+                            ${ValidationService.validateName(firstName || '') || 'is valid'}\n`,
+                        `LastName: ${lastName}, 
+                            ${ValidationService.validateName(lastName || '') || 'is valid'}\n`,
+                        `Phone: ${phone}, 
+                            ${ValidationService.validatePhone(phone || '') || 'is valid'}\n`,
                     )
                 }
             }

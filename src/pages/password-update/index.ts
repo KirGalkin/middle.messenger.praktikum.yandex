@@ -5,7 +5,7 @@ import {Button} from "../../components/button";
 import {ValidationService} from "../../utils/validationService";
 
 export class PasswordUpdatePage extends Block {
-    constructor(props: {}) {
+    constructor(props: unknown) {
         super('main', props);
     }
 
@@ -37,14 +37,23 @@ export class PasswordUpdatePage extends Block {
             events: {
                 click: (event) => {
                     event.preventDefault();
-                    const oldPassword = (this.children.updateFieldOldPass as UpdateField)?.value
-                    const newPassword = (this.children.updateFieldNewPass as UpdateField)?.value
-                    const newPasswordRepeat = (this.children.updateFieldNewPassRepeat as UpdateField)?.value
+                    const oldPassword =
+                        (this.children.updateFieldOldPass as UpdateField)?.value
+                    const newPassword =
+                        (this.children.updateFieldNewPass as UpdateField)?.value
+                    const newPasswordRepeat =
+                        (this.children.updateFieldNewPassRepeat as UpdateField)?.value
 
                     console.log(
-                        `Old Password: ${oldPassword}, ${ValidationService.validatePassword(oldPassword || '') || 'is valid'}\n`,
-                        `New Password: ${newPassword}, ${ValidationService.validatePassword(newPassword || '') || 'is valid'}\n`,
-                        `New Password repeat: ${newPasswordRepeat}, ${ValidationService.validatePassword(newPasswordRepeat || '') || 'is valid'}\n`,
+                        `Old Password: ${oldPassword}, 
+                            ${ValidationService.validatePassword(oldPassword || '') 
+                            || 'is valid'}\n`,
+                        `New Password: ${newPassword}, 
+                            ${ValidationService.validatePassword(newPassword || '') 
+                            || 'is valid'}\n`,
+                        `New Password repeat: ${newPasswordRepeat}, 
+                            ${ValidationService.validatePassword(newPasswordRepeat || '') 
+                            || 'is valid'}\n`,
                     )
                 }
             },

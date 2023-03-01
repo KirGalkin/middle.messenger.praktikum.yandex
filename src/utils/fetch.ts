@@ -30,7 +30,7 @@ export class Fetch {
         return this.request(url, {...options, method: Method.DELETE}, options.timeout);
     };
 
-    request(url: string, options: Options = {method: Method.GET}, timeout: number = 5000) {
+    request(url: string, options: Options = {method: Method.GET}, timeout = 5000) {
         const {method, data} = options;
 
         return new Promise((resolve, reject) => {

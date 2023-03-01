@@ -48,7 +48,8 @@ export class UpdateField extends Block {
 
     private validateField(): void {
         const {validationFn} = this.props;
-        const message = validationFn ? validationFn((this.children.input as Input)?.value) : undefined;
+        const message = validationFn ?
+            validationFn((this.children.input as Input)?.value) : undefined;
         this.children.error.setProps({message});
     }
 }

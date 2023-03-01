@@ -22,7 +22,7 @@ export abstract class Block {
         return this.el;
     }
 
-    constructor(tagName: string = 'div', propsWithChildren: any = {}) {
+    constructor(tagName = 'div', propsWithChildren: any = {}) {
         const eventBus = new EventBus();
 
         const {children, props} = this.getChildrenAndProps(propsWithChildren)
@@ -86,8 +86,9 @@ export abstract class Block {
             if(!stub) {
                 return;
             }
-
-            stub.replaceWith(child.element!);
+            if (child.element) {
+                stub.replaceWith(child.element);
+            }
         })
 
         return fragment.content;
@@ -98,7 +99,7 @@ export abstract class Block {
     }
 
     protected componentDidMount(): void {
-
+        console.log('componentDidMount')
     }
 
     protected componentDidUpdate(oldProps: any, newProps: any): boolean {
@@ -106,7 +107,9 @@ export abstract class Block {
         return true;
     }
 
-    protected init(): void {}
+    protected init(): void {
+        console.log('init')
+    }
 
     private registerEvents(eventBus: EventBus): void {
         eventBus.on(EVENTS.INIT, this.initInternal.bind(this));
@@ -203,7 +206,8 @@ export abstract class Block {
         })
     }
 
-    private getChildrenAndProps(propsAndChildren: any): {children: Record<string, Block>, props: Record<string, any>} {
+    private getChildrenAndProps(propsAndChildren: any):
+        {children: Record<string, Block>, props: Record<string, any>} {
         const children: Record<string, Block> = {};
         const props: Record<string, any> = {};
 

@@ -6,7 +6,7 @@ import {SentMessage} from "../../components/sentMessage";
 import {Message} from "../../components/message";
 
 export class ChatPage extends Block {
-    constructor(props: {}) {
+    constructor(props: unknown) {
         super('main', props);
     }
 
@@ -15,28 +15,32 @@ export class ChatPage extends Block {
 
         this.children.chat = new Chat({
             count: 2,
-            message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
+            message: 'Lorem ipsum dolor sit amet, ' +
+                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
             name: 'Andrew',
             time: '15:24'
         })
 
         this.children.chat1 = new Chat({
             count: 2,
-            message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
+            message: 'Lorem ipsum dolor sit amet, ' +
+                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
             name: 'Andrew',
             time: '15:24'
         })
 
         this.children.chat2 = new Chat({
             count: 2,
-            message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
+            message: 'Lorem ipsum dolor sit amet, ' +
+                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
             name: 'Andrew',
             time: '15:24'
         })
 
         this.children.chat3 = new Chat({
             count: 2,
-            message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
+            message: 'Lorem ipsum dolor sit amet, ' +
+                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
             name: 'Andrew',
             time: '15:24'
         })

@@ -5,7 +5,7 @@ import {InputField} from "../../components/inputField";
 import {ValidationService} from "../../utils/validationService";
 
 export class SignUpPage extends Block {
-    constructor(props: {}) {
+    constructor(props: unknown) {
         super('main', props);
     }
 
@@ -24,13 +24,27 @@ export class SignUpPage extends Block {
                     const password = (this.children.inputPassword as InputField)?.value;
                     const passwordRepeat = (this.children.inputPasswordRepeat as InputField)?.value;
                     console.log(
-                        `Email: ${email}, ${ValidationService.validateEmail(email || '') || 'is valid'}\n`,
-                        `Login: ${login}, ${ValidationService.validateLogin(login || '') || 'is valid'}\n`,
-                        `FirstName: ${firstName}, ${ValidationService.validateName(firstName || '') || 'is valid'}\n`,
-                        `LastName: ${lastName}, ${ValidationService.validateName(lastName || '') || 'is valid'}\n`,
-                        `Phone: ${phone}, ${ValidationService.validatePhone(phone || '') || 'is valid'}\n`,
-                        `Password: ${password}, ${ValidationService.validatePassword(password || '') || 'is valid'}\n`,
-                        `PasswordRepeat: ${passwordRepeat}, ${ValidationService.validatePassword(passwordRepeat || '') || 'is valid'}\n`,
+                        `Email: ${email}, 
+                            ${ValidationService.validateEmail(email || '') 
+                            || 'is valid'}\n`,
+                        `Login: ${login}, 
+                            ${ValidationService.validateLogin(login || '') 
+                            || 'is valid'}\n`,
+                        `FirstName: ${firstName}, 
+                            ${ValidationService.validateName(firstName || '') 
+                            || 'is valid'}\n`,
+                        `LastName: ${lastName}, 
+                            ${ValidationService.validateName(lastName || '') 
+                            || 'is valid'}\n`,
+                        `Phone: ${phone}, 
+                            ${ValidationService.validatePhone(phone || '') 
+                            || 'is valid'}\n`,
+                        `Password: ${password}, 
+                            ${ValidationService.validatePassword(password || '') 
+                            || 'is valid'}\n`,
+                        `PasswordRepeat: ${passwordRepeat}, 
+                            ${ValidationService.validatePassword(passwordRepeat || '') 
+                            || 'is valid'}\n`,
                     );
                 }
             },

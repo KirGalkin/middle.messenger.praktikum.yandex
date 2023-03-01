@@ -4,7 +4,7 @@ import {NavigationLink} from "../../components/navigationLink";
 import {renderDOM} from "../../utils/renderDOM";
 
 export class NavigationPage extends Block {
-    constructor(props: {}) {
+    constructor(props: unknown) {
         super('nav', props);
     }
 

@@ -5,7 +5,7 @@ import {InputField} from "../../components/inputField";
 import {ValidationService} from "../../utils/validationService";
 
 export class SignInPage extends Block {
-    constructor(props: {}) {
+    constructor(props: unknown) {
         super('main', props);
     }
 
@@ -33,8 +33,10 @@ export class SignInPage extends Block {
                     const login = (this.children.inputLogin as InputField).value;
                     const password = (this.children.inputPass as InputField).value;
                     console.log(
-                        `Login: ${login}, ${ValidationService.validateLogin(login || '') || 'is valid'}\n`,
-                        `Password: ${password}, ${ValidationService.validatePassword(password || '') || 'is valid'}\n`);
+                        `Login: ${login}, 
+                            ${ValidationService.validateLogin(login || '') || 'is valid'}\n`,
+                        `Password: ${password}, 
+                            ${ValidationService.validatePassword(password || '') || 'is valid'}\n`);
                 }
             }
         });

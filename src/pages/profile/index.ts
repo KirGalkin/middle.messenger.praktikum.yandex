@@ -4,7 +4,7 @@ import {ReadonlyField} from "../../components/readonlyField";
 import {Link} from "../../components/link";
 
 export class ProfilePage extends Block {
-    constructor(props: {}) {
+    constructor(props: unknown) {
         super('main', props);
     }
 

@@ -20,7 +20,7 @@ const ROUTES: {[key: string]: any} = {
     'signUp': SignUpPage,
 };
 
-export function renderDOM(route: keyof typeof ROUTES, query: string = '#root' ): void {
+export function renderDOM(route: keyof typeof ROUTES, query = '#root' ): void {
     const root = document.querySelector(query);
     if (!root) {
         throw new Error(`Root element with query ${query} not found`);
