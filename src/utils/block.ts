@@ -10,7 +10,7 @@ export enum EVENTS {
 
 export abstract class Block {
 
-    private readonly meta: {tagName: string, props: any};
+    private readonly meta: {tagName: string, props: unknown};
     private el?: HTMLElement;
     private readonly eventBus: EventBus;
     protected readonly props: any;
@@ -22,7 +22,7 @@ export abstract class Block {
         return this.el;
     }
 
-    constructor(tagName = 'div', propsWithChildren: any = {}) {
+    constructor(tagName = 'div', propsWithChildren: unknown = {}) {
         const eventBus = new EventBus();
 
         const {children, props} = this.getChildrenAndProps(propsWithChildren)
@@ -46,7 +46,7 @@ export abstract class Block {
         this.eventBus.emit(EVENTS.FLOW_CDM);
     }
 
-    setProps = (nextProps: any) => {
+    setProps = (nextProps: unknown) => {
         if(!nextProps) {
             return;
         }
@@ -68,7 +68,7 @@ export abstract class Block {
     }
 
 
-    protected compile(template: (context: any) => string, props: any) {
+    protected compile(template: (context: unknown) => string, props: any) {
         const propsAndStubs = {...props};
 
         Object.entries(this.children).forEach(([key, child]) => {
@@ -102,7 +102,7 @@ export abstract class Block {
         console.log('componentDidMount')
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
         console.log(oldProps, newProps);
         return true;
     }
@@ -134,7 +134,7 @@ export abstract class Block {
         })
     }
 
-    private componentDidUpdateInternal(oldProps: any, newProps: any): void {
+    private componentDidUpdateInternal(oldProps: unknown, newProps: unknown): void {
         if (this.componentDidUpdate(oldProps, newProps)) {
             this.eventBus.emit(EVENTS.FLOW_RENDER);
         }
@@ -168,14 +168,15 @@ export abstract class Block {
     }
 
     private makePropsProxy(props: any) {
+        // eslint-disable-next-line
         const self = this;
 
         return new Proxy(props, {
-            get(target: any, p: string | symbol): any {
+            get(target: any, p: string | symbol): unknown {
                 const value = target[p];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target: any, p: string | symbol, newValue: any): boolean {
+            set(target: any, p: string | symbol, newValue: unknown): boolean {
                 const old = {...target};
                 target[p] = newValue;
 
@@ -207,9 +208,9 @@ export abstract class Block {
     }
 
     private getChildrenAndProps(propsAndChildren: any):
-        {children: Record<string, Block>, props: Record<string, any>} {
+        {children: Record<string, Block>, props: Record<string, unknown>} {
         const children: Record<string, Block> = {};
-        const props: Record<string, any> = {};
+        const props: Record<string, unknown> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Block) {

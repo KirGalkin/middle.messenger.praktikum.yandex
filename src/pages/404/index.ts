@@ -3,7 +3,7 @@ import {Block} from "../../utils/block";
 import {ErrorMessage} from "../../components/errorMessage";
 
 export class NotFoundErrorPage extends Block {
-    constructor(props: any) {
+    constructor(props: unknown) {
         super('main', props);
     }
 

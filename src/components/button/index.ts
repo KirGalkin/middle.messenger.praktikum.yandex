@@ -4,7 +4,7 @@ import {Block} from "../../utils/block";
 interface ButtonProps {
     label: string;
     events: {
-        click: (...args: any[]) => void;
+        click: (...args: unknown[]) => void;
     };
 }
 

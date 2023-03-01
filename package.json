@@ -7,7 +7,6 @@
     "start": "npm run build & node server.js",
     "build": "parcel build index.html",
     "stylelint": "npx stylelint \"**/*.pcss\" --fix",
-    "eslint": "node_modules/.bin/eslint . --fix",
     "lint": "eslint . --ext .ts --fix"
   },
   "repository": {

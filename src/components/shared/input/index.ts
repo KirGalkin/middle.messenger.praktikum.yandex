@@ -4,8 +4,8 @@ interface InputProps {
     htmlId: string,
     type: string,
     events: {
-        focus: (...args: any[]) => void;
-        blur: (...args: any[]) => void;
+        focus: (...args: unknown[]) => void;
+        blur: (...args: unknown[]) => void;
     };
 }
 export class Input extends Block {

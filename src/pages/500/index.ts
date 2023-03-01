@@ -1,9 +1,9 @@
 import template from './500.hbs';
 import {Block} from "../../utils/block";
-import {ErrorMessage} from '../../components/errorMessage/index'
+import {ErrorMessage} from '../../components/errorMessage'
 
 export class ServerErrorPage extends Block {
-    constructor(props: any) {
+    constructor(props: unknown) {
         super('main', props);
     }
 
