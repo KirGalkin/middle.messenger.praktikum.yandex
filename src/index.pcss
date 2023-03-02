@@ -18,10 +18,16 @@
 @import url("./pages/signIn/signIn.pcss");
 
 html, body, main {
+    --main-bg-color: #000337;
+    --main-text-color: #fafeff;
+    --primary-color: #44f0f8;
+    --warning-color: #fe5b4a;
+    --secondary-bg-color: #00065f;
+
     padding: 0;
     margin: 0;
     height: 100%;
-    background-color: #000337;
+    background-color: var(--main-bg-color);
     font-family: Roboto, sans-serif;
 }
 
@@ -37,19 +43,19 @@ h2, p, a {
 
 a {
     text-decoration: none;
-    color: #44f0f8;
+    color: var(--primary-color);
     font-size: 11px;
     line-height: 11px;
 }
 
 nav {
     ul {
-        color: #fafeff;
+        color: var(--main-text-color);
     }
 }
 
 .line {
     width: 100%;
-    border-bottom: 1px solid #44f0f8;
+    border-bottom: 1px solid var(--primary-color);
 }
 

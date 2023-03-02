@@ -42,19 +42,19 @@ export class ProfilePage extends Block {
         this.children.linkUpdateProfile = new Link({
             label: 'Update profile',
             link: '#',
-            style: 'color: #44f0f8'
+            style: 'color: var(--primary-color)'
         })
 
         this.children.linkUpdatePassword = new Link({
             label: 'Update password',
             link: '#',
-            style: 'color: #44f0f8'
+            style: 'color: var(--primary-color)'
         })
 
         this.children.linkExit = new Link({
             label: 'Exit',
             link: '#',
-            style: 'color: #FE5B4A'
+            style: 'color: var(--warning-color)'
         })
 
         this.children.avatar = new Avatar({

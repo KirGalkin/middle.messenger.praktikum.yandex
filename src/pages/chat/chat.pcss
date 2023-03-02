@@ -5,15 +5,15 @@
     .chat-list {
         height: 100%;
         width: 25%;
-        background: #00065f;
-        border-right: 1px solid #44f0f8;
+        background: var(--secondary-bg-color);
+        border-right: 1px solid var(--primary-color);
 
         .chat-list_head {
             display: flex;
             flex-direction: column;
 
             .chat-list_profile {
-                color: #fafeff;
+                color: var(--main-text-color);
                 margin: 21px 10px 21px auto;
                 font-size: 12px;
                 line-height: 12px;
@@ -64,18 +64,18 @@
             flex-direction: row;
             align-items: center;
             width: 100%;
-            border-top: 1px solid #44f0f8;
+            border-top: 1px solid var(--primary-color);
 
             .controls-attach {
                 height: 32px;
                 width: 32px;
-                background: #fafeff;
+                background: var(--main-text-color);
             }
 
             .controls-send {
                 height: 32px;
                 width: 32px;
-                background: #44f0f8;
+                background: var(--primary-color);
             }
         }
 
