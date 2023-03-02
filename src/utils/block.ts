@@ -200,8 +200,6 @@ export abstract class Block {
     private removeEvents(): void {
         const {events = {}} = this.props;
 
-        console.log('removeEvents', events)
-
         Object.keys(events).forEach(eventName => {
             this.element?.removeEventListener(eventName, events[eventName]);
         })
