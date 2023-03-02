@@ -3,6 +3,9 @@ import template from './profile-update.hbs';
 import {Button} from "../../components/button";
 import {UpdateField} from "../../components/updateField";
 import {ValidationService} from "../../utils/validationService";
+import {Avatar} from "../../components/avatar";
+import {Img} from "../../components/shared/img";
+import arrow from "../../../static/nav_arrow.png";
 
 export class ProfileUpdatePage extends Block {
     constructor(props: unknown) {
@@ -15,7 +18,7 @@ export class ProfileUpdatePage extends Block {
         this.children.button = new Button({
             label: 'Update',
             events: {
-                click: (event) => {
+                click: (event: any) => {
                     event.preventDefault();
                     const email = (this.children.updateFieldEmail as UpdateField)?.value;
                     const login = (this.children.updateFieldLogin as UpdateField)?.value;
@@ -74,6 +77,15 @@ export class ProfileUpdatePage extends Block {
             validationFn: ValidationService.validatePhone
         })
 
+        this.children.avatar = new Avatar({
+            name: 'Ivan!'
+        })
+
+        this.children.arrowImg = new Img({
+            src: arrow,
+            alt: 'back',
+            className: 'navigation-arrow'
+        })
     }
 
     protected render(): DocumentFragment {

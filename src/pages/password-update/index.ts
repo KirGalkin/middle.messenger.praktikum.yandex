@@ -3,6 +3,9 @@ import template from './password-update.hbs';
 import {UpdateField} from "../../components/updateField";
 import {Button} from "../../components/button";
 import {ValidationService} from "../../utils/validationService";
+import {Avatar} from "../../components/avatar";
+import {Img} from "../../components/shared/img";
+import arrow from "../../../static/nav_arrow.png";
 
 export class PasswordUpdatePage extends Block {
     constructor(props: unknown) {
@@ -35,7 +38,7 @@ export class PasswordUpdatePage extends Block {
 
         this.children.button = new Button({
             events: {
-                click: (event) => {
+                click: (event: any) => {
                     event.preventDefault();
                     const oldPassword =
                         (this.children.updateFieldOldPass as UpdateField)?.value
@@ -58,6 +61,16 @@ export class PasswordUpdatePage extends Block {
                 }
             },
             label: 'Update'
+        })
+
+        this.children.avatar = new Avatar({
+            name: 'Ivan!'
+        })
+
+        this.children.arrowImg = new Img({
+            src: arrow,
+            alt: 'back',
+            className: 'navigation-arrow'
         })
     }
 

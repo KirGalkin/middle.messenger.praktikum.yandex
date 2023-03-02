@@ -28,7 +28,7 @@ export class SignInPage extends Block {
         this.children.button = new Button({
             label: 'Sign in',
             events: {
-                click: (event) => {
+                click: (event: any) => {
                     event.preventDefault();
                     const login = (this.children.inputLogin as InputField).value;
                     const password = (this.children.inputPass as InputField).value;

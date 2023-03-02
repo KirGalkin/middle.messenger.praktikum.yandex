@@ -4,6 +4,9 @@ import {Chat} from "../../components/chat";
 import {ReceivedMessage} from "../../components/receivedMessage";
 import {SentMessage} from "../../components/sentMessage";
 import {Message} from "../../components/message";
+import {Img} from "../../components/shared/img";
+import imageAttach from '../../../static/attach.png';
+import imageSend from '../../../static/nav_arrow_left.png';
 
 export class ChatPage extends Block {
     constructor(props: unknown) {
@@ -65,6 +68,16 @@ export class ChatPage extends Block {
             type: 'text',
             placeholder: 'Message',
             events: {}
+        })
+
+        this.children.imageAttach = new Img({
+            alt: 'attach',
+            src: imageAttach
+        })
+
+        this.children.imageSend = new Img({
+            alt: 'attach',
+            src: imageSend
         })
 
     }

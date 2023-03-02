@@ -2,6 +2,9 @@ import {Block} from "../../utils/block";
 import template from './profile.hbs';
 import {ReadonlyField} from "../../components/readonlyField";
 import {Link} from "../../components/link";
+import {Avatar} from "../../components/avatar";
+import {Img} from "../../components/shared/img";
+import arrow from '../../../static/nav_arrow.png';
 
 export class ProfilePage extends Block {
     constructor(props: unknown) {
@@ -52,6 +55,16 @@ export class ProfilePage extends Block {
             label: 'Exit',
             link: '#',
             style: 'color: #FE5B4A'
+        })
+
+        this.children.avatar = new Avatar({
+            name: 'Ivan!'
+        })
+
+        this.children.arrowImg = new Img({
+            src: arrow,
+            alt: 'back',
+            className: 'navigation-arrow'
         })
     }
 
