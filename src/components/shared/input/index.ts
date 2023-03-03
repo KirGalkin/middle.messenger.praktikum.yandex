@@ -21,5 +21,6 @@ export class Input extends Block {
         this.element?.classList.add('input_field')
         this.element?.setAttribute('id', this.props.htmlId);
         this.element?.setAttribute('type', this.props.type);
+        this.element?.setAttribute('name', this.props.htmlId);
     }
 }

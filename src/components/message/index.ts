@@ -22,5 +22,6 @@ export class Message extends Block {
         this.element?.setAttribute('id', this.props.htmlId);
         this.element?.setAttribute('type', this.props.type);
         this.element?.setAttribute('placeholder', this.props.placeholder);
+        this.element?.setAttribute('name', this.props.htmlId);
     }
 }
