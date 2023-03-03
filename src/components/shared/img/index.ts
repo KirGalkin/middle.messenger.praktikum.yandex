@@ -5,7 +5,7 @@ interface ImageProps {
     alt: string,
     className?: string
 }
-export class Img extends Block {
+export class Img extends Block<ImageProps> {
     constructor(props: ImageProps) {
         super('img', props);
     }

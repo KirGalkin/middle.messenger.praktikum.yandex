@@ -7,7 +7,7 @@ interface LinkProps {
     label: string
 }
 
-export class Link extends Block {
+export class Link extends Block<LinkProps> {
     constructor(props: LinkProps) {
         super('div', props);
     }

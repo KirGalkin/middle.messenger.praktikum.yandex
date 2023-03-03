@@ -8,7 +8,7 @@ interface InputProps {
         blur: (...args: unknown[]) => void;
     };
 }
-export class Input extends Block {
+export class Input extends Block<InputProps> {
     get value(): string | undefined {
         return (this.element as HTMLInputElement | undefined)?.value;
     }

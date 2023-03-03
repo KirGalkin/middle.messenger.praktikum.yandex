@@ -5,7 +5,7 @@ interface ReadonlyFieldProps {
     label: string,
     value: string
 }
-export class ReadonlyField extends Block {
+export class ReadonlyField extends Block<ReadonlyFieldProps> {
     constructor(props: ReadonlyFieldProps) {
         super('div', props);
     }

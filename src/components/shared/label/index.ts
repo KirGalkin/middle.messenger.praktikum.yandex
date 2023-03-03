@@ -4,7 +4,7 @@ import template from './label.hbs';
 interface LabelProps {
     label: string
 }
-export class Label extends Block {
+export class Label extends Block<LabelProps> {
     constructor(props: LabelProps) {
         super('label', props);
     }

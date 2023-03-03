@@ -6,7 +6,7 @@ import {Img} from "../shared/img";
 interface AvatarProps {
     name: string,
 }
-export class Avatar extends Block {
+export class Avatar extends Block<AvatarProps> {
     constructor(props: AvatarProps) {
         super('div', props);
     }

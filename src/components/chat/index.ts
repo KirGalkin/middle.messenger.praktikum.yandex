@@ -7,7 +7,7 @@ interface ChatProps {
     time: string,
     count: number
 }
-export class Chat extends Block {
+export class Chat extends Block<ChatProps> {
     constructor(props: ChatProps) {
         super('div', props);
     }

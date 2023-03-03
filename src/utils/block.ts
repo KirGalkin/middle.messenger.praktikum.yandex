@@ -8,12 +8,12 @@ export enum EVENTS {
     FLOW_RENDER = "flow:render"
 }
 
-export abstract class Block {
+export abstract class Block<Props extends Record<string, any> = any> {
 
     private readonly meta: {tagName: string, props: unknown};
     private el?: HTMLElement;
     private readonly eventBus: EventBus;
-    protected readonly props: any;
+    protected readonly props: Props;
     children: Record<string, Block> = {}
 
     private readonly id: string;

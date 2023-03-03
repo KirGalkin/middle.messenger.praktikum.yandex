@@ -4,7 +4,7 @@ import template from './receivedMessage.hbs';
 interface ReceivedMessageProps {
     message: string
 }
-export class ReceivedMessage extends Block{
+export class ReceivedMessage extends Block<ReceivedMessageProps> {
     constructor(props: ReceivedMessageProps) {
         super('div', props);
     }

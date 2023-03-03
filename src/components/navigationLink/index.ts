@@ -8,7 +8,7 @@ interface NavigationLinkProps {
     };
 }
 
-export class NavigationLink extends Block {
+export class NavigationLink extends Block<NavigationLinkProps> {
     constructor(props: NavigationLinkProps) {
         super('li', props);
     }

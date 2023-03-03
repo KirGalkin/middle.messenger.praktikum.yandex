@@ -8,7 +8,7 @@ interface InputProps {
         blur?: (...args: unknown[]) => void;
     };
 }
-export class Message extends Block {
+export class Message extends Block<InputProps> {
     get value(): string | undefined {
         return (this.element as HTMLInputElement | undefined)?.value;
     }
@@ -21,7 +21,7 @@ export class Message extends Block {
         this.element?.classList.add('message')
         this.element?.setAttribute('id', this.props.htmlId);
         this.element?.setAttribute('type', this.props.type);
-        this.element?.setAttribute('placeholder', this.props.placeholder);
+        this.element?.setAttribute('placeholder', this.props.placeholder || '');
         this.element?.setAttribute('name', this.props.htmlId);
     }
 }

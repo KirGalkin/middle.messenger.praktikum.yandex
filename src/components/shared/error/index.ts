@@ -4,7 +4,7 @@ import template from './error.hbs';
 interface InputErrorProps {
     message?: string
 }
-export class InputError extends Block {
+export class InputError extends Block<InputErrorProps> {
     constructor(props: InputErrorProps) {
         super('span', props);
     }

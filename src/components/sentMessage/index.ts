@@ -4,7 +4,7 @@ import template from './sentMessage.hbs';
 interface SentMessageProps {
     message: string
 }
-export class SentMessage extends Block {
+export class SentMessage extends Block<SentMessageProps> {
     constructor(props: SentMessageProps) {
         super('div', props);
     }

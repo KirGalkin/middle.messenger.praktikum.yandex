@@ -10,7 +10,7 @@ interface UpdateFieldProps {
     type: string,
     validationFn?: (value: string) => string | undefined
 }
-export class UpdateField extends Block {
+export class UpdateField extends Block<UpdateFieldProps> {
     get value(): string | undefined {
         return (this.children.input as Input)?.value;
     }

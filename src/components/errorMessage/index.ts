@@ -7,7 +7,7 @@ interface ErrorMessageProps {
     link: string
 }
 
-export class ErrorMessage extends Block {
+export class ErrorMessage extends Block<ErrorMessageProps> {
     constructor(props: ErrorMessageProps) {
         super('div', props);
     }

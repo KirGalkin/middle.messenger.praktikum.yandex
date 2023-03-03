@@ -8,9 +8,9 @@ interface InputProps {
     htmlId: string,
     label: string,
     type: string,
-    validationFn?: (value: string) => string | undefined
+    validationFn?: (value?: string) => string | undefined
 }
-export class InputField extends Block {
+export class InputField extends Block<InputProps> {
 
     get value(): string | undefined {
         return (this.children.input as Input)?.value;
