@@ -10,7 +10,7 @@ import imageSend from '../../../static/nav_arrow_left.png';
 
 export class ChatPage extends Block {
     constructor(props: unknown) {
-        super('main', props);
+        super('div', props);
     }
 
     protected init() {

@@ -4,10 +4,12 @@ import {ErrorMessage} from "../../components/errorMessage";
 
 export class NotFoundErrorPage extends Block {
     constructor(props: unknown) {
-        super('main', props);
+        super('div', props);
     }
 
     protected init() {
+        this.element?.classList.add('error-container');
+
         this.children.errorMessage = new ErrorMessage({
             code: '404',
             message: 'Something gone wrong!',

@@ -4,10 +4,12 @@ import {ErrorMessage} from '../../components/errorMessage'
 
 export class ServerErrorPage extends Block {
     constructor(props: unknown) {
-        super('main', props);
+        super('div', props);
     }
 
     protected init() {
+        this.element?.classList.add('error-container');
+
         this.children.errorMessage = new ErrorMessage({
             code: '500',
             message: 'We will fix it',

@@ -9,7 +9,7 @@ import arrow from "../../../static/nav_arrow.png";
 
 export class PasswordUpdatePage extends Block {
     constructor(props: unknown) {
-        super('main', props);
+        super('div', props);
     }
 
     protected init() {

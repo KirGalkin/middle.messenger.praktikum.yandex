@@ -6,7 +6,7 @@ import {ValidationService} from "../../utils/validationService";
 
 export class SignInPage extends Block {
     constructor(props: unknown) {
-        super('main', props);
+        super('div', props);
     }
 
     protected init() {
