@@ -1,20 +1,39 @@
-
-@import "./partials/button/button.pcss";
-@import "./pages/signUp/signUp.pcss";
-@import "./pages/signIn/signIn.pcss";
-@import "./partials/errorMessage/errorMessage.pcss";
-@import "./partials/input/input.pcss";
-@import "./partials/readonlyField/readonlyField.pcss";
-@import "./partials/line/line.pcss";
-@import "./partials/link/link.pcss";
-@import "./partials/updateField/updateField.pcss";
+@import url("./components/button/button.pcss");
+@import url("./components/errorMessage/errorMessage.pcss");
+@import url("./components/inputField/inputField.pcss");
+@import url("./components/readonlyField/readonlyField.pcss");
+@import url("./components/link/link.pcss");
+@import url("./components/updateField/updateField.pcss");
+@import url("./components/chat/chat.pcss");
+@import url("./components/receivedMessage/receivedMessage.pcss");
+@import url("./components/sentMessage/sentMessage.pcss");
+@import url("./components/navigationLink/navigationLink.pcss");
+@import url("./components/message/message.pcss");
+@import url("./components/avatar/avatar.pcss");
+@import url("./pages/chat/chat.pcss");
+@import url("./pages/password-update/password-update.pcss");
+@import url("./pages/profile/profile.pcss");
+@import url("./pages/profile-update/profile-update.pcss");
+@import url("./pages/signUp/signUp.pcss");
+@import url("./pages/signIn/signIn.pcss");
 
 html, body, main {
+    --main-bg-color: #000337;
+    --main-text-color: #fafeff;
+    --primary-color: #44f0f8;
+    --warning-color: #fe5b4a;
+    --secondary-bg-color: #00065f;
+
     padding: 0;
     margin: 0;
     height: 100%;
-    background-color: #000337;
-    font-family: 'Roboto', sans-serif;
+    background-color: var(--main-bg-color);
+    font-family: Roboto, sans-serif;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
 }
 
 h2, p, a {
@@ -22,27 +41,24 @@ h2, p, a {
     font-weight: 500;
 }
 
-h2 {
-    font-size: 40px;
-    line-height: 40px;
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 20px;
-    line-height: 20px;
-    margin-bottom: 70px;
-}
-
 a {
     text-decoration: none;
-    color: #44F0F8;
+    color: var(--primary-color);
     font-size: 11px;
     line-height: 11px;
 }
 
 nav {
     ul {
-        color: #fafeff;
+        color: var(--main-text-color);
     }
+}
+
+.line {
+    width: 100%;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.error-container {
+    height: 100%;
 }

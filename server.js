@@ -6,6 +6,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.resolve(__dirname, './dist')));
 
-app.listen(PORT, function () {
-    console.log(`App listening on PORT ${PORT}`)
+app.listen(PORT, () => {
+  console.log(`App listening on PORT ${PORT}`);
 });

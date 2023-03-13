@@ -1,20 +1,35 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./chat.pcss">
-    <link rel="stylesheet" href="../../index.pcss">
-    <title>Chat</title>
-</head>
-<body>
-<main class="chat-content">
-    <div class="chat-list"></div>
-    <div class="chat-main">
-        <p>Select chat to start</p>
+<div class="chat-list">
+    <div class="chat-list_head">
+        <a class="chat-list_profile">Profile ></a>
+        <input class="chat-list_input" type="text" name="search" placeholder="Search">
     </div>
-</main>
-</body>
-</html>
+    <div class="chat-list_body">
+        <div class="line"></div>
+
+        {{{chat}}}
+
+        <div class="line"></div>
+
+        {{{chat1}}}
+
+        <div class="line"></div>
+
+        {{{chat2}}}
+
+        <div class="line"></div>
+
+        {{{chat3}}}
+
+    </div>
+</div>
+<div class="chat-main">
+    <div class="chat-main_messages">
+        {{{receivedMessage}}}
+        {{{sentMessage}}}
+    </div>
+    <div class="chat-main_controls">
+        {{{imageAttach}}}
+        {{{message}}}
+        {{{imageSend}}}
+    </div>
+</div>
