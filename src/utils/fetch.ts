@@ -6,41 +6,47 @@ enum Method {
 }
 
 interface Options {
-    method: Method,
+    method?: Method,
     data?: any,
     timeout?: number
 }
 
 export class Fetch {
+    private readonly baseUrl = 'https://ya-praktikum.tech/api/v2';
+    constructor(private readonly endpoint: string) {
+    }
 
-    get = (url: string, options: Options) => {
+    get<T>(url: string, options: Options): Promise<T> {
         const strData = this.queryStringify(options.data);
-        return this.request(`${url}${strData}`, {...options, method: Method.GET}, options.timeout);
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}${strData ?? ""}`, {...options, method: Method.GET}, options.timeout);
     };
 
-    put = (url: string, options: Options) => {
-        return this.request(url, {...options, method: Method.PUT}, options.timeout);
+    put<T = void>(url: string, options: Options): Promise<T> {
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {...options, method: Method.PUT}, options.timeout);
     };
 
-    post = (url: string, options: Options) => {
-        return this.request(url, {...options, method: Method.POST}, options.timeout);
+    post<T = void>(url: string, options: Options): Promise<T> {
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {...options, method: Method.POST}, options.timeout);
     };
 
-    delete = (url: string, options: Options) => {
-        return this.request(url, {...options, method: Method.DELETE}, options.timeout);
+    delete<T = void>(url: string, options: Options): Promise<T> {
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {...options, method: Method.DELETE}, options.timeout);
     };
 
-    request(url: string, options: Options = {method: Method.GET}, timeout = 5000) {
+    request<T>(url: string, options: Options = {method: Method.GET}, timeout = 5000): Promise<T> {
         const {method, data} = options;
 
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-            xhr.open(method, url);
+            xhr.open(method!, url);
+
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+            xhr.withCredentials = true;
 
             xhr.timeout = timeout;
 
             xhr.onload = function () {
-                resolve(xhr);
+                resolve(xhr.response);
             }
 
             xhr.onerror = reject;
@@ -52,7 +58,7 @@ export class Fetch {
             if (method === Method.GET || !data) {
                 xhr.send();
             } else {
-                xhr.send(data);
+                xhr.send(JSON.stringify(data));
             }
         })
     }

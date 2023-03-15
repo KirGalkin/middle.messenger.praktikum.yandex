@@ -8,15 +8,15 @@ import {PasswordUpdatePage} from "./pages/password-update";
 
 enum ROUTES {
     Index = '/',
-    SignUp = 'signup',
-    SignIn = 'signin',
-    Chats = 'chats',
-    Profile = 'profile',
-    ProfileUpdate = 'profile-update',
-    PasswordUpdate = 'password-update',
+    SignUp = '/signup',
+    SignIn = '/signin',
+    Chats = '/chats',
+    Profile = '/profile',
+    ProfileUpdate = '/profile-update',
+    PasswordUpdate = '/password-update',
 
 }
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener('DOMContentLoaded', () => {
 
     Router
         .use(ROUTES.SignUp, SignUpPage)
@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     Router.start();
 
-    Router.go(ROUTES.Chats);
+    // Router.go(ROUTES.SignIn);
 })
 
 

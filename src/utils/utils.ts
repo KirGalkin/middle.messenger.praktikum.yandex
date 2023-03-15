@@ -1,16 +1,5 @@
 import {Block} from "./block";
-
-function isArray(value: unknown): value is [] {
-    return Array.isArray(value);
-}
-
-type PlainObject<T = unknown> = {
-    [k in string]: T;
-};
-
-export interface BlockConstructable<P extends Record<string, any> = any> {
-    new(props: P): Block<P>;
-}
+import {Indexed, PlainObject} from "./types";
 
 export function render(query: string, block: Block) {
     const root = document.querySelector(query);
@@ -26,15 +15,15 @@ export function render(query: string, block: Block) {
     return root;
 }
 
-function isPlainObject(value: unknown): value is PlainObject {
-    return typeof value === 'object'
-        && value !== null
-        && value.constructor === Object
-        && Object.prototype.toString.call(value) === '[object Object]';
-}
+export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+    if (typeof object !== 'object' || object === null) {
+        return object;
+    }
 
-function isArrayOrObject(value: unknown): value is ([] | PlainObject) {
-    return isPlainObject(value) || isArray(value);
+    const result = path.split('.').reduceRight<Indexed>((acc, key) => ({
+        [key]: acc,
+    }), value as any);
+    return merge(object as Indexed, result);
 }
 
 export function isEqual(lhs: any, rhs: any) {
@@ -65,4 +54,40 @@ export function isEqual(lhs: any, rhs: any) {
 
     return true;
 }
+
+function isArray(value: unknown): value is [] {
+    return Array.isArray(value);
+}
+
+function isPlainObject(value: unknown): value is PlainObject {
+    return typeof value === 'object'
+        && value !== null
+        && value.constructor === Object
+        && Object.prototype.toString.call(value) === '[object Object]';
+}
+
+function isArrayOrObject(value: unknown): value is ([] | PlainObject) {
+    return isPlainObject(value) || isArray(value);
+}
+
+function merge(lhs: Indexed, rhs: Indexed): Indexed {
+    for (let p in rhs) {
+        if (!rhs.hasOwnProperty(p)) {
+            continue;
+        }
+
+        try {
+            if (rhs[p].constructor === Object) {
+                rhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
+            } else {
+                lhs[p] = rhs[p];
+            }
+        } catch(e) {
+            lhs[p] = rhs[p];
+        }
+    }
+
+    return lhs;
+}
+
 

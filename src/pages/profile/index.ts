@@ -5,8 +5,9 @@ import {Link} from "../../components/link";
 import {Avatar} from "../../components/avatar";
 import {Img} from "../../components/shared/img";
 import arrow from '../../../static/nav_arrow.png';
+import {withStore} from "../../utils/hoc/withStore";
 
-export class ProfilePage extends Block {
+class ProfilePageBase extends Block {
     constructor(props: unknown) {
         super('div', props);
     }
@@ -53,8 +54,8 @@ export class ProfilePage extends Block {
 
         this.children.linkExit = new Link({
             label: 'Exit',
-            link: '#',
-            style: 'color: var(--warning-color)'
+            style: 'color: var(--warning-color)',
+
         })
 
         this.children.avatar = new Avatar({
@@ -72,3 +73,7 @@ export class ProfilePage extends Block {
         return this.compile(template, this.props);
     }
 }
+
+export const ProfilePage = withStore((state) => {
+    return state.user || {};
+})(ProfilePageBase);
