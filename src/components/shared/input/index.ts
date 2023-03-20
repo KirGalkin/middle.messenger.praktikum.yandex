@@ -22,6 +22,7 @@ export class Input extends Block<InputProps> {
         super('input', props);
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
         this.value = (newProps as InputProps).value;
         return false

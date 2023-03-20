@@ -2,6 +2,7 @@
 import {Block} from "../../utils/block";
 import template from "./chatList.hbs";
 import {Chat} from "../chat";
+import ChatController from "../../controllers/chatController";
 
 export interface ChatListProps {
     chatData: any[]
@@ -14,34 +15,31 @@ export class ChatList extends Block<ChatListProps> {
     }
 
     protected init() {
-
-        // const chatArray = (this.props.chatData || []).map(c => {
-        //     return  new Chat({count: 0, message: "", name: c.title, time: ""})
-        // });
-
-
-        (this.props.chatData || []).forEach(data => {
-            this.children[data.title] = new Chat({
-                count: 0, message: "", name: data.title, time: ""
-            })
-        })
-
-        // this.children.chats = chatArray;
-
-        this.children['chha'] = new Chat({
-            count: 0, message: "", name: "HUI", time: ""
-
-        })
+        this.children.chats = this.createChats(this.props);
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: ChatListProps, newProps: ChatListProps): boolean {
-        (newProps.chatData || []).forEach(data => {
-            this.children[data.title] = new Chat({
-                count: 0, message: "", name: data.title, time: ""
-            })
-        })
+        console.log('CHATLIST UPDATE', newProps)
+        this.children.chats = this.createChats(newProps);
 
         return true;
+    }
+
+    private createChats(props: ChatListProps) {
+        return (props.chatData || []).map(data => {
+            return new Chat({
+                name: data.title,
+                message: "",
+                time: "string",
+                count: 32,
+                events: {
+                    click: () => {
+                        ChatController.selectChat(data.id);
+                    }
+                }
+            });
+        })
     }
 
     protected render(): DocumentFragment {

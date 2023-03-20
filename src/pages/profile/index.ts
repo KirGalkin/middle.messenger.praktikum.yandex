@@ -89,13 +89,14 @@ class ProfilePageBase extends Block {
         })
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        this.children.readonlyFieldEmail.setProps({value: (newProps as User).email});
-        this.children.readonlyFieldLogin.setProps({value: (newProps as User).login});
-        this.children.readonlyFieldFirstName.setProps({value: (newProps as User).first_name});
-        this.children.readonlyFieldLastName.setProps({value: (newProps as User).second_name});
-        this.children.readonlyFieldPhone.setProps({value: (newProps as User).phone});
-        this.children.avatar.setProps({name: (newProps as User).login});
+        (this.children.readonlyFieldEmail as Block).setProps({value: (newProps as User).email});
+        (this.children.readonlyFieldLogin as Block).setProps({value: (newProps as User).login});
+        (this.children.readonlyFieldFirstName as Block).setProps({value: (newProps as User).first_name});
+        (this.children.readonlyFieldLastName as Block).setProps({value: (newProps as User).second_name});
+        (this.children.readonlyFieldPhone as Block).setProps({value: (newProps as User).phone});
+        (this.children.avatar as Block).setProps({name: (newProps as User).login});
         return false;
     }
 

@@ -9,8 +9,8 @@ import {ROUTES} from "../../utils/types";
 import ChatController from "../../controllers/chatController";
 import {Button} from "../../components/button";
 import {withStore} from "../../utils/store";
-import {Chat} from "../../components/chat";
 import {ChatList} from "../../components/chatList";
+import {Messenger} from "../../components/messenger";
 
 class ChatPageBase extends Block {
 
@@ -25,29 +25,6 @@ class ChatPageBase extends Block {
 
     protected init() {
         this.element?.classList.add('chat-content');
-
-        this.children.chat = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        // this.children.receivedMessage = new ReceivedMessage({
-        //     message: `
-        //         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        //         Provident quibusdam voluptatem voluptates. Aliquid assumenda
-        //         commodi deserunt dignissimos eum illum labore, natus nobis,
-        //         odit officia officiis velit voluptas voluptatibus. Nulla odio
-        //         officiis similique! Ab alias amet doloremque esse optio pariatur
-        //         placeat quia saepe temporibus? Ab assumenda beatae ea, iste perferendis
-        //         possimus!`
-        // });
-        //
-        // this.children.sentMessage = new SentMessage({
-        //     message: 'Lorem ipsum!!'
-        // })
 
         this.children.message = new Message({
             htmlId: 'message',
@@ -78,25 +55,19 @@ class ChatPageBase extends Block {
         })
 
         this.children.chatList = new ChatList({
-            chatData: [{title: 'CHAT!!444'}, {title: 'CHAT!!3333'}]
+            chatData: []
         })
+
+        this.children.messenger = new Messenger({});
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: {chats: any[]}): boolean {
-        console.log('DSKJDKLSA', newProps);
+        console.log('CHAT PAGE UPDATE', newProps);
 
-        this.children.chat.setProps({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'newProps?.messages[0].title',
-            time: '15:24'
-        })
-
-        this.children.chatList.setProps({
+        (this.children.chatList as Block).setProps({
             chatData: newProps.chats
-        })
-
+        });
 
         return true;
     }
@@ -107,17 +78,16 @@ class ChatPageBase extends Block {
 }
 
 const withSelectedChatMessages = withStore(state => {
-    const selectedChatId = 8415;
-    // const selectedChatId = state.selectedChat;
-    //
-    // if (!selectedChatId) {
-    //     return {
-    //         messages: [],
-    //         selectedChat: undefined,
-    //         userId: state.user.id
-    //     };
-    // }
+    const selectedChatId = state.selectedChat;
 
+    if (!selectedChatId) {
+        return {
+            messages: [],
+            selectedChat: undefined,
+            userId: state.user.id,
+            chats: state.chats
+        };
+    }
 
     return {
         messages: (state.messages || {})[selectedChatId] || [],

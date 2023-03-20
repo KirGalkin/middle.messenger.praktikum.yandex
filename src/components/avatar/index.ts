@@ -35,10 +35,11 @@ export class Avatar extends Block<AvatarProps> {
         })
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
         // console.log('U{DATE', newProps, this.props);
 
-        this.children.image.setProps({
+        (this.children.image as Block).setProps({
             src: (newProps as AvatarProps).imageSrc,
             alt: 'avatar',
             className: 'avatar-img'

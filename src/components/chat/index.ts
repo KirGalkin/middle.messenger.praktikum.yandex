@@ -5,7 +5,10 @@ interface ChatProps {
     name: string,
     message: string,
     time: string,
-    count: number
+    count: number,
+    events?: {
+        click: (...args: unknown[]) => void;
+    };
 }
 export class Chat extends Block<ChatProps> {
     constructor(props: ChatProps) {

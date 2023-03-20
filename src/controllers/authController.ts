@@ -46,13 +46,9 @@ class AuthController {
     }
 
     async getUser(): Promise<void> {
-        try {
-            const response = await this.api.getUser();
+        const response = await this.api.getUser();
 
-            store.set('user', response)
-        } catch (e) {
-            console.error(e)
-        }
+        store.set('user', response)
     }
 }
 

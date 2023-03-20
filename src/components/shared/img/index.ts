@@ -21,6 +21,7 @@ export class Img extends Block<ImageProps> {
         }
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
         // console.log('IMAGE UPDATE!!', newProps)
         this.element?.setAttribute('src', (newProps as ImageProps)?.src || '');

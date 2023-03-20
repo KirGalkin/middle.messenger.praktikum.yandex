@@ -1,6 +1,7 @@
 import {CreateChatRequest, DeleteChatRequest, UsersRequest} from "../api/types";
 import {ChatApi} from "../api/chatApi";
 import store from "../utils/store";
+import MessagesController from "./messagesController";
 
 class ChatController {
     private readonly api: ChatApi;
@@ -12,6 +13,17 @@ class ChatController {
     async getChats() {
         try {
             const chats = await this.api.getChats();
+
+            chats.map(async (chat) => {
+                const token = await this.getToken(chat.id);
+
+                if(!token) {
+                    throw new Error('Token error');
+                }
+
+                await MessagesController.connect(chat.id, token);
+            });
+
             store.set('chats', chats);
         } catch (e) {
             console.error(e);
@@ -65,6 +77,10 @@ class ChatController {
         } catch (e) {
             console.error(e);
         }
+    }
+
+    selectChat(id: number) {
+        store.set('selectedChat', id)
     }
 }
 

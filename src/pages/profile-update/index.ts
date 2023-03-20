@@ -128,13 +128,14 @@ class ProfileUpdatePageBase extends Block {
         })
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        this.children.updateFieldEmail.setProps({value: (newProps as User).email});
-        this.children.updateFieldLogin.setProps({value: (newProps as User).login});
-        this.children.updateFieldFirstName.setProps({value: (newProps as User).first_name});
-        this.children.updateFieldLastName.setProps({value: (newProps as User).second_name});
-        this.children.updateFieldPhone.setProps({value: (newProps as User).phone});
-        this.children.avatar.setProps({name: (newProps as User).login, imageSrc: (newProps as User).avatar});
+        (this.children.updateFieldEmail as Block).setProps({value: (newProps as User).email});
+        (this.children.updateFieldLogin as Block).setProps({value: (newProps as User).login});
+        (this.children.updateFieldFirstName as Block).setProps({value: (newProps as User).first_name});
+        (this.children.updateFieldLastName as Block).setProps({value: (newProps as User).second_name});
+        (this.children.updateFieldPhone as Block).setProps({value: (newProps as User).phone});
+        (this.children.avatar as Block).setProps({name: (newProps as User).login, imageSrc: (newProps as User).avatar});
 
         return true;
     }

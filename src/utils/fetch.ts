@@ -78,8 +78,6 @@ export class Fetch {
             if (method === Method.GET || !data) {
                 xhr.send();
             } else {
-                console.log('ELSE', data)
-                // xhr.send(data);
                 xhr.send(JSON.stringify(data));
             }
         })

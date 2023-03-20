@@ -44,8 +44,9 @@ export class UpdateField extends Block<UpdateFieldProps> {
 
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        this.children.input.setProps({value: (newProps as UpdateFieldProps).value})
+        (this.children.input as Block).setProps({value: (newProps as UpdateFieldProps).value})
         return false;
     }
 
@@ -57,6 +58,6 @@ export class UpdateField extends Block<UpdateFieldProps> {
         const {validationFn} = this.props;
         const message = validationFn ?
             validationFn((this.children.input as Input)?.value) : undefined;
-        this.children.error.setProps({message});
+        (this.children.error as Block).setProps({message});
     }
 }
