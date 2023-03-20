@@ -5,20 +5,13 @@ import {ChatPage} from "./pages/chat";
 import {ProfilePage} from "./pages/profile";
 import {ProfileUpdatePage} from "./pages/profile-update";
 import {PasswordUpdatePage} from "./pages/password-update";
+import {ROUTES} from "./utils/types";
+import AuthController from "./controllers/authController";
 
-enum ROUTES {
-    Index = '/',
-    SignUp = '/signup',
-    SignIn = '/signin',
-    Chats = '/chats',
-    Profile = '/profile',
-    ProfileUpdate = '/profile-update',
-    PasswordUpdate = '/password-update',
-
-}
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
 
     Router
+        .use(ROUTES.Index, SignInPage)
         .use(ROUTES.SignUp, SignUpPage)
         .use(ROUTES.SignIn, SignInPage)
         .use(ROUTES.Chats, ChatPage)
@@ -26,9 +19,35 @@ window.addEventListener('DOMContentLoaded', () => {
         .use(ROUTES.PasswordUpdate, PasswordUpdatePage)
         .use(ROUTES.ProfileUpdate, ProfileUpdatePage)
 
-    Router.start();
+    let isProtectedRoute = true;
 
-    // Router.go(ROUTES.SignIn);
+    switch (window.location.pathname) {
+        case ROUTES.Index:
+        case ROUTES.SignIn:
+        case ROUTES.SignUp:
+            isProtectedRoute = false;
+            break;
+    }
+
+    try {
+        await AuthController.getUser();
+
+        Router.start();
+
+        if (!isProtectedRoute) {
+            Router.go(ROUTES.Profile)
+        }
+    } catch (e) {
+
+        console.log('catch')
+        Router.start();
+
+        if (isProtectedRoute) {
+            Router.go(ROUTES.Index);
+        }
+    }
+
+    // Router.start();
 })
 
 

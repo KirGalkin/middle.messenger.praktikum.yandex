@@ -4,8 +4,10 @@ import {Button} from "../../components/button";
 import {InputField} from "../../components/inputField";
 import {ValidationService} from "../../utils/validationService";
 import AuthController from "../../controllers/authController";
-import {withStore} from "../../utils/hoc/withStore";
 import {Link} from "../../components/link";
+import router from "../../utils/router";
+import {ROUTES} from "../../utils/types";
+import {withStore} from "../../utils/store";
 
 class SignInPageBase extends Block {
     constructor(props: unknown) {
@@ -35,9 +37,16 @@ class SignInPageBase extends Block {
             }
         });
 
+        this.children.button2 = new Button({
+            label: 'Logout',
+            events: {
+                click: (event: any) => this.logout(event)
+            }
+        });
+
         this.children.link = new Link({
             label: 'Sign Up',
-            to: 'signup',
+            to: ROUTES.SignUp,
         })
     }
 
@@ -56,6 +65,13 @@ class SignInPageBase extends Block {
             return;
         }
         AuthController.signIn({login, password})
+    }
+
+    logout(event: any) {
+        event.preventDefault();
+
+        AuthController.logout();
+        router.go(ROUTES.SignIn)
     }
 
     protected render(): DocumentFragment {

@@ -11,3 +11,13 @@ export type Indexed<T = any> = {
 export interface BlockConstructable<P extends Record<string, any> = any> {
     new(props: P): Block<P>;
 }
+
+export enum ROUTES {
+    Index = '/',
+    SignUp = '/signup',
+    SignIn = '/signin',
+    Chats = '/chats',
+    Profile = '/profile',
+    ProfileUpdate = '/profile-update',
+    PasswordUpdate = '/password-update',
+}

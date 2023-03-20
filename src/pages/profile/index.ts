@@ -5,9 +5,15 @@ import {Link} from "../../components/link";
 import {Avatar} from "../../components/avatar";
 import {Img} from "../../components/shared/img";
 import arrow from '../../../static/nav_arrow.png';
-import {withStore} from "../../utils/hoc/withStore";
+import {ROUTES} from "../../utils/types";
+import router from "../../utils/router";
+import {Button} from "../../components/button";
+import AuthController from "../../controllers/authController";
+import {withStore} from "../../utils/store";
+import {User} from "../../api/types";
 
 class ProfilePageBase extends Block {
+
     constructor(props: unknown) {
         super('div', props);
     }
@@ -15,9 +21,11 @@ class ProfilePageBase extends Block {
     protected init() {
         this.element?.classList.add('profile-container');
 
+        AuthController.getUser();
+
         this.children.readonlyFieldEmail = new ReadonlyField({
             label: 'Email',
-            value: 'pochta@yandex.ru'
+            value: 'dsa'
         });
 
         this.children.readonlyFieldLogin = new ReadonlyField({
@@ -42,31 +50,53 @@ class ProfilePageBase extends Block {
 
         this.children.linkUpdateProfile = new Link({
             label: 'Update profile',
-            link: '#',
-            style: 'color: var(--primary-color)'
+            style: 'color: var(--primary-color)',
+            to: ROUTES.ProfileUpdate
         })
 
         this.children.linkUpdatePassword = new Link({
             label: 'Update password',
-            link: '#',
-            style: 'color: var(--primary-color)'
+            style: 'color: var(--primary-color)',
+            to: ROUTES.PasswordUpdate
         })
 
-        this.children.linkExit = new Link({
-            label: 'Exit',
-            style: 'color: var(--warning-color)',
+        // this.children.linkExit = new Link({
+        //     label: 'Exit',
+        //     style: 'color: var(--warning-color)',
+        //     to: ''
+        // })
+
+        this.children.buttonExit = new Button({
+            events: {
+                click: () => {
+                    AuthController.logout();
+                }
+            },
+            label: 'Exit'
 
         })
 
         this.children.avatar = new Avatar({
-            name: 'Ivan!'
+            name: 'Ivan!',
+            imageSrc: ""
         })
 
         this.children.arrowImg = new Img({
             src: arrow,
             alt: 'back',
-            className: 'navigation-arrow'
+            className: 'navigation-arrow',
+            events: {click: () => router.back()}
         })
+    }
+
+    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
+        this.children.readonlyFieldEmail.setProps({value: (newProps as User).email});
+        this.children.readonlyFieldLogin.setProps({value: (newProps as User).login});
+        this.children.readonlyFieldFirstName.setProps({value: (newProps as User).first_name});
+        this.children.readonlyFieldLastName.setProps({value: (newProps as User).second_name});
+        this.children.readonlyFieldPhone.setProps({value: (newProps as User).phone});
+        this.children.avatar.setProps({name: (newProps as User).login});
+        return false;
     }
 
     protected render(): DocumentFragment {
@@ -77,3 +107,11 @@ class ProfilePageBase extends Block {
 export const ProfilePage = withStore((state) => {
     return state.user || {};
 })(ProfilePageBase);
+// const withUser = withStore((state) => ({ ...state.user }))
+//
+// export const ProfilePage = withUser(ProfilePageBase);
+
+//
+// const withUser = withStore((state) => ({ ...state.user }))
+//
+// export const ProfilePage = withUser(ProfilePageBase);

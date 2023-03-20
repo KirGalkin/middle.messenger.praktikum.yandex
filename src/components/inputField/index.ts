@@ -39,7 +39,8 @@ export class InputField extends Block<InputProps> {
                 blur: () => {
                     this.validateField();
                 }
-            }
+            },
+            value: ''
         });
     }
 

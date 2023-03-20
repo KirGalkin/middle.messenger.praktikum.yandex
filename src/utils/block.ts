@@ -1,5 +1,6 @@
 import {EventBus} from "./eventBus";
 import {v4 as makeUUID} from 'uuid';
+import {isEqual} from "./utils";
 
 export enum EVENTS {
     INIT = 'init',
@@ -103,8 +104,8 @@ export abstract class Block<Props extends Record<string, any> = any> {
     }
 
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        console.log(oldProps, newProps);
-        return true;
+        return !isEqual(oldProps, newProps);
+
     }
 
     protected init(): void {

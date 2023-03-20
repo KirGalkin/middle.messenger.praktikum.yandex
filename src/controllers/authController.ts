@@ -1,6 +1,8 @@
 import store from "../utils/store";
 import {AuthApi} from "../api/authApi";
 import {SignInRequest, SignUpRequest} from "../api/types";
+import router from "../utils/router";
+import {ROUTES} from "../utils/types";
 
 class AuthController {
 
@@ -14,6 +16,8 @@ class AuthController {
         try {
             await this.api.signIn(data);
             await this.getUser();
+
+            router.go(ROUTES.Chats)
         } catch (e) {
             console.error(e)
         }
@@ -22,7 +26,10 @@ class AuthController {
     async signUp(data: SignUpRequest): Promise<void> {
         try {
             await this.api.signUp(data);
+
             await this.getUser();
+
+            router.go(ROUTES.Chats);
         } catch (e) {
             console.error(e)
         }
@@ -32,6 +39,7 @@ class AuthController {
         try {
             await this.api.logout();
             store.set('user', undefined);
+            router.go(ROUTES.SignIn)
         } catch (e) {
             console.error(e)
         }
@@ -39,14 +47,13 @@ class AuthController {
 
     async getUser(): Promise<void> {
         try {
-            const user = await this.api.getUser();
-            console.log('USER', user)
-            store.set('user', user)
+            const response = await this.api.getUser();
+
+            store.set('user', response)
         } catch (e) {
             console.error(e)
         }
     }
-
 }
 
 export default new AuthController();

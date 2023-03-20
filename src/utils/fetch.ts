@@ -11,26 +11,40 @@ interface Options {
     timeout?: number
 }
 
+//TODO rename/think about 'original' fetch
 export class Fetch {
     private readonly baseUrl = 'https://ya-praktikum.tech/api/v2';
+
     constructor(private readonly endpoint: string) {
     }
 
     get<T>(url: string, options: Options): Promise<T> {
         const strData = this.queryStringify(options.data);
-        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}${strData ?? ""}`, {...options, method: Method.GET}, options.timeout);
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}${strData ?? ""}`, {
+            ...options,
+            method: Method.GET
+        }, options.timeout);
     };
 
     put<T = void>(url: string, options: Options): Promise<T> {
-        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {...options, method: Method.PUT}, options.timeout);
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {
+            ...options,
+            method: Method.PUT
+        }, options.timeout);
     };
 
     post<T = void>(url: string, options: Options): Promise<T> {
-        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {...options, method: Method.POST}, options.timeout);
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {
+            ...options,
+            method: Method.POST
+        }, options.timeout);
     };
 
     delete<T = void>(url: string, options: Options): Promise<T> {
-        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {...options, method: Method.DELETE}, options.timeout);
+        return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {
+            ...options,
+            method: Method.DELETE
+        }, options.timeout);
     };
 
     request<T>(url: string, options: Options = {method: Method.GET}, timeout = 5000): Promise<T> {
@@ -40,24 +54,31 @@ export class Fetch {
             const xhr = new XMLHttpRequest();
             xhr.open(method!, url);
 
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-            xhr.withCredentials = true;
+            xhr.onreadystatechange = () => {
 
-            xhr.timeout = timeout;
-
-            xhr.onload = function () {
-                resolve(xhr.response);
-            }
-
-            xhr.onerror = reject;
-            xhr.onabort = reject;
-            xhr.ontimeout = function () {
-                throw new Error('Timeout!')
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status < 400) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
             };
+
+            xhr.onabort = () => reject({reason: 'abort'});
+            xhr.onerror = () => reject({reason: 'network error'});
+            xhr.ontimeout = () => reject({reason: 'timeout'});
+
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.withCredentials = true;
+            xhr.responseType = 'json';
 
             if (method === Method.GET || !data) {
                 xhr.send();
             } else {
+                console.log('ELSE', data)
+                // xhr.send(data);
                 xhr.send(JSON.stringify(data));
             }
         })
@@ -65,12 +86,12 @@ export class Fetch {
 
     private queryStringify(data?: any): string | undefined {
         if (!data) {
-            return ;
+            return;
         }
         let result = '';
         Object.keys(data).forEach(key => {
             const value = `${key}=${data[key].toString()}`
-            result += result.length ? `&${value}` : `?${value}` ;
+            result += result.length ? `&${value}` : `?${value}`;
         })
 
         return result

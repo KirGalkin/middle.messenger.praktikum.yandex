@@ -6,6 +6,8 @@ import {ValidationService} from "../../utils/validationService";
 import {Avatar} from "../../components/avatar";
 import {Img} from "../../components/shared/img";
 import arrow from "../../../static/nav_arrow.png";
+import router from "../../utils/router";
+import UserController from "../../controllers/userController";
 
 export class PasswordUpdatePage extends Block {
     constructor(props: unknown) {
@@ -19,58 +21,76 @@ export class PasswordUpdatePage extends Block {
             htmlId: 'oldPassword',
             label: 'Old password',
             type: 'password',
-            validationFn: ValidationService.validatePassword
+            validationFn: ValidationService.validatePassword,
+            value: ''
         });
 
         this.children.updateFieldNewPass = new UpdateField({
             htmlId: 'newPassword',
             label: 'New password',
             type: 'password',
-            validationFn: ValidationService.validatePassword
+            validationFn: ValidationService.validatePassword,
+            value: ''
         });
 
         this.children.updateFieldNewPassRepeat = new UpdateField({
             htmlId: 'newPasswordRepeat',
             label: 'Repeat new password',
             type: 'password',
-            validationFn: ValidationService.validatePassword
+            validationFn: ValidationService.validatePassword,
+            value: ''
         });
 
         this.children.button = new Button({
             events: {
-                click: (event: any) => {
-                    event.preventDefault();
-                    const oldPassword =
-                        (this.children.updateFieldOldPass as UpdateField)?.value
-                    const newPassword =
-                        (this.children.updateFieldNewPass as UpdateField)?.value
-                    const newPasswordRepeat =
-                        (this.children.updateFieldNewPassRepeat as UpdateField)?.value
-
-                    console.log(
-                        `Old Password: ${oldPassword}, 
-                            ${ValidationService.validatePassword(oldPassword || '') 
-                            || 'is valid'}\n`,
-                        `New Password: ${newPassword}, 
-                            ${ValidationService.validatePassword(newPassword || '') 
-                            || 'is valid'}\n`,
-                        `New Password repeat: ${newPasswordRepeat}, 
-                            ${ValidationService.validatePassword(newPasswordRepeat || '') 
-                            || 'is valid'}\n`,
-                    )
-                }
+                click: (event: any) => this.onSubmit(event)
             },
             label: 'Update'
         })
 
         this.children.avatar = new Avatar({
-            name: 'Ivan!'
+            name: 'Ivan!',
+            imageSrc: ''
         })
 
         this.children.arrowImg = new Img({
             src: arrow,
             alt: 'back',
-            className: 'navigation-arrow'
+            className: 'navigation-arrow',
+            events: {click: () => router.back()}
+        })
+    }
+
+    private onSubmit(event: any) {
+        event.preventDefault();
+        const oldPassword =
+            (this.children.updateFieldOldPass as UpdateField)?.value
+        const newPassword =
+            (this.children.updateFieldNewPass as UpdateField)?.value
+        const newPasswordRepeat =
+            (this.children.updateFieldNewPassRepeat as UpdateField)?.value
+
+        const oldPassValidationRes = ValidationService.validatePassword(oldPassword || '');
+        const newPassValidationRes = ValidationService.validatePassword(newPassword || '');
+        const repeatNewPassValidationRes = ValidationService.validatePassword(newPasswordRepeat || '');
+
+        console.log(
+            `Old Password: ${oldPassword}, 
+                            ${oldPassValidationRes || 'is valid'}\n`,
+            `New Password: ${newPassword}, 
+                            ${newPassValidationRes || 'is valid'}\n`,
+            `New Password repeat: ${newPasswordRepeat}, 
+                            ${repeatNewPassValidationRes || 'is valid'}\n`,
+        )
+
+        if(oldPassValidationRes || newPassValidationRes || repeatNewPassValidationRes) {
+            console.log('Error profile validations')
+            return;
+        }
+
+        UserController.updatePassword({
+            newPassword: newPassword!,
+            oldPassword: oldPassword!
         })
     }
 

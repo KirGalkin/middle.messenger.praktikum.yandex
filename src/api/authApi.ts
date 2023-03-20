@@ -7,18 +7,18 @@ export class AuthApi extends BaseApi{
     }
 
     signIn(data: SignInRequest) {
-        return this.http.post('/signin', {data})
+        return this.http.post<void>('/signin', {data})
     }
 
     signUp(data: SignUpRequest) {
-        return this.http.post('/signup', {data});
+        return this.http.post<void>('/signup', {data})
     }
 
     logout() {
-        return this.http.post('/logout', {})
+        return this.http.post<void>('/logout', {})
     }
 
     getUser() {
-        return this.http.get<User>('/user', {});
+        return this.http.get<User | void>('/user', {})
     }
 }

@@ -1,46 +1,34 @@
 import {Block} from "../../utils/block";
 import template from './chat.hbs';
-import {Chat} from "../../components/chat";
 import {ReceivedMessage} from "../../components/receivedMessage";
 import {SentMessage} from "../../components/sentMessage";
 import {Message} from "../../components/message";
 import {Img} from "../../components/shared/img";
 import imageAttach from '../../../static/attach.png';
 import imageSend from '../../../static/nav_arrow_left.png';
+import {Link} from "../../components/link";
+import {ROUTES} from "../../utils/types";
+import ChatController from "../../controllers/chatController";
+import {Button} from "../../components/button";
+import {withStore} from "../../utils/store";
+import {Chat} from "../../components/chat";
+import {ChatData} from "../../api/types";
 
-export class ChatPage extends Block {
+class ChatPageBase extends Block {
+
     constructor(props: unknown) {
         super('div', props);
+        this.loadChats();
+    }
+
+    async loadChats() {
+        await ChatController.getChats();
     }
 
     protected init() {
         this.element?.classList.add('chat-content');
 
         this.children.chat = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        this.children.chat1 = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        this.children.chat2 = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        this.children.chat3 = new Chat({
             count: 2,
             message: 'Lorem ipsum dolor sit amet, ' +
                 'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
@@ -80,9 +68,39 @@ export class ChatPage extends Block {
             src: imageSend
         })
 
+        this.children.link = new Link({
+            label: 'Profile >',
+            to: ROUTES.Profile
+        })
+
+        this.children.addChatButton = new Button({
+            events: {
+                click: () => ChatController.createChat({title: 'CHAT1'})
+            }, label: 'Add new chat'
+        })
+
+    }
+
+    protected componentDidUpdate(oldProps: unknown, newProps: {data: ChatData[]}): boolean {
+        console.log('UPDATE', oldProps, newProps);
+
+        this.children.chat.setProps({
+            count: 2,
+            message: 'Lorem ipsum dolor sit amet, ' +
+                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
+            name: newProps?.data[0].title,
+            time: '15:24'
+        })
+
+
+        return true;
     }
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
 }
+
+export const ChatPage = withStore((state) => {
+    return {data: state.chats}
+})(ChatPageBase);

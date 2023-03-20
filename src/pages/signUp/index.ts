@@ -5,8 +5,9 @@ import {InputField} from "../../components/inputField";
 import {ValidationService} from "../../utils/validationService";
 import AuthController from "../../controllers/authController";
 import {Link} from "../../components/link";
+import {withStore} from "../../utils/store";
 
-export class SignUpPage extends Block {
+class SignUpPageBase extends Block {
     constructor(props: unknown) {
         super('div', props);
     }
@@ -123,3 +124,7 @@ export class SignUpPage extends Block {
         })
     }
 }
+
+export const SignUpPage = withStore((state) => {
+    return state.user;
+})(SignUpPageBase)
