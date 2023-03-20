@@ -61,11 +61,17 @@ class ChatController {
 
     async getToken(id: number) {
         try {
-            await this.api.getToken(id);
+            return await this.api.getToken(id).then(r => r.token);
         } catch (e) {
             console.error(e);
         }
     }
 }
 
-export default new ChatController();
+const chatController = new ChatController();
+
+
+// @ts-ignore
+window.chatController = chatController;
+
+export default chatController;

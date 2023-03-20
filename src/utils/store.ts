@@ -2,10 +2,13 @@ import { set } from "./utils";
 import {EventBus} from "./eventBus";
 import {ChatData, User} from "../api/types";
 import {Block} from "./block";
+import {Message} from "../controllers/messagesController";
 
 export interface State {
     user?: User;
     chats?: ChatData[];
+    messages?: Record<number, Message[]>;
+    selectedChat?: number;
 }
 
 export enum StoreEvent {
@@ -17,13 +20,11 @@ class Store extends EventBus {
 
     constructor() {
         super();
-        console.log('STORERRERE');
     }
 
     set(path: string, value: unknown): void {
         set(this.state, path, value);
 
-        console.log('EMIT STORE');
         this.emit(StoreEvent.Updated, this.getState());
 
         console.log('STATE UPDATED: ', this.getState());
@@ -66,5 +67,8 @@ export function withStore(mapStateToProps: (state: any) => any) {
         }
     }
 }
+
+// @ts-ignore
+window.store = store
 
 export default store;

@@ -13,6 +13,7 @@ import {Button} from "../../components/button";
 import {withStore} from "../../utils/store";
 import {Chat} from "../../components/chat";
 import {ChatData} from "../../api/types";
+import {ChatList} from "../../components/chatList";
 
 class ChatPageBase extends Block {
 
@@ -79,17 +80,24 @@ class ChatPageBase extends Block {
             }, label: 'Add new chat'
         })
 
+        this.children.chatList = new ChatList({
+            chatData: [{title: 'CHAT!!1'}, {title: 'CHAT!!1'}]
+        })
     }
 
-    protected componentDidUpdate(oldProps: unknown, newProps: {data: ChatData[]}): boolean {
-        console.log('UPDATE', oldProps, newProps);
+    protected componentDidUpdate(oldProps: unknown, newProps: {messages: Message[]}): boolean {
+        console.log('DSKJDKLSA', newProps.messages);
 
         this.children.chat.setProps({
             count: 2,
             message: 'Lorem ipsum dolor sit amet, ' +
                 'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: newProps?.data[0].title,
+            name: 'newProps?.messages[0].title',
             time: '15:24'
+        })
+
+        this.children.chatList.setProps({
+            chatData: [{title: 'CHAT!!1'}, {title: 'CHAT!!1'}]
         })
 
 
@@ -101,6 +109,24 @@ class ChatPageBase extends Block {
     }
 }
 
-export const ChatPage = withStore((state) => {
-    return {data: state.chats}
-})(ChatPageBase);
+const withSelectedChatMessages = withStore(state => {
+    const selectedChatId = 8415;
+    // const selectedChatId = state.selectedChat;
+    //
+    // if (!selectedChatId) {
+    //     return {
+    //         messages: [],
+    //         selectedChat: undefined,
+    //         userId: state.user.id
+    //     };
+    // }
+
+
+    return {
+        messages: (state.messages || {})[selectedChatId] || [],
+        selectedChat: state.selectedChat,
+        userId: state.user.id
+    };
+});
+
+export const ChatPage = withSelectedChatMessages(ChatPageBase);

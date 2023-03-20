@@ -7,6 +7,9 @@ import {ProfileUpdatePage} from "./pages/profile-update";
 import {PasswordUpdatePage} from "./pages/password-update";
 import {ROUTES} from "./utils/types";
 import AuthController from "./controllers/authController";
+import messagesController from "./controllers/messagesController";
+
+console.log(messagesController);
 
 window.addEventListener('DOMContentLoaded', async () => {
 
