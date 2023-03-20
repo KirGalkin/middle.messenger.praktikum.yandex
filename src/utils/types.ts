@@ -20,4 +20,7 @@ export enum ROUTES {
     Profile = '/profile',
     ProfileUpdate = '/profile-update',
     PasswordUpdate = '/password-update',
+    AddNewChat = '/add-new-chat',
+    AddUserToChat = '/add-user',
+    RemoveUserToChat = '/remove-user'
 }

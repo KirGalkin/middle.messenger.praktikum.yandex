@@ -11,6 +11,8 @@ import {Button} from "../../components/button";
 import {withStore} from "../../utils/store";
 import {ChatList} from "../../components/chatList";
 import {Messenger} from "../../components/messenger";
+import MessagesController from "../../controllers/messagesController";
+import router from "../../utils/router";
 
 class ChatPageBase extends Block {
 
@@ -35,12 +37,43 @@ class ChatPageBase extends Block {
 
         this.children.imageAttach = new Img({
             alt: 'attach',
-            src: imageAttach
+            src: imageAttach,
+            events: {
+                click: () => {
+                    router.go(ROUTES.AddUserToChat)
+                }
+            }
         })
 
-        this.children.imageSend = new Img({
-            alt: 'attach',
-            src: imageSend
+        this.children.sendButton = new Img({
+            alt: 'send',
+            src: imageSend,
+            events: {
+                click:() => {
+                    const message = (this.children.message as Message).value;
+
+                    console.log('SEND MESSAGE', message, this.props.selectedChat)
+
+                    if(!message || !this.props.selectedChat) {
+                        return;
+                    }
+
+                    //TODO FIX ME
+                    (this.children.message as Message).value = '';
+
+                    MessagesController.sendMessage(this.props.selectedChat, message);
+                }
+            }
+        })
+
+        this.children.deleteUser = new Img({
+            alt: 'delete',
+            src: imageSend,
+            events: {
+                click: () => {
+                    router.go(ROUTES.RemoveUserToChat)
+                }
+            }
         })
 
         this.children.link = new Link({
@@ -50,7 +83,7 @@ class ChatPageBase extends Block {
 
         this.children.addChatButton = new Button({
             events: {
-                click: () => ChatController.createChat({title: 'CHAT1'})
+                click: () => router.go(ROUTES.AddNewChat)
             }, label: 'Add new chat'
         })
 

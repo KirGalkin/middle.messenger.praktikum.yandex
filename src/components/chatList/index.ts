@@ -20,9 +20,7 @@ export class ChatList extends Block<ChatListProps> {
 
     // @ts-ignore
     protected componentDidUpdate(oldProps: ChatListProps, newProps: ChatListProps): boolean {
-        console.log('CHATLIST UPDATE', newProps)
         this.children.chats = this.createChats(newProps);
-
         return true;
     }
 

@@ -23,6 +23,6 @@ export class UserApi extends BaseApi {
     }
 
     findUserByLogin(data: UserByLoginRequest) {
-        return this.http.post<User | undefined>('/search', {data})
+        return this.http.post<User[] | undefined>('/search', {data})
     }
 }

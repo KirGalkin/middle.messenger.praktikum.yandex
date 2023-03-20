@@ -8,6 +8,9 @@ import {PasswordUpdatePage} from "./pages/password-update";
 import {ROUTES} from "./utils/types";
 import AuthController from "./controllers/authController";
 import messagesController from "./controllers/messagesController";
+import AddNewChat from "./pages/addNewChat";
+import {AddNewUserToChatPage} from "./pages/add-new-user-to-chat";
+import {DeleteUserFromChatPage} from "./pages/delete-user-from-chat";
 
 console.log(messagesController);
 
@@ -21,6 +24,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         .use(ROUTES.Profile, ProfilePage)
         .use(ROUTES.PasswordUpdate, PasswordUpdatePage)
         .use(ROUTES.ProfileUpdate, ProfileUpdatePage)
+        .use(ROUTES.AddNewChat, AddNewChat)
+        .use(ROUTES.AddUserToChat, AddNewUserToChatPage)
+        .use(ROUTES.RemoveUserToChat, DeleteUserFromChatPage)
 
     let isProtectedRoute = true;
 

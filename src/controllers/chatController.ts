@@ -2,6 +2,8 @@ import {CreateChatRequest, DeleteChatRequest, UsersRequest} from "../api/types";
 import {ChatApi} from "../api/chatApi";
 import store from "../utils/store";
 import MessagesController from "./messagesController";
+import router from "../utils/router";
+import {ROUTES} from "../utils/types";
 
 class ChatController {
     private readonly api: ChatApi;
@@ -34,6 +36,8 @@ class ChatController {
         try {
             await this.api.createChat(data);
             await this.getChats();
+
+            router.go(ROUTES.Chats);
         } catch (e) {
             console.error(e);
         }
@@ -66,6 +70,7 @@ class ChatController {
     async addUsers(data: UsersRequest) {
         try {
             await this.api.addUsers(data);
+            router.go(ROUTES.Chats);
         } catch (e) {
             console.error(e);
         }
@@ -78,6 +83,16 @@ class ChatController {
             console.error(e);
         }
     }
+
+    async deleteUsers(data: UsersRequest) {
+        try {
+            await this.api.deleteUsers(data);
+            router.go(ROUTES.Chats);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
 
     selectChat(id: number) {
         store.set('selectedChat', id)

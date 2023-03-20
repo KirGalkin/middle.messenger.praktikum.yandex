@@ -41,4 +41,8 @@ export class ChatApi extends BaseApi {
     getToken(id: number): Promise<TokenResponse> {
         return this.http.post<TokenResponse>(`/token/${id}`, {});
     }
+
+    deleteUsers(data: UsersRequest): Promise<void> {
+        return this.http.delete('/users', {data});
+    }
 }

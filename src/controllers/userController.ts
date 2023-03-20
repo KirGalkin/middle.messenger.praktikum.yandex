@@ -62,7 +62,7 @@ class UserController {
 
     async findUserByLogin(data: UserByLoginRequest) {
         try {
-            await this.api.findUserByLogin(data);
+            return await this.api.findUserByLogin(data);
         } catch (e) {
             console.error(e)
         }
