@@ -1,28 +1,45 @@
 // import {Chat} from "../chat";
 import {Block} from "../../utils/block";
 import template from "./chatList.hbs";
+import {Chat} from "../chat";
 
 export interface ChatListProps {
     chatData: any[]
 }
 
 export class ChatList extends Block<ChatListProps> {
-    chats: any[] = [{title: 'CHAT!!2'}, {title: 'CHAT!!3'}];
 
     constructor(props: ChatListProps) {
         super('div', props);
-        // console.log('CHATLIST', props);
     }
 
     protected init() {
-        this.chats = [{title: 'CHAT!!1'}, {title: 'CHAT!!1'}]
 
-        // console.log('THIS> PROPS', this.props)
+        // const chatArray = (this.props.chatData || []).map(c => {
+        //     return  new Chat({count: 0, message: "", name: c.title, time: ""})
+        // });
+
+
+        (this.props.chatData || []).forEach(data => {
+            this.children[data.title] = new Chat({
+                count: 0, message: "", name: data.title, time: ""
+            })
+        })
+
+        // this.children.chats = chatArray;
+
+        this.children['chha'] = new Chat({
+            count: 0, message: "", name: "HUI", time: ""
+
+        })
     }
 
-    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-
-        // console.log('CHAT LIST UPDATE', newProps)
+    protected componentDidUpdate(oldProps: ChatListProps, newProps: ChatListProps): boolean {
+        (newProps.chatData || []).forEach(data => {
+            this.children[data.title] = new Chat({
+                count: 0, message: "", name: data.title, time: ""
+            })
+        })
 
         return true;
     }

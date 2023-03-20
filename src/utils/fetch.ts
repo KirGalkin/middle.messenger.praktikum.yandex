@@ -47,6 +47,7 @@ export class Fetch {
         }, options.timeout);
     };
 
+    // @ts-ignore
     request<T>(url: string, options: Options = {method: Method.GET}, timeout = 5000): Promise<T> {
         const {method, data} = options;
 

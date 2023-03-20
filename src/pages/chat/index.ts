@@ -1,7 +1,5 @@
 import {Block} from "../../utils/block";
 import template from './chat.hbs';
-import {ReceivedMessage} from "../../components/receivedMessage";
-import {SentMessage} from "../../components/sentMessage";
 import {Message} from "../../components/message";
 import {Img} from "../../components/shared/img";
 import imageAttach from '../../../static/attach.png';
@@ -12,7 +10,6 @@ import ChatController from "../../controllers/chatController";
 import {Button} from "../../components/button";
 import {withStore} from "../../utils/store";
 import {Chat} from "../../components/chat";
-import {ChatData} from "../../api/types";
 import {ChatList} from "../../components/chatList";
 
 class ChatPageBase extends Block {
@@ -37,20 +34,20 @@ class ChatPageBase extends Block {
             time: '15:24'
         })
 
-        this.children.receivedMessage = new ReceivedMessage({
-            message: `
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Provident quibusdam voluptatem voluptates. Aliquid assumenda
-                commodi deserunt dignissimos eum illum labore, natus nobis,
-                odit officia officiis velit voluptas voluptatibus. Nulla odio
-                officiis similique! Ab alias amet doloremque esse optio pariatur
-                placeat quia saepe temporibus? Ab assumenda beatae ea, iste perferendis
-                possimus!`
-        });
-
-        this.children.sentMessage = new SentMessage({
-            message: 'Lorem ipsum!!'
-        })
+        // this.children.receivedMessage = new ReceivedMessage({
+        //     message: `
+        //         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        //         Provident quibusdam voluptatem voluptates. Aliquid assumenda
+        //         commodi deserunt dignissimos eum illum labore, natus nobis,
+        //         odit officia officiis velit voluptas voluptatibus. Nulla odio
+        //         officiis similique! Ab alias amet doloremque esse optio pariatur
+        //         placeat quia saepe temporibus? Ab assumenda beatae ea, iste perferendis
+        //         possimus!`
+        // });
+        //
+        // this.children.sentMessage = new SentMessage({
+        //     message: 'Lorem ipsum!!'
+        // })
 
         this.children.message = new Message({
             htmlId: 'message',
@@ -81,12 +78,12 @@ class ChatPageBase extends Block {
         })
 
         this.children.chatList = new ChatList({
-            chatData: [{title: 'CHAT!!1'}, {title: 'CHAT!!1'}]
+            chatData: [{title: 'CHAT!!444'}, {title: 'CHAT!!3333'}]
         })
     }
 
-    protected componentDidUpdate(oldProps: unknown, newProps: {messages: Message[]}): boolean {
-        console.log('DSKJDKLSA', newProps.messages);
+    protected componentDidUpdate(oldProps: unknown, newProps: {chats: any[]}): boolean {
+        console.log('DSKJDKLSA', newProps);
 
         this.children.chat.setProps({
             count: 2,
@@ -97,7 +94,7 @@ class ChatPageBase extends Block {
         })
 
         this.children.chatList.setProps({
-            chatData: [{title: 'CHAT!!1'}, {title: 'CHAT!!1'}]
+            chatData: newProps.chats
         })
 
 
@@ -125,7 +122,8 @@ const withSelectedChatMessages = withStore(state => {
     return {
         messages: (state.messages || {})[selectedChatId] || [],
         selectedChat: state.selectedChat,
-        userId: state.user.id
+        userId: state.user.id,
+        chats: state.chats
     };
 });
 
