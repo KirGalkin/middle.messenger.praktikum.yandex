@@ -1,6 +1,6 @@
 
 import WSTransport, { WSTransportEvents } from '../utils/WSTransport';
-import store from '../utils/Store';
+import store from "../utils/store";
 
 export interface Message {
     chat_id: number;
