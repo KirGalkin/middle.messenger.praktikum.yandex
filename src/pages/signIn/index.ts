@@ -37,13 +37,6 @@ class SignInPageBase extends Block {
             }
         });
 
-        this.children.button2 = new Button({
-            label: 'Logout',
-            events: {
-                click: (event: any) => this.logout(event)
-            }
-        });
-
         this.children.link = new Link({
             label: 'Sign Up',
             to: ROUTES.SignUp,
