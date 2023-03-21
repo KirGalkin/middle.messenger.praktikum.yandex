@@ -71,7 +71,6 @@ export class Fetch {
             xhr.ontimeout = () => reject({reason: 'timeout'});
 
             if (!(data instanceof FormData)) {
-                console.log('dsddssd', data)
                 xhr.setRequestHeader("Content-Type", "application/json");
             }
 

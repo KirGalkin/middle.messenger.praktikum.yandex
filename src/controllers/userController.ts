@@ -47,6 +47,8 @@ class UserController {
     async updatePassword(data: PasswordRequest) {
         try {
             await this.api.updatePassword(data);
+
+            router.go(ROUTES.Profile);
         } catch (e) {
             console.error(e)
         }

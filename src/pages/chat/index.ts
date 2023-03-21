@@ -1,8 +1,6 @@
 import {Block} from "../../utils/block";
 import template from './chat.hbs';
 import {Message} from "../../components/message";
-import {Img} from "../../components/shared/img";
-import imageSend from '../../../static/nav_arrow_left.png';
 import {Link} from "../../components/link";
 import {ROUTES} from "../../utils/types";
 import ChatController from "../../controllers/chatController";
@@ -27,40 +25,15 @@ class ChatPageBase extends Block {
 
     protected init() {
         this.element?.classList.add('chat-content');
+        this.initChildrens();
+    }
 
+    private initChildrens() {
         this.children.message = new Message({
             htmlId: 'message',
             type: 'text',
             placeholder: 'Message',
             events: {}
-        })
-
-        this.children.sendButton = new Img({
-            alt: 'send',
-            src: imageSend,
-            events: {
-                click:() => {
-                    const message = (this.children.message as Message).value;
-
-                    console.log('SEND MESSAGE', message, this.props.selectedChat)
-
-                    if(!message || !this.props.selectedChat) {
-                        return;
-                    }
-
-                    MessagesController.sendMessage(this.props.selectedChat, message);
-                }
-            }
-        })
-
-        this.children.deleteUser = new Img({
-            alt: 'delete',
-            src: imageSend,
-            events: {
-                click: () => {
-                    router.go(ROUTES.RemoveUserToChat)
-                }
-            }
         })
 
         this.children.link = new Link({
@@ -71,11 +44,12 @@ class ChatPageBase extends Block {
         this.children.addChatButton = new Button({
             events: {
                 click: () => router.go(ROUTES.AddNewChat)
-            }, label: '+'
+            }, label: '+ Chat'
         })
 
         this.children.chatList = new ChatList({
-            chatData: [] as any,
+            chatData: [],
+            //FIX ME
             activeId: this.props.selectedChat
         })
 
@@ -86,7 +60,7 @@ class ChatPageBase extends Block {
                 }
             },
             label: "+ User",
-            style: "width: 66px; margin: 0 6px; height: 32px"
+            style: "width: 75px; margin: 0 6px; height: 32px"
 
         })
 
@@ -97,14 +71,28 @@ class ChatPageBase extends Block {
                 }
             },
             label: "- User",
-            style: "width: 66px; margin: 0 6px; height: 32px"
+            style: "width: 75px; margin: 0 6px; height: 32px"
+        })
+
+        this.children.sendMessageBtn = new Button({
+            events: {
+                click: () => {
+                    const message = (this.children.message as Message).value;
+                    if (!message || !this.props.selectedChat) {
+                        return;
+                    }
+                    MessagesController.sendMessage(this.props.selectedChat, message);
+                }
+            },
+            label: "Send ->",
+            style: "width: 170px; height: 32px; margin: 0"
 
         })
 
         this.children.messenger = new Messenger({});
     }
 
-    // @ts-ignore
+// @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: {chats: ChatData[], selectedChat: number}): boolean {
         (this.children.chatList as Block).setProps({
             chatData: newProps.chats,
