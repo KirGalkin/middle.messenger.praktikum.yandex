@@ -12,16 +12,18 @@ class AddNewUserToChatPageBase extends Block {
     }
 
     protected init() {
+        this.element?.classList.add('center-page-content');
+        this.element?.classList.add('add-new-user-content')
+
         this.children.loginField = new InputField({
             htmlId: "login",
-            label: "Insert user Login",
+            label: "",
             type: "text"
         });
 
         this.children.button = new Button({
             events: {
                 click: async () => {
-                    // const title = (this.children.titleField as InputField).value;
                     const login = (this.children.loginField as InputField).value;
 
                     if(!login) {
@@ -30,7 +32,6 @@ class AddNewUserToChatPageBase extends Block {
                     }
 
                     await userController.findUserByLogin({login}).then(async users => {
-                        console.log('UUUUSERSRSRSRE', users)
                         if(!users) {
                             console.error('User not found', login)
                             return;
@@ -38,28 +39,11 @@ class AddNewUserToChatPageBase extends Block {
 
                         const ids = users.map(u => u.id)
 
-                        console.log('{users: [user.id], chatId: this.props.selectedChat}', {users: ids, chatId: this.props.selectedChat})
                         chatController.addUsers({users: ids, chatId: this.props.selectedChat});
-
                     })
-
-
-                    // const user = userController.findUserByLogin({login: login}).then(us => {
-                    //     if(!us) {
-                    //         console.error('User not found', login)
-                    //         return;
-                    //     }
-                    //
-                    //     chatController.createChat({title}).then(() => {
-                    //         chatController.addUsers({users: [us.id], chatId: chat })
-                    //
-                    //     })
-                    // })
-
-
                 }
             },
-            label: "Add new chat"
+            label: "Add user to chat"
         })
     }
 

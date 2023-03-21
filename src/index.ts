@@ -8,9 +8,9 @@ import {PasswordUpdatePage} from "./pages/password-update";
 import {ROUTES} from "./utils/types";
 import AuthController from "./controllers/authController";
 import messagesController from "./controllers/messagesController";
-import AddNewChat from "./pages/addNewChat";
 import {AddNewUserToChatPage} from "./pages/add-new-user-to-chat";
 import {DeleteUserFromChatPage} from "./pages/delete-user-from-chat";
+import AddNewChat from "./pages/add-new-chat";
 
 console.log(messagesController);
 

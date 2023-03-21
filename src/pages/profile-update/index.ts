@@ -135,7 +135,7 @@ class ProfileUpdatePageBase extends Block {
         (this.children.updateFieldFirstName as Block).setProps({value: (newProps as User).first_name});
         (this.children.updateFieldLastName as Block).setProps({value: (newProps as User).second_name});
         (this.children.updateFieldPhone as Block).setProps({value: (newProps as User).phone});
-        (this.children.avatar as Block).setProps({name: (newProps as User).login, imageSrc: (newProps as User).avatar});
+        (this.children.avatar as Block).setProps({name: (newProps as User).login, imageSrc: (newProps as User).avatar, editMode: true});
 
         return true;
     }

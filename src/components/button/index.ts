@@ -6,6 +6,7 @@ interface ButtonProps {
     events: {
         click: (...args: unknown[]) => void;
     };
+    style?: string;
 }
 
 export class Button extends Block<ButtonProps> {
@@ -15,6 +16,7 @@ export class Button extends Block<ButtonProps> {
 
     protected init() {
         this.element?.classList.add('main-button');
+        this.element?.setAttribute('style', this.props.style || '');
     }
 
     render() {

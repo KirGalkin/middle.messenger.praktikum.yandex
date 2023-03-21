@@ -7,11 +7,13 @@ import userController from "../../controllers/userController";
 
 interface AvatarProps {
     name: string,
-    imageSrc: string
+    imageSrc: string,
+    editMode?: boolean
 }
 
 export class Avatar extends Block<AvatarProps> {
 
+    private url = 'https://ya-praktikum.tech/api/v2/resources'
 
     constructor(props: AvatarProps) {
         super('div', props);
@@ -22,7 +24,7 @@ export class Avatar extends Block<AvatarProps> {
         this.element?.classList.add('avatar')
 
         this.children.image = new Img({
-            src: this.props.imageSrc ?? imageAva,
+            src: this.props.imageSrc ? `${this.url}${this.props.imageSrc}` : imageAva,
             alt: 'avatar',
             className: 'avatar-img'
         })
@@ -31,16 +33,17 @@ export class Avatar extends Block<AvatarProps> {
             events: {
                 click: (event) => this.onSubmit(event)
             },
-            label: "submit"
+            label: "Update avatar"
         })
     }
 
     // @ts-ignore
-    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        // console.log('U{DATE', newProps, this.props);
+    protected componentDidUpdate(oldProps: AvatarProps, newProps: AvatarProps): boolean {
+
+        console.log('U{DATE', newProps.imageSrc);
 
         (this.children.image as Block).setProps({
-            src: (newProps as AvatarProps).imageSrc,
+            src: newProps.imageSrc ? `${this.url}${newProps.imageSrc}` : imageAva,
             alt: 'avatar',
             className: 'avatar-img'
         })

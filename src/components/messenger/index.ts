@@ -23,7 +23,6 @@ class MessengerBase extends Block {
 
     // @ts-ignore
     protected componentDidUpdate(oldProps: MessengerProps, newProps: MessengerProps): boolean {
-        console.log('Messenger UPDATE', newProps);
         this.children.messages = this.createMessages(newProps);
 
         return true;
@@ -55,14 +54,14 @@ const withSelectedChatMessages = withStore(state => {
         return {
             messages: [],
             selectedChat: undefined,
-            userId: state.user.id
+            userId: state.user?.id
         };
     }
 
     return {
         messages: (state.messages || {})[selectedChatId] || [],
         selectedChat: state.selectedChat,
-        userId: state.user.id
+        userId: state.user?.id
     };
 });
 

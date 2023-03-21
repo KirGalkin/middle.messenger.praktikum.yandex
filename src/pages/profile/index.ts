@@ -60,19 +60,14 @@ class ProfilePageBase extends Block {
             to: ROUTES.PasswordUpdate
         })
 
-        // this.children.linkExit = new Link({
-        //     label: 'Exit',
-        //     style: 'color: var(--warning-color)',
-        //     to: ''
-        // })
-
         this.children.buttonExit = new Button({
             events: {
                 click: () => {
                     AuthController.logout();
                 }
             },
-            label: 'Exit'
+            label: 'Logout',
+            style: 'align-self: center; margin-top: 16px'
 
         })
 
@@ -96,7 +91,7 @@ class ProfilePageBase extends Block {
         (this.children.readonlyFieldFirstName as Block).setProps({value: (newProps as User).first_name});
         (this.children.readonlyFieldLastName as Block).setProps({value: (newProps as User).second_name});
         (this.children.readonlyFieldPhone as Block).setProps({value: (newProps as User).phone});
-        (this.children.avatar as Block).setProps({name: (newProps as User).login});
+        (this.children.avatar as Avatar).setProps({name: (newProps as User).login, imageSrc: (newProps as User).avatar});
         return false;
     }
 
@@ -108,11 +103,3 @@ class ProfilePageBase extends Block {
 export const ProfilePage = withStore((state) => {
     return state.user || {};
 })(ProfilePageBase);
-// const withUser = withStore((state) => ({ ...state.user }))
-//
-// export const ProfilePage = withUser(ProfilePageBase);
-
-//
-// const withUser = withStore((state) => ({ ...state.user }))
-//
-// export const ProfilePage = withUser(ProfilePageBase);

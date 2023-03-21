@@ -13,6 +13,7 @@ import {ChatList} from "../../components/chatList";
 import {Messenger} from "../../components/messenger";
 import MessagesController from "../../controllers/messagesController";
 import router from "../../utils/router";
+import {ChatData} from "../../api/types";
 
 class ChatPageBase extends Block {
 
@@ -84,22 +85,22 @@ class ChatPageBase extends Block {
         this.children.addChatButton = new Button({
             events: {
                 click: () => router.go(ROUTES.AddNewChat)
-            }, label: 'Add new chat'
+            }, label: '+'
         })
 
         this.children.chatList = new ChatList({
-            chatData: []
+            chatData: [] as any,
+            activeId: this.props.selectedChat
         })
 
         this.children.messenger = new Messenger({});
     }
 
     // @ts-ignore
-    protected componentDidUpdate(oldProps: unknown, newProps: {chats: any[]}): boolean {
-        console.log('CHAT PAGE UPDATE', newProps);
-
+    protected componentDidUpdate(oldProps: unknown, newProps: {chats: ChatData[], selectedChat: number}): boolean {
         (this.children.chatList as Block).setProps({
-            chatData: newProps.chats
+            chatData: newProps.chats,
+            activeId: newProps.selectedChat
         });
 
         return true;
@@ -117,7 +118,7 @@ const withSelectedChatMessages = withStore(state => {
         return {
             messages: [],
             selectedChat: undefined,
-            userId: state.user.id,
+            userId: state.user?.id,
             chats: state.chats
         };
     }
@@ -125,7 +126,7 @@ const withSelectedChatMessages = withStore(state => {
     return {
         messages: (state.messages || {})[selectedChatId] || [],
         selectedChat: state.selectedChat,
-        userId: state.user.id,
+        userId: state.user?.id,
         chats: state.chats
     };
 });

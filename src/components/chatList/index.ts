@@ -1,11 +1,13 @@
 // import {Chat} from "../chat";
 import {Block} from "../../utils/block";
 import template from "./chatList.hbs";
-import {Chat} from "../chat";
+import {ChatItem} from "../chatItem";
 import ChatController from "../../controllers/chatController";
+import {ChatData} from "../../api/types";
 
 export interface ChatListProps {
-    chatData: any[]
+    chatData: ChatData[],
+    activeId: number
 }
 
 export class ChatList extends Block<ChatListProps> {
@@ -26,11 +28,12 @@ export class ChatList extends Block<ChatListProps> {
 
     private createChats(props: ChatListProps) {
         return (props.chatData || []).map(data => {
-            return new Chat({
+            return new ChatItem({
                 name: data.title,
-                message: "",
-                time: "string",
-                count: 32,
+                message: data.last_message?.content || '',
+                time: this.getFormattedDate(data.last_message?.time),
+                count: data.unread_count || 0,
+                isActive: this.isActive(data),
                 events: {
                     click: () => {
                         ChatController.selectChat(data.id);
@@ -42,5 +45,32 @@ export class ChatList extends Block<ChatListProps> {
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
+    }
+
+    private isActive(data: any) {
+        return data.id === this.props.activeId
+    }
+
+    private getFormattedDate(time: string | undefined) {
+        if(!time) {
+            return '';
+        }
+
+        const dateTime = new Date(time);
+
+        const yyyy = dateTime.getFullYear();
+        let mm = dateTime.getMonth() + 1;
+        let dd = dateTime.getDate();
+        let month = mm.toString();
+        let days = dd.toString();
+
+        if (dd < 10) {
+            days = '0' + dd;
+        }
+        if (mm < 10) {
+            month = '0' + mm;
+        }
+
+        return days + '/' + month + '/' + yyyy;
     }
 }
