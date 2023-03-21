@@ -35,13 +35,6 @@ class Store extends EventBus {
     }
 }
 
-// const store = new Store();
-//
-//
-// // @ts-ignore
-// // window.store = store;
-//
-// export default store;
 const store = new Store();
 
 export function withStore(mapStateToProps: (state: any) => any) {

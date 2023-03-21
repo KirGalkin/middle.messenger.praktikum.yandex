@@ -5,6 +5,9 @@ import {Button} from "../../components/button";
 import chatController from "../../controllers/chatController";
 import userController from "../../controllers/userController";
 import {withStore} from "../../utils/store";
+import {Img} from "../../components/shared/img";
+import arrow from "../../../static/nav_arrow.png";
+import router from "../../utils/router";
 
 class DeleteUserFromChatPageBase extends Block {
     constructor(props: unknown) {
@@ -12,16 +15,25 @@ class DeleteUserFromChatPageBase extends Block {
     }
 
     protected init() {
+        this.element?.classList.add('center-page-content');
+        this.element?.classList.add('delete-user-content');
+
+        this.children.arrowImg = new Img({
+            src: arrow,
+            alt: 'back',
+            className: 'navigation-arrow',
+            events: {click: () => router.back()}
+        })
+
         this.children.loginField = new InputField({
             htmlId: "login",
-            label: "Insert user Login",
+            label: "",
             type: "text"
         });
 
         this.children.button = new Button({
             events: {
                 click: async () => {
-                    // const title = (this.children.titleField as InputField).value;
                     const login = (this.children.loginField as InputField).value;
 
                     if(!login) {

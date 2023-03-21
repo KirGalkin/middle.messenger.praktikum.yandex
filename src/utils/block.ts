@@ -70,29 +70,6 @@ export abstract class Block<Props extends Record<string, any> = any> {
 
 
     protected compile(template: (context: any) => string, context: any) {
-        // const propsAndStubs = {...props};
-        //
-        // Object.entries(this.children).forEach(([key, child]) => {
-        //     propsAndStubs[key] = `<div data-id="${child.id}"></div>`
-        // })
-        //
-        // const html = template(propsAndStubs);
-        //
-        // const fragment = this.createDocumentElement('template') as HTMLTemplateElement;
-        //
-        // fragment.innerHTML = html;
-        //
-        // Object.values(this.children).forEach(child => {
-        //     const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-        //     if(!stub) {
-        //         return;
-        //     }
-        //     if (child.element) {
-        //         stub.replaceWith(child.element);
-        //     }
-        // })
-        //
-        // return fragment.content;
         const contextAndStubs = {...context};
 
         Object.entries(this.children).forEach(([name, component]) => {
@@ -194,7 +171,6 @@ export abstract class Block<Props extends Record<string, any> = any> {
 
         this.removeEvents();
 
-        // this.element.innerHTML = block
         this.element.innerHTML = '';
 
         this.element.appendChild(block);

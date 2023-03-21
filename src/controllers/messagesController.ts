@@ -21,6 +21,7 @@ export interface Message {
 
 class MessagesController {
     private sockets: Map<number, WSTransport> = new Map();
+    private url = 'wss://ya-praktikum.tech/ws/chats';
 
     async connect(id: number, token: string) {
         if (this.sockets.has(id)) {
@@ -29,7 +30,7 @@ class MessagesController {
 
         const userId = store.getState().user?.id;
 
-        const wsTransport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`);
+        const wsTransport = new WSTransport(`${this.url}/${userId}/${id}/${token}`);
 
         this.sockets.set(id, wsTransport);
 
@@ -59,6 +60,7 @@ class MessagesController {
             throw new Error(`Chat ${id} is not connected`);
         }
 
+        //TODO pagination?
         socket.send({type: 'get old', content: '0'});
     }
 

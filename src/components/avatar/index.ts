@@ -54,13 +54,11 @@ export class Avatar extends Block<AvatarProps> {
     protected async onSubmit(event: any) {
         event.preventDefault();
         const myUserForm = document.getElementById('myUserForm');
-        console.log('this.myUserForm?', (myUserForm as HTMLFormElement))
 
         if (myUserForm) {
             const form = new FormData((myUserForm as HTMLFormElement));
             await userController.updateAvatar(form);
         }
-        console.log('HUI')
     }
 
 

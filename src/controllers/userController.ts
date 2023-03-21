@@ -24,9 +24,9 @@ class UserController {
 
     async updateAvatar(data: FormData) {
         try {
-            // console.log('upda')
-            // await this.api.updateAvatar(data);
-            //TODO FIX
+            await this.api.updateAvatar(data);
+
+            // TODO FIX
             fetch(`https://ya-praktikum.tech/api/v2/user/profile/avatar`, {
                 method: 'PUT',
                 credentials: 'include', // Нам нужно подставлять cookies

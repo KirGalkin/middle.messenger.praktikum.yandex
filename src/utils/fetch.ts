@@ -70,7 +70,10 @@ export class Fetch {
             xhr.onerror = () => reject({reason: 'network error'});
             xhr.ontimeout = () => reject({reason: 'timeout'});
 
-            xhr.setRequestHeader('Content-Type', 'application/json');
+            if (!(data instanceof FormData)) {
+                console.log('dsddssd', data)
+                xhr.setRequestHeader("Content-Type", "application/json");
+            }
 
             xhr.withCredentials = true;
             xhr.responseType = 'json';

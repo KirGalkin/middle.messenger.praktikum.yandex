@@ -20,7 +20,7 @@ export class EventBus<
 
     off<Event extends MapInterface<E>>(event: Event, callback: Handler<Args[Event]>) {
         if (!this.listeners[event]) {
-            throw new Error(`Нет события: ${event}`);
+            throw new Error(`No events: ${event}`);
         }
 
         this.listeners[event] = this.listeners[event]!.filter(
@@ -38,39 +38,3 @@ export class EventBus<
         });
     }
 }
-
-// export class EventBus {
-//     private readonly listeners: Record<string, Array<(...args: unknown[]) => void>> = {}
-//
-//     constructor() {
-//         this.listeners = {}
-//     }
-//
-//     on(event: string, callback: (...args: unknown[]) => void): void {
-//         // console.log('ONNN')
-//         if (!this.listeners[event]) {
-//             this.listeners[event] = [];
-//         }
-//
-//         this.listeners[event].push(callback);
-//     }
-//
-//     off(event: string, callback: (...args: unknown[]) => void): void {
-//         if (!this.listeners[event]) {
-//             throw new Error(`Event ${event} is not registered`);
-//         }
-//
-//         this.listeners[event] = this.listeners[event].filter(listener => listener !== callback)
-//     }
-//
-//     emit(event: string, ...args: unknown[]): void {
-//         // console.log('EMIIIT', this.listeners);
-//         if (!this.listeners[event]) {
-//             throw new Error(`Event ${event} is not registered`);
-//         }
-//
-//         this.listeners[event].forEach(listener => {
-//             listener(...args);
-//         })
-//     }
-// }

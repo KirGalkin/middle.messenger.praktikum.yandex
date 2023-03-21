@@ -1,4 +1,3 @@
-// import {Chat} from "../chat";
 import {Block} from "../../utils/block";
 import template from "./chatList.hbs";
 import {ChatItem} from "../chatItem";

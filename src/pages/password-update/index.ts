@@ -33,14 +33,6 @@ export class PasswordUpdatePage extends Block {
             value: ''
         });
 
-        this.children.updateFieldNewPassRepeat = new UpdateField({
-            htmlId: 'newPasswordRepeat',
-            label: 'Repeat new password',
-            type: 'password',
-            validationFn: ValidationService.validatePassword,
-            value: ''
-        });
-
         this.children.button = new Button({
             events: {
                 click: (event: any) => this.onSubmit(event)
@@ -67,23 +59,18 @@ export class PasswordUpdatePage extends Block {
             (this.children.updateFieldOldPass as UpdateField)?.value
         const newPassword =
             (this.children.updateFieldNewPass as UpdateField)?.value
-        const newPasswordRepeat =
-            (this.children.updateFieldNewPassRepeat as UpdateField)?.value
 
         const oldPassValidationRes = ValidationService.validatePassword(oldPassword || '');
         const newPassValidationRes = ValidationService.validatePassword(newPassword || '');
-        const repeatNewPassValidationRes = ValidationService.validatePassword(newPasswordRepeat || '');
 
         console.log(
             `Old Password: ${oldPassword}, 
                             ${oldPassValidationRes || 'is valid'}\n`,
             `New Password: ${newPassword}, 
                             ${newPassValidationRes || 'is valid'}\n`,
-            `New Password repeat: ${newPasswordRepeat}, 
-                            ${repeatNewPassValidationRes || 'is valid'}\n`,
         )
 
-        if(oldPassValidationRes || newPassValidationRes || repeatNewPassValidationRes) {
+        if(oldPassValidationRes || newPassValidationRes) {
             console.log('Error profile validations')
             return;
         }

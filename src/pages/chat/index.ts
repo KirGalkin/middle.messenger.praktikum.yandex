@@ -2,7 +2,6 @@ import {Block} from "../../utils/block";
 import template from './chat.hbs';
 import {Message} from "../../components/message";
 import {Img} from "../../components/shared/img";
-import imageAttach from '../../../static/attach.png';
 import imageSend from '../../../static/nav_arrow_left.png';
 import {Link} from "../../components/link";
 import {ROUTES} from "../../utils/types";
@@ -36,16 +35,6 @@ class ChatPageBase extends Block {
             events: {}
         })
 
-        this.children.imageAttach = new Img({
-            alt: 'attach',
-            src: imageAttach,
-            events: {
-                click: () => {
-                    router.go(ROUTES.AddUserToChat)
-                }
-            }
-        })
-
         this.children.sendButton = new Img({
             alt: 'send',
             src: imageSend,
@@ -58,9 +47,6 @@ class ChatPageBase extends Block {
                     if(!message || !this.props.selectedChat) {
                         return;
                     }
-
-                    //TODO FIX ME
-                    (this.children.message as Message).value = '';
 
                     MessagesController.sendMessage(this.props.selectedChat, message);
                 }
@@ -91,6 +77,28 @@ class ChatPageBase extends Block {
         this.children.chatList = new ChatList({
             chatData: [] as any,
             activeId: this.props.selectedChat
+        })
+
+        this.children.addUserButton = new Button({
+            events: {
+                click: () => {
+                    router.go(ROUTES.AddUserToChat)
+                }
+            },
+            label: "+ User",
+            style: "width: 66px; margin: 0 6px; height: 32px"
+
+        })
+
+        this.children.removeUserButton = new Button({
+            events: {
+                click: () => {
+                    router.go(ROUTES.RemoveUserToChat)
+                }
+            },
+            label: "- User",
+            style: "width: 66px; margin: 0 6px; height: 32px"
+
         })
 
         this.children.messenger = new Messenger({});
