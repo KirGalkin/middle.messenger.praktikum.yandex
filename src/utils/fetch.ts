@@ -80,7 +80,8 @@ export class Fetch {
             if (method === Method.GET || !data) {
                 xhr.send();
             } else {
-                xhr.send(JSON.stringify(data));
+                const d = (data instanceof FormData) ? data : JSON.stringify(data);
+                xhr.send(d);
             }
         })
     }

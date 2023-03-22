@@ -24,21 +24,9 @@ class UserController {
 
     async updateAvatar(data: FormData) {
         try {
-            await this.api.updateAvatar(data);
-
-            // TODO FIX
-            fetch(`https://ya-praktikum.tech/api/v2/user/profile/avatar`, {
-                method: 'PUT',
-                credentials: 'include', // Нам нужно подставлять cookies
-                mode: 'cors', // Работаем с CORS
-                body: data,
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    store.set('user', data);
-                    return data;
-                });
+            const user = await this.api.updateAvatar(data);
+            store.set('user', user);
+            router.go(ROUTES.Profile)
         } catch (e) {
             console.error(e)
         }
