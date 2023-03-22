@@ -9,7 +9,7 @@ export enum WSTransportEvents {
 
 export default class WSTransport extends EventBus {
     private socket: WebSocket | null = null;
-    private pingInterval: number = 0;
+    private pingInterval = 0;
 
     constructor(private url: string) {
         super();
@@ -66,13 +66,17 @@ export default class WSTransport extends EventBus {
         });
 
         socket.addEventListener('message', (message) => {
-            const data = JSON.parse(message.data);
+            try {
+                const data = JSON.parse(message.data);
 
-            if (data.type && data.type === 'pong') {
-                return;
+                if (data.type && data.type === 'pong') {
+                    return;
+                }
+
+                this.emit(WSTransportEvents.Message, data)
+            } catch (e) {
+                console.error(e)
             }
-
-            this.emit(WSTransportEvents.Message, data)
         });
     }
 }

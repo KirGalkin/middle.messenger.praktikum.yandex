@@ -51,7 +51,6 @@ class DeleteUserFromChatPageBase extends Block {
 
                         const ids = users.map(u => u.id)
 
-                        console.log('{users: [user.id], chatId: this.props.selectedChat}', {users: ids, chatId: this.props.selectedChat})
                         chatController.deleteUsers({users: ids, chatId: this.props.selectedChat});
 
                     })

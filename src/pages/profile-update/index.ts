@@ -113,7 +113,11 @@ class ProfileUpdatePageBase extends Block {
                             ${phoneValidationRes || 'is valid'}\n`,
         )
 
-        if(emailValidationRes || loginValidationRes || firstnameValidationRes || lastnameValidationRes || phoneValidationRes) {
+        if(emailValidationRes
+            || loginValidationRes
+            || firstnameValidationRes
+            || lastnameValidationRes
+            || phoneValidationRes) {
             console.log('Error profile validations')
             return;
         }
@@ -130,12 +134,20 @@ class ProfileUpdatePageBase extends Block {
 
     // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        (this.children.updateFieldEmail as Block).setProps({value: (newProps as User).email});
-        (this.children.updateFieldLogin as Block).setProps({value: (newProps as User).login});
-        (this.children.updateFieldFirstName as Block).setProps({value: (newProps as User).first_name});
-        (this.children.updateFieldLastName as Block).setProps({value: (newProps as User).second_name});
-        (this.children.updateFieldPhone as Block).setProps({value: (newProps as User).phone});
-        (this.children.avatar as Block).setProps({name: (newProps as User).login, imageSrc: (newProps as User).avatar, editMode: true});
+        (this.children.updateFieldEmail as Block)
+            .setProps({value: (newProps as User).email});
+        (this.children.updateFieldLogin as Block)
+            .setProps({value: (newProps as User).login});
+        (this.children.updateFieldFirstName as Block)
+            .setProps({value: (newProps as User).first_name});
+        (this.children.updateFieldLastName as Block)
+            .setProps({value: (newProps as User).second_name});
+        (this.children.updateFieldPhone as Block)
+            .setProps({value: (newProps as User).phone});
+        (this.children.avatar as Block)
+            .setProps(
+                {name: (newProps as User).login,
+                    imageSrc: (newProps as User).avatar, editMode: true});
 
         return true;
     }

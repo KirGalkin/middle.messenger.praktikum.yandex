@@ -93,7 +93,8 @@ class ChatPageBase extends Block {
     }
 
 // @ts-ignore
-    protected componentDidUpdate(oldProps: unknown, newProps: {chats: ChatData[], selectedChat: number}): boolean {
+    protected componentDidUpdate(oldProps: unknown,
+        newProps: {chats: ChatData[], selectedChat: number}): boolean {
         (this.children.chatList as Block).setProps({
             chatData: newProps.chats,
             activeId: newProps.selectedChat

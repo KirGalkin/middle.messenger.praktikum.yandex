@@ -58,8 +58,8 @@ export class ChatList extends Block<ChatListProps> {
         const dateTime = new Date(time);
 
         const yyyy = dateTime.getFullYear();
-        let mm = dateTime.getMonth() + 1;
-        let dd = dateTime.getDate();
+        const mm = dateTime.getMonth() + 1;
+        const dd = dateTime.getDate();
         let month = mm.toString();
         let days = dd.toString();
 

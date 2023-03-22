@@ -23,7 +23,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
         return this.el;
     }
 
-    constructor(tagName = 'div', propsWithChildren: unknown = {}) {
+    protected constructor(tagName = 'div', propsWithChildren: unknown = {}) {
         const eventBus = new EventBus();
 
         const {children, props} = this.getChildrenAndProps(propsWithChildren)
@@ -98,6 +98,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
             stub.replaceWith(component.getContent()!);
         }
 
+        // @ts-ignore
         Object.entries(this.children).forEach(([_, component]) => {
             if (Array.isArray(component)) {
                 component.forEach(replaceStub);

@@ -5,7 +5,8 @@ export interface PropsWithRouter {
     router: typeof Router;
 }
 
-export function withRouter<P extends Record<string, any> & PropsWithRouter>(Component: BlockConstructable<P>) {
+export function withRouter<P extends Record<string, any>
+    & PropsWithRouter>(Component: BlockConstructable<P>) {
 
     return class WithRouter extends Component {
         constructor(props: Omit<P, 'router'> ) {

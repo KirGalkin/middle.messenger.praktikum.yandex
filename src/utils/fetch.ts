@@ -24,29 +24,30 @@ export class Fetch {
             ...options,
             method: Method.GET
         }, options.timeout);
-    };
+    }
 
     put<T = void>(url: string, options: Options): Promise<T> {
         return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {
             ...options,
             method: Method.PUT
         }, options.timeout);
-    };
+    }
 
     post<T = void>(url: string, options: Options): Promise<T> {
         return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {
             ...options,
             method: Method.POST
         }, options.timeout);
-    };
+    }
 
     delete<T = void>(url: string, options: Options): Promise<T> {
         return this.request<T>(`${this.baseUrl}${this.endpoint}${url}`, {
             ...options,
             method: Method.DELETE
         }, options.timeout);
-    };
+    }
 
+    // eslint-disable-next-line
     // @ts-ignore
     request<T>(url: string, options: Options = {method: Method.GET}, timeout = 5000): Promise<T> {
         const {method, data} = options;
