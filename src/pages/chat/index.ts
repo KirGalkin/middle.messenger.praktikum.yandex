@@ -89,18 +89,36 @@ class ChatPageBase extends Block {
 
         })
 
+        this.children.removeChat = new Button({
+            events: {
+                click: () => this.onRemoveChat()
+            },
+            label: '- Chat',
+            style: "width: 75px; margin: 0 6px; height: 32px; background-color: var(--warning-color);"
+        })
+
         this.children.messenger = new Messenger({});
     }
 
 // @ts-ignore
     protected componentDidUpdate(oldProps: unknown,
-        newProps: {chats: ChatData[], selectedChat: number}): boolean {
+                                 newProps: { chats: ChatData[], selectedChat: number }): boolean {
         (this.children.chatList as Block).setProps({
             chatData: newProps.chats,
             activeId: newProps.selectedChat
         });
 
         return true;
+    }
+
+    private async onRemoveChat(): Promise<void> {
+        const currentChat = this.props.selectedChat;
+
+        if (!currentChat) {
+            console.error('Current chat is empty', currentChat)
+            return;
+        }
+        await ChatController.deleteChat({chatId: currentChat});
     }
 
     protected render(): DocumentFragment {

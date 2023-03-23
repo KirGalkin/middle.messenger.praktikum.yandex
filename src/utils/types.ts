@@ -14,11 +14,10 @@ export interface BlockConstructable<P extends Record<string, any> = any> {
 
 export enum ROUTES {
     Index = '/',
-    SignUp = '/signup',
-    SignIn = '/signin',
-    Chats = '/chats',
+    SignUp = '/sign-up',
+    Chats = '/messenger',
     Profile = '/profile',
-    ProfileUpdate = '/profile-update',
+    ProfileUpdate = '/settings',
     PasswordUpdate = '/password-update',
     AddNewChat = '/add-new-chat',
     AddUserToChat = '/add-user',

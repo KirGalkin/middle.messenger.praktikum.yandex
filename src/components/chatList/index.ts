@@ -33,6 +33,7 @@ export class ChatList extends Block<ChatListProps> {
                 time: this.getFormattedDate(data.last_message?.time),
                 count: data.unread_count || 0,
                 isActive: this.isActive(data),
+                imageSrc: data.avatar,
                 events: {
                     click: () => {
                         ChatController.selectChat(data.id);

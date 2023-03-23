@@ -19,7 +19,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     Router
         .use(ROUTES.Index, SignInPage)
         .use(ROUTES.SignUp, SignUpPage)
-        .use(ROUTES.SignIn, SignInPage)
         .use(ROUTES.Chats, ChatPage)
         .use(ROUTES.Profile, ProfilePage)
         .use(ROUTES.PasswordUpdate, PasswordUpdatePage)
@@ -32,7 +31,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     switch (window.location.pathname) {
         case ROUTES.Index:
-        case ROUTES.SignIn:
         case ROUTES.SignUp:
             isProtectedRoute = false;
             break;

@@ -39,7 +39,7 @@ class AuthController {
         try {
             await this.api.logout();
             store.set('user', undefined);
-            router.go(ROUTES.SignIn)
+            router.go(ROUTES.Index)
         } catch (e) {
             console.error(e)
         }

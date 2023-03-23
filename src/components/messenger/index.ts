@@ -26,6 +26,7 @@ class MessengerBase extends Block {
     protected componentDidUpdate(oldProps: MessengerProps, newProps: MessengerProps): boolean {
         this.children.messages = this.createMessages(newProps);
 
+        this.element?.scrollTo(0, this.element?.getBoundingClientRect().height);
         return true;
     }
 

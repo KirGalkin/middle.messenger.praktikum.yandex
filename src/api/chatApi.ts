@@ -45,4 +45,9 @@ export class ChatApi extends BaseApi {
     deleteUsers(data: UsersRequest): Promise<void> {
         return this.http.delete('/users', {data});
     }
+
+    updateAvatar(data: FormData): Promise<void> {
+        data.append('chatId', '8643');
+        return this.http.put('/avatar', {data});
+    }
 }

@@ -46,6 +46,8 @@ class ChatController {
     async deleteChat(data: DeleteChatRequest) {
         try {
             await this.api.deleteChat(data);
+            store.set('selectedChat', undefined);
+            await this.getChats();
         } catch (e) {
             console.error(e);
         }
@@ -88,6 +90,14 @@ class ChatController {
         try {
             await this.api.deleteUsers(data);
             router.go(ROUTES.Chats);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async updateAvatar(data: FormData) {
+        try {
+            await this.api.updateAvatar(data);
         } catch (e) {
             console.error(e);
         }

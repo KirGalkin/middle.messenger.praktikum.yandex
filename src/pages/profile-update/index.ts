@@ -25,7 +25,7 @@ class ProfileUpdatePageBase extends Block {
         this.children.button = new Button({
             label: 'Update',
             events: {
-                click: (event: any) => this.onSubmit(event)
+                click: (event: Event) => this.onSubmit(event)
             }
         });
 
@@ -86,7 +86,7 @@ class ProfileUpdatePageBase extends Block {
         })
     }
 
-    private onSubmit(event: any) {
+    private onSubmit(event: Event) {
         event.preventDefault();
         const email = (this.children.updateFieldEmail as UpdateField)?.value;
         const login = (this.children.updateFieldLogin as UpdateField)?.value;

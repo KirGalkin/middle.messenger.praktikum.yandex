@@ -17,7 +17,7 @@ class SignUpPageBase extends Block {
 
         this.children.button = new Button({
             events: {
-                click: (event: any) => this.onSubmit(event)
+                click: (event: Event) => this.onSubmit(event)
             },
             label: 'Sign up'
         });
@@ -81,7 +81,7 @@ class SignUpPageBase extends Block {
         return this.compile(template, this.props);
     }
 
-    private onSubmit(event: any) {
+    private onSubmit(event: Event) {
         event.preventDefault();
         const email = (this.children.inputEmail as InputField)?.value;
         const login = (this.children.inputLogin as InputField)?.value;

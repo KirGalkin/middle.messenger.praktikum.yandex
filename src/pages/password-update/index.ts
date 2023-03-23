@@ -35,7 +35,7 @@ export class PasswordUpdatePage extends Block {
 
         this.children.button = new Button({
             events: {
-                click: (event: any) => this.onSubmit(event)
+                click: (event: Event) => this.onSubmit(event)
             },
             label: 'Update'
         })
@@ -53,7 +53,7 @@ export class PasswordUpdatePage extends Block {
         })
     }
 
-    private onSubmit(event: any) {
+    private onSubmit(event: Event) {
         event.preventDefault();
         const oldPassword =
             (this.children.updateFieldOldPass as UpdateField)?.value

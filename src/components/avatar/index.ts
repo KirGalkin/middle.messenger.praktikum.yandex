@@ -31,7 +31,7 @@ export class Avatar extends Block<AvatarProps> {
 
         this.children.button = new Button({
             events: {
-                click: (event) => this.onSubmit(event)
+                click: (event: Event) => this.onSubmit(event)
             },
             label: "Update avatar"
         })
@@ -49,7 +49,7 @@ export class Avatar extends Block<AvatarProps> {
         return true;
     }
 
-    protected async onSubmit(event: any) {
+    protected async onSubmit(event: Event) {
         event.preventDefault();
         const myUserForm = document.getElementById('myUserForm');
 
