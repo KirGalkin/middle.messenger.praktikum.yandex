@@ -28,6 +28,7 @@ export class ChatItem extends Block<ChatItemProps> {
         this.children.image = new Img({
             src: this.props.imageSrc ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.imageSrc : '',
             alt: 'avatar',
+            style: 'width: 47px; height: 47px;'
         })
     }
 

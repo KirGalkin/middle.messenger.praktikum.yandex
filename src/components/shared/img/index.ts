@@ -17,7 +17,7 @@ export class Img extends Block<ImageProps> {
     protected init() {
         this.element?.setAttribute('src', this.props.src);
         this.element?.setAttribute('alt', this.props.alt);
-        this.element?.setAttribute('style', "cursor: 'pointer'; width: 47px; height: 47px;");
+        this.element?.setAttribute('style',  this.props.style ?? "cursor: 'pointer'");
         this.element?.classList.add('animation');
         if (this.props.className) {
             this.element?.classList.add(this.props.className);
