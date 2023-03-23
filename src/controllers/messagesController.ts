@@ -71,14 +71,14 @@ class MessagesController {
         let messagesToAdd: Message[] = [];
 
         if (Array.isArray(messages)) {
-            messagesToAdd = messages.reverse();
+            messagesToAdd = messages;
         } else {
-            messagesToAdd.push(messages);
+            messagesToAdd.unshift(messages);
         }
 
         const currentMessages = (store.getState().messages || {})[id] || [];
 
-        messagesToAdd = [...currentMessages, ...messagesToAdd];
+        messagesToAdd = [...messagesToAdd, ...currentMessages];
 
         store.set(`messages.${id}`, messagesToAdd);
     }
