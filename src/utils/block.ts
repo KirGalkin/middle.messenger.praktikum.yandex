@@ -1,5 +1,6 @@
 import {EventBus} from "./eventBus";
 import {v4 as makeUUID} from 'uuid';
+import {isEqual} from "./utils";
 
 export enum EVENTS {
     INIT = 'init',
@@ -14,7 +15,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
     private el?: HTMLElement;
     private readonly eventBus: EventBus;
     protected readonly props: Props;
-    children: Record<string, Block> = {}
+    children: Record<string, Block | Block[]> = {}
 
     private readonly id: string;
 
@@ -22,7 +23,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
         return this.el;
     }
 
-    constructor(tagName = 'div', propsWithChildren: unknown = {}) {
+    protected constructor(tagName = 'div', propsWithChildren: unknown = {}) {
         const eventBus = new EventBus();
 
         const {children, props} = this.getChildrenAndProps(propsWithChildren)
@@ -68,30 +69,45 @@ export abstract class Block<Props extends Record<string, any> = any> {
     }
 
 
-    protected compile(template: (context: unknown) => string, props: any) {
-        const propsAndStubs = {...props};
+    protected compile(template: (context: any) => string, context: any) {
+        const contextAndStubs = {...context};
 
-        Object.entries(this.children).forEach(([key, child]) => {
-            propsAndStubs[key] = `<div data-id="${child.id}"></div>`
-        })
+        Object.entries(this.children).forEach(([name, component]) => {
+            if (Array.isArray(component)) {
+                contextAndStubs[name] = component.map(child => `<div data-id="${child.id}"></div>`)
+            } else {
+                contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+            }
+        });
 
-        const html = template(propsAndStubs);
+        const html = template(contextAndStubs);
 
-        const fragment = this.createDocumentElement('template') as HTMLTemplateElement;
+        const temp = document.createElement('template');
 
-        fragment.innerHTML = html;
+        temp.innerHTML = html;
 
-        Object.values(this.children).forEach(child => {
-            const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-            if(!stub) {
+        const replaceStub = (component: Block) => {
+            const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+
+            if (!stub) {
                 return;
             }
-            if (child.element) {
-                stub.replaceWith(child.element);
-            }
-        })
 
-        return fragment.content;
+            component.getContent()?.append(...Array.from(stub.childNodes));
+
+            stub.replaceWith(component.getContent()!);
+        }
+
+        // @ts-ignore
+        Object.entries(this.children).forEach(([_, component]) => {
+            if (Array.isArray(component)) {
+                component.forEach(replaceStub);
+            } else {
+                replaceStub(component);
+            }
+        });
+
+        return temp.content;
     }
 
     protected render(): DocumentFragment {
@@ -103,8 +119,12 @@ export abstract class Block<Props extends Record<string, any> = any> {
     }
 
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        console.log(oldProps, newProps);
-        return true;
+        return !isEqual(oldProps, newProps);
+
+    }
+
+    getContent() {
+        return this.element;
     }
 
     protected init(): void {
@@ -130,8 +150,12 @@ export abstract class Block<Props extends Record<string, any> = any> {
         this.componentDidMount();
 
         Object.values(this.children).forEach(child => {
-            child.dispatchComponentDidMount();
-        })
+            if (Array.isArray(child)) {
+                child.forEach(ch => ch.dispatchComponentDidMount());
+            } else {
+                child.dispatchComponentDidMount();
+            }
+        });
     }
 
     private componentDidUpdateInternal(oldProps: unknown, newProps: unknown): void {
@@ -148,7 +172,6 @@ export abstract class Block<Props extends Record<string, any> = any> {
 
         this.removeEvents();
 
-        // this.element.innerHTML = block
         this.element.innerHTML = '';
 
         this.element.appendChild(block);
@@ -206,19 +229,21 @@ export abstract class Block<Props extends Record<string, any> = any> {
     }
 
     private getChildrenAndProps(propsAndChildren: any):
-        {children: Record<string, Block>, props: Record<string, unknown>} {
-        const children: Record<string, Block> = {};
+        {children: Record<string, Block | Block[]>, props: Record<string, unknown>} {
         const props: Record<string, unknown> = {};
+        const children: Record<string, Block | Block[]> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
-            if (value instanceof Block) {
-                children[key] = value;
+            if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+                children[key as string] = value;
+            } else if (value instanceof Block) {
+                children[key as string] = value;
             } else {
                 props[key] = value;
             }
-        })
+        });
 
-        return {children, props};
+        return {props, children};
     }
 
 }

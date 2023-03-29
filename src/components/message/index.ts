@@ -13,6 +13,13 @@ export class Message extends Block<InputProps> {
         return (this.element as HTMLInputElement | undefined)?.value;
     }
 
+    set value(value: string | undefined) {
+        if(!value) {
+            return;
+        }
+        this.element?.setAttribute('value', value);
+    }
+
     constructor(props: InputProps) {
         super('input', props);
     }

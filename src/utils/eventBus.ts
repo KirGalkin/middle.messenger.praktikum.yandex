@@ -1,33 +1,40 @@
-export class EventBus {
-    private readonly listeners: Record<string, Array<(...args: unknown[]) => void>> = {}
+type Handler<A extends any[] = unknown[]> = (...args: A) => void;
+type MapInterface<P> = P[keyof P]
 
-    constructor() {
-        this.listeners = {}
-    }
+export class EventBus<
+    E extends Record<string, string> = Record<string, string>,
+    Args extends Record<MapInterface<E>, any[]> = Record<string, any[]>
+> {
+    private readonly listeners: {
+        [K in MapInterface<E>]?: Handler<Args[K]>[]
+    } = {};
 
-    on(event: string, callback: (...args: unknown[]) => void): void {
+    on<Event extends MapInterface<E>>(event: Event, callback: Handler<Args[Event]>) {
         if (!this.listeners[event]) {
             this.listeners[event] = [];
         }
 
-        this.listeners[event].push(callback);
+
+        this.listeners[event]?.push(callback);
     }
 
-    off(event: string, callback: (...args: unknown[]) => void): void {
+    off<Event extends MapInterface<E>>(event: Event, callback: Handler<Args[Event]>) {
         if (!this.listeners[event]) {
-            throw new Error(`Event ${event} is not registered`);
+            throw new Error(`No events: ${event}`);
         }
 
-        this.listeners[event] = this.listeners[event].filter(listener => listener !== callback)
+        this.listeners[event] = this.listeners[event]!.filter(
+            listener => listener !== callback
+        );
     }
 
-    emit(event: string, ...args: unknown[]): void {
+    emit<Event extends MapInterface<E>>(event: Event, ...args: Args[Event]) {
         if (!this.listeners[event]) {
-            throw new Error(`Event ${event} is not registered`);
+            return;
         }
 
-        this.listeners[event].forEach(listener => {
+        this.listeners[event]!.forEach(listener => {
             listener(...args);
-        })
+        });
     }
 }

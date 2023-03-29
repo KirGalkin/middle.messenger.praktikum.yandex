@@ -1,68 +1,34 @@
 import {Block} from "../../utils/block";
 import template from './chat.hbs';
-import {Chat} from "../../components/chat";
-import {ReceivedMessage} from "../../components/receivedMessage";
-import {SentMessage} from "../../components/sentMessage";
 import {Message} from "../../components/message";
-import {Img} from "../../components/shared/img";
-import imageAttach from '../../../static/attach.png';
-import imageSend from '../../../static/nav_arrow_left.png';
+import {Link} from "../../components/link";
+import {ROUTES} from "../../utils/types";
+import ChatController from "../../controllers/chatController";
+import {Button} from "../../components/button";
+import {withStore} from "../../utils/store";
+import {ChatList} from "../../components/chatList";
+import {Messenger} from "../../components/messenger";
+import MessagesController from "../../controllers/messagesController";
+import router from "../../utils/router";
+import {ChatData} from "../../api/types";
 
-export class ChatPage extends Block {
+class ChatPageBase extends Block {
+
     constructor(props: unknown) {
         super('div', props);
+        this.loadChats();
+    }
+
+    async loadChats() {
+        await ChatController.getChats();
     }
 
     protected init() {
         this.element?.classList.add('chat-content');
+        this.initChildrens();
+    }
 
-        this.children.chat = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        this.children.chat1 = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        this.children.chat2 = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        this.children.chat3 = new Chat({
-            count: 2,
-            message: 'Lorem ipsum dolor sit amet, ' +
-                'consectetur adipisicing elit. Ab, ad atque cupiditate dignissimos',
-            name: 'Andrew',
-            time: '15:24'
-        })
-
-        this.children.receivedMessage = new ReceivedMessage({
-            message: `
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Provident quibusdam voluptatem voluptates. Aliquid assumenda
-                commodi deserunt dignissimos eum illum labore, natus nobis,
-                odit officia officiis velit voluptas voluptatibus. Nulla odio
-                officiis similique! Ab alias amet doloremque esse optio pariatur
-                placeat quia saepe temporibus? Ab assumenda beatae ea, iste perferendis
-                possimus!`
-        });
-
-        this.children.sentMessage = new SentMessage({
-            message: 'Lorem ipsum!!'
-        })
-
+    private initChildrens() {
         this.children.message = new Message({
             htmlId: 'message',
             type: 'text',
@@ -70,19 +36,114 @@ export class ChatPage extends Block {
             events: {}
         })
 
-        this.children.imageAttach = new Img({
-            alt: 'attach',
-            src: imageAttach
+        this.children.link = new Link({
+            label: 'Profile >',
+            to: ROUTES.Profile
         })
 
-        this.children.imageSend = new Img({
-            alt: 'attach',
-            src: imageSend
+        this.children.addChatButton = new Button({
+            events: {
+                click: () => router.go(ROUTES.AddNewChat)
+            }, label: '+ Chat'
         })
 
+        this.children.chatList = new ChatList({
+            chatData: [],
+            //FIX ME
+            activeId: this.props.selectedChat
+        })
+
+        this.children.addUserButton = new Button({
+            events: {
+                click: () => {
+                    router.go(ROUTES.AddUserToChat)
+                }
+            },
+            label: "+ User",
+            style: "width: 75px; margin: 0 6px; height: 32px"
+
+        })
+
+        this.children.removeUserButton = new Button({
+            events: {
+                click: () => {
+                    router.go(ROUTES.RemoveUserToChat)
+                }
+            },
+            label: "- User",
+            style: "width: 75px; margin: 0 6px; height: 32px"
+        })
+
+        this.children.sendMessageBtn = new Button({
+            events: {
+                click: () => {
+                    const message = (this.children.message as Message).value;
+                    if (!message || !this.props.selectedChat) {
+                        return;
+                    }
+                    MessagesController.sendMessage(this.props.selectedChat, message);
+                }
+            },
+            label: "Send ->",
+            style: "width: 170px; height: 32px; margin: 0"
+
+        })
+
+        this.children.removeChat = new Button({
+            events: {
+                click: () => this.onRemoveChat()
+            },
+            label: '- Chat',
+            style: "width: 75px; margin: 0 6px; height: 32px; background-color: var(--warning-color);"
+        })
+
+        this.children.messenger = new Messenger({});
+    }
+
+// @ts-ignore
+    protected componentDidUpdate(oldProps: unknown,
+                                 newProps: { chats: ChatData[], selectedChat: number }): boolean {
+        (this.children.chatList as Block).setProps({
+            chatData: newProps.chats,
+            activeId: newProps.selectedChat
+        });
+
+        return true;
+    }
+
+    private async onRemoveChat(): Promise<void> {
+        const currentChat = this.props.selectedChat;
+
+        if (!currentChat) {
+            console.error('Current chat is empty', currentChat)
+            return;
+        }
+        await ChatController.deleteChat({chatId: currentChat});
     }
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
 }
+
+const withSelectedChatMessages = withStore(state => {
+    const selectedChatId = state.selectedChat;
+
+    if (!selectedChatId) {
+        return {
+            messages: [],
+            selectedChat: undefined,
+            userId: state.user?.id,
+            chats: state.chats
+        };
+    }
+
+    return {
+        messages: (state.messages || {})[selectedChatId] || [],
+        selectedChat: state.selectedChat,
+        userId: state.user?.id,
+        chats: state.chats
+    };
+});
+
+export const ChatPage = withSelectedChatMessages(ChatPageBase);

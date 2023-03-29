@@ -8,7 +8,8 @@ interface UpdateFieldProps {
     htmlId: string,
     label: string,
     type: string,
-    validationFn?: (value: string) => string | undefined
+    validationFn?: (value?: string) => string | undefined
+    value: string
 }
 export class UpdateField extends Block<UpdateFieldProps> {
     get value(): string | undefined {
@@ -30,6 +31,7 @@ export class UpdateField extends Block<UpdateFieldProps> {
         this.children.input = new Input({
             htmlId: this.props.htmlId,
             type: this.props.type,
+            value: this.props.value,
             events: {
                 focus: () => {
                     this.validateField();
@@ -37,9 +39,15 @@ export class UpdateField extends Block<UpdateFieldProps> {
                 blur: () => {
                     this.validateField();
                 }
-            }
+            },
         });
 
+    }
+
+    // @ts-ignore
+    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
+        (this.children.input as Block).setProps({value: (newProps as UpdateFieldProps).value})
+        return false;
     }
 
     protected render(): DocumentFragment {
@@ -50,6 +58,6 @@ export class UpdateField extends Block<UpdateFieldProps> {
         const {validationFn} = this.props;
         const message = validationFn ?
             validationFn((this.children.input as Input)?.value) : undefined;
-        this.children.error.setProps({message});
+        (this.children.error as Block).setProps({message});
     }
 }

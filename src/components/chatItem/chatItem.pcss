@@ -1,3 +1,12 @@
+.chat-active {
+    background-color: var(--primary-color);
+    color: var(--main-bg-color);
+
+    h4 {
+        color: var(--main-bg-color) !important;
+    }
+}
+
 .chat-list_card {
     color: var(--main-text-color);
     display: flex;
@@ -5,6 +14,16 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
+
+    &:hover {
+        background-color: var(--primary-color);
+        color: var(--main-bg-color);
+        cursor: pointer;
+
+        h4 {
+            color: var(--main-bg-color) !important;
+        }
+    }
 
     .card-avatar {
         height: 47px;

@@ -1,2 +1,8 @@
 {{{image}}}
-<p class="avatar-name">{{name}}</p>
+
+{{#if editMode}}
+    <form id="myUserForm">
+        Upload new avatar image: <input id="avatar" type="file" name="avatar" accept="image/*">
+        {{{button}}}
+    </form>
+{{/if}}

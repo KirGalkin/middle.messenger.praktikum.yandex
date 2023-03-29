@@ -4,7 +4,7 @@
 @import url("./components/readonlyField/readonlyField.pcss");
 @import url("./components/link/link.pcss");
 @import url("./components/updateField/updateField.pcss");
-@import url("./components/chat/chat.pcss");
+@import url("./components/chatItem/chatItem.pcss");
 @import url("./components/receivedMessage/receivedMessage.pcss");
 @import url("./components/sentMessage/sentMessage.pcss");
 @import url("./components/navigationLink/navigationLink.pcss");
@@ -16,6 +16,9 @@
 @import url("./pages/profile-update/profile-update.pcss");
 @import url("./pages/signUp/signUp.pcss");
 @import url("./pages/signIn/signIn.pcss");
+@import url("./pages/add-new-chat/add-new-chat.pcss");
+@import url("./pages/add-new-user-to-chat/add-new-user-to-chat.pcss");
+@import url("./pages/delete-user-from-chat/delete-user-from-chat.pcss");
 
 html, body, main {
     --main-bg-color: #000337;
@@ -61,4 +64,26 @@ nav {
 
 .error-container {
     height: 100%;
+}
+
+.center-page-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animation {
+    transition: transform .2s;
+    
+    &:hover {
+        transform: scale(1.1)
+    }
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: scroll;
 }
