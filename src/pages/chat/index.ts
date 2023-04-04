@@ -24,7 +24,7 @@ class ChatPageBase extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('chat-content');
+        this.getContent()?.classList.add('chat-content');
         this.initChildrens();
     }
 

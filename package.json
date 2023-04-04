@@ -8,12 +8,8 @@
     "build": "webpack --config webpack.config.js",
     "stylelint": "npx stylelint \"**/*.pcss\" --fix",
     "eslint": "eslint . --ext .ts --fix",
-    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.spec.ts'"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test"
-    }
+    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.spec.ts'",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
