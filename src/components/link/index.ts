@@ -22,7 +22,7 @@ class BaseLink extends Block<LinkProps> {
     }
 
     protected init() {
-        this.element?.classList.add('link');
+        this.getContent()?.classList.add('link');
     }
 
     protected render(): DocumentFragment {

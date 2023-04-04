@@ -10,7 +10,7 @@ export class InputError extends Block<InputErrorProps> {
     }
 
     protected init() {
-        this.element?.classList.add('error');
+        this.getContent()?.classList.add('error');
     }
 
     protected render(): DocumentFragment {

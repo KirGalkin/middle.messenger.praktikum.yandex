@@ -15,8 +15,8 @@ class DeleteUserFromChatPageBase extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('center-page-content');
-        this.element?.classList.add('delete-user-content');
+        this.getContent()?.classList.add('center-page-content');
+        this.getContent()?.classList.add('delete-user-content');
 
         this.children.arrowImg = new Img({
             src: arrow,

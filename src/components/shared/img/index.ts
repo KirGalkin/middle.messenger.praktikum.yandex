@@ -15,18 +15,18 @@ export class Img extends Block<ImageProps> {
     }
 
     protected init() {
-        this.element?.setAttribute('src', this.props.src);
-        this.element?.setAttribute('alt', this.props.alt);
-        this.element?.setAttribute('style',  this.props.style ?? "cursor: 'pointer'");
-        this.element?.classList.add('animation');
+        this.getContent()?.setAttribute('src', this.props.src);
+        this.getContent()?.setAttribute('alt', this.props.alt);
+        this.getContent()?.setAttribute('style',  this.props.style ?? "cursor: 'pointer'");
+        this.getContent()?.classList.add('animation');
         if (this.props.className) {
-            this.element?.classList.add(this.props.className);
+            this.getContent()?.classList.add(this.props.className);
         }
     }
 
     // @ts-ignore
     protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
-        this.element?.setAttribute('src', (newProps as ImageProps)?.src || '');
+        this.getContent()?.setAttribute('src', (newProps as ImageProps)?.src || '');
 
         return true;
     }

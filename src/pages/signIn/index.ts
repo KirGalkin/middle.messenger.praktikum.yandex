@@ -14,7 +14,7 @@ class SignInPageBase extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('signin-container');
+        this.getContent()?.classList.add('signin-container');
 
         this.children.inputLogin = new InputField({
             htmlId: 'login',

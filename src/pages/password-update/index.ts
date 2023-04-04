@@ -15,7 +15,7 @@ export class PasswordUpdatePage extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('password_update-container');
+        this.getContent()?.classList.add('password_update-container');
 
         this.children.updateFieldOldPass = new UpdateField({
             htmlId: 'oldPassword',

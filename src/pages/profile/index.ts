@@ -19,7 +19,7 @@ class ProfilePageBase extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('profile-container');
+        this.getContent()?.classList.add('profile-container');
 
         AuthController.getUser();
 

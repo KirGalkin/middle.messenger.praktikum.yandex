@@ -20,9 +20,9 @@ export class ChatItem extends Block<ChatItemProps> {
     }
 
     protected init() {
-        this.element?.classList.add('chat-list_card');
+        this.getContent()?.classList.add('chat-list_card');
         if(this.props.isActive) {
-            this.element?.classList.add('chat-active');
+            this.getContent()?.classList.add('chat-active');
         }
 
         this.children.image = new Img({
@@ -35,7 +35,7 @@ export class ChatItem extends Block<ChatItemProps> {
     // @ts-ignore
     protected componentDidUpdate(oldProps: ChatItemProps, newProps: ChatItemProps): boolean {
         if(newProps.isActive) {
-            this.element?.classList.add('chat-active');
+            this.getContent()?.classList.add('chat-active');
         }
         return false;
     }
