@@ -10,7 +10,7 @@ export class ReceivedMessage extends Block<ReceivedMessageProps> {
     }
 
     protected init() {
-        this.element?.classList.add('received-message')
+        this.getContent()?.classList.add('received-message')
     }
 
     protected render(): DocumentFragment {

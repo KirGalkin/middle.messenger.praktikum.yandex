@@ -10,14 +10,15 @@ export function render(query: string, block: Block) {
 
     root.innerHTML = '';
 
-    root.append(block.element!);
+    root.append(block.getContent()!);
 
     return root;
 }
 
 export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
     if (typeof object !== 'object' || object === null) {
-        return object;
+        // return object;
+        throw new Error('Object must be type of object!')
     }
 
     const result = path.split('.').reduceRight<Indexed>((acc, key) => ({
@@ -49,7 +50,6 @@ export function isEqual(lhs: any, rhs: any) {
             return false;
         }
     }
-
     return true;
 }
 

@@ -19,7 +19,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
 
     private readonly id: string;
 
-    get element(): HTMLElement | undefined {
+    private get element(): HTMLElement | undefined {
         return this.el;
     }
 

@@ -10,7 +10,7 @@ export class Label extends Block<LabelProps> {
     }
 
     protected init() {
-        this.element?.classList.add('input_label');
+        this.getContent()?.classList.add('input_label');
     }
 
     protected render(): DocumentFragment {

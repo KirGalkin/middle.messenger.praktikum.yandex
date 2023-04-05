@@ -7,12 +7,11 @@ import {ProfileUpdatePage} from "./pages/profile-update";
 import {PasswordUpdatePage} from "./pages/password-update";
 import {ROUTES} from "./utils/types";
 import AuthController from "./controllers/authController";
-import messagesController from "./controllers/messagesController";
 import {AddNewUserToChatPage} from "./pages/add-new-user-to-chat";
 import {DeleteUserFromChatPage} from "./pages/delete-user-from-chat";
 import AddNewChat from "./pages/add-new-chat";
+import './index.pcss'
 
-console.log(messagesController);
 
 window.addEventListener('DOMContentLoaded', async () => {
 

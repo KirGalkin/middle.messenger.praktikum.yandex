@@ -14,7 +14,7 @@ export class NavigationLink extends Block<NavigationLinkProps> {
     }
 
     protected init() {
-        this.element?.classList.add('nav-link');
+        this.getContent()?.classList.add('nav-link');
     }
 
     protected render(): DocumentFragment {

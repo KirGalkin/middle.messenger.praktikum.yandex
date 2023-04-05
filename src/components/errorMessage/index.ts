@@ -13,7 +13,7 @@ export class ErrorMessage extends Block<ErrorMessageProps> {
     }
 
     protected init() {
-        this.element?.classList.add('error-message_container')
+        this.getContent()?.classList.add('error-message_container')
     }
 
     protected render(): DocumentFragment {

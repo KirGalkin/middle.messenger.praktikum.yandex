@@ -11,11 +11,11 @@ interface InputProps {
 }
 export class Input extends Block<InputProps> {
     get value(): string | undefined {
-        return (this.element as HTMLInputElement | undefined)?.value;
+        return (this.getContent() as HTMLInputElement | undefined)?.value;
     }
 
     set value(value) {
-        this.element?.setAttribute('value', value || '')
+        this.getContent()?.setAttribute('value', value || '')
     }
 
     constructor(props: InputProps) {
@@ -29,10 +29,10 @@ export class Input extends Block<InputProps> {
     }
 
     protected init() {
-        this.element?.classList.add('input_field')
-        this.element?.setAttribute('id', this.props.htmlId);
-        this.element?.setAttribute('type', this.props.type);
-        this.element?.setAttribute('name', this.props.htmlId);
-        this.element?.setAttribute('value', this.props.value);
+        this.getContent()?.classList.add('input_field')
+        this.getContent()?.setAttribute('id', this.props.htmlId);
+        this.getContent()?.setAttribute('type', this.props.type);
+        this.getContent()?.setAttribute('name', this.props.htmlId);
+        this.getContent()?.setAttribute('value', this.props.value);
     }
 }

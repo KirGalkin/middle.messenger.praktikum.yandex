@@ -21,7 +21,7 @@ export class InputField extends Block<InputProps> {
     }
 
     protected init() {
-        this.element?.classList.add('input');
+        this.getContent()?.classList.add('input');
 
         this.children.error = new InputError({});
 

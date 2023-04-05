@@ -20,7 +20,7 @@ export class UpdateField extends Block<UpdateFieldProps> {
     }
 
     protected init() {
-        this.element?.classList.add('update-field');
+        this.getContent()?.classList.add('update-field');
 
         this.children.label = new Label({
             label: this.props.label

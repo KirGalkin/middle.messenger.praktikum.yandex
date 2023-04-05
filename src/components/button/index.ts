@@ -15,9 +15,9 @@ export class Button extends Block<ButtonProps> {
     }
 
     protected init() {
-        this.element?.classList.add('main-button');
-        this.element?.classList.add('animation');
-        this.element?.setAttribute('style', this.props.style || '');
+        this.getContent()?.classList.add('main-button');
+        this.getContent()?.classList.add('animation');
+        this.getContent()?.setAttribute('style', this.props.style || '');
     }
 
     render() {

@@ -10,7 +10,7 @@ export class SentMessage extends Block<SentMessageProps> {
     }
 
     protected init() {
-        this.element?.classList.add('sent-message');
+        this.getContent()?.classList.add('sent-message');
     }
 
     protected render(): DocumentFragment {

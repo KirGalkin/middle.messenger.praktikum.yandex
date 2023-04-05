@@ -18,7 +18,7 @@ class ProfileUpdatePageBase extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('profile_update-container');
+        this.getContent()?.classList.add('profile_update-container');
 
         AuthController.getUser();
 

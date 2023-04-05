@@ -10,14 +10,14 @@ interface InputProps {
 }
 export class Message extends Block<InputProps> {
     get value(): string | undefined {
-        return (this.element as HTMLInputElement | undefined)?.value;
+        return (this.getContent() as HTMLInputElement | undefined)?.value;
     }
 
     set value(value: string | undefined) {
         if(!value) {
             return;
         }
-        this.element?.setAttribute('value', value);
+        this.getContent()?.setAttribute('value', value);
     }
 
     constructor(props: InputProps) {
@@ -25,10 +25,10 @@ export class Message extends Block<InputProps> {
     }
 
     protected init() {
-        this.element?.classList.add('message')
-        this.element?.setAttribute('id', this.props.htmlId);
-        this.element?.setAttribute('type', this.props.type);
-        this.element?.setAttribute('placeholder', this.props.placeholder || '');
-        this.element?.setAttribute('name', this.props.htmlId);
+        this.getContent()?.classList.add('message')
+        this.getContent()?.setAttribute('id', this.props.htmlId);
+        this.getContent()?.setAttribute('type', this.props.type);
+        this.getContent()?.setAttribute('placeholder', this.props.placeholder || '');
+        this.getContent()?.setAttribute('name', this.props.htmlId);
     }
 }

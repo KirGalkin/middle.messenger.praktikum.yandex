@@ -21,7 +21,7 @@ export class Avatar extends Block<AvatarProps> {
 
     protected init() {
 
-        this.element?.classList.add('avatar')
+        this.getContent()?.classList.add('avatar')
 
         this.children.image = new Img({
             src: this.props.imageSrc ? `${this.url}${this.props.imageSrc}` : imageAva,

@@ -11,7 +11,7 @@ export class ReadonlyField extends Block<ReadonlyFieldProps> {
     }
 
     protected init() {
-        this.element?.classList.add('readonly-field');
+        this.getContent()?.classList.add('readonly-field');
     }
 
     protected render(): DocumentFragment {

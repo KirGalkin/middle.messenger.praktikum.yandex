@@ -13,7 +13,7 @@ class SignUpPageBase extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('signup-container');
+        this.getContent()?.classList.add('signup-container');
 
         this.children.button = new Button({
             events: {

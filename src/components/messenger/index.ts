@@ -17,7 +17,7 @@ class MessengerBase extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('flex-column');
+        this.getContent()?.classList.add('flex-column');
         this.children.messages = this.createMessages(this.props);
     }
 

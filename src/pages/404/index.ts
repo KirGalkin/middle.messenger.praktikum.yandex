@@ -8,7 +8,7 @@ export class NotFoundErrorPage extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('error-container');
+        this.getContent()?.classList.add('error-container');
 
         this.children.errorMessage = new ErrorMessage({
             code: '404',

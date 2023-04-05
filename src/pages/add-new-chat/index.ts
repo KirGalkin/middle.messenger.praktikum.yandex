@@ -13,8 +13,8 @@ class AddNewChat extends Block {
     }
 
     protected init() {
-        this.element?.classList.add('center-page-content');
-        this.element?.classList.add('add-new-chat-content')
+        this.getContent()?.classList.add('center-page-content');
+        this.getContent()?.classList.add('add-new-chat-content')
 
         this.children.arrowImg = new Img({
             src: arrow,
