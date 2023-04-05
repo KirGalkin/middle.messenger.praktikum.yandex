@@ -36,3 +36,6 @@ https://www.figma.com/file/W2RLTCx9zxwhhJekrrZDAV/Chat-(Copy)?t=p1y7nqJtWGfci0Qd
 
 ### Netlify
 https://capable-beijinho-e7296a.netlify.app/
+
+### Y.Cloud
+https://bbap5f0852affl2umtr4.containers.yandexcloud.net
