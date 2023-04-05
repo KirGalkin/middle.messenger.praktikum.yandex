@@ -22,8 +22,6 @@
   },
   "homepage": "https://github.com/KirGalkin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.9",
-    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
     "@types/chai": "^4.3.4",
     "@types/jsdom": "^21.1.1",
     "@types/mocha": "^10.0.1",
@@ -45,7 +43,6 @@
     "jsdom": "^21.1.1",
     "mini-css-extract-plugin": "^2.7.5",
     "mocha": "^10.2.0",
-    "parcel": "^2.8.3",
     "postcss": "^8.4.21",
     "postcss-custom-properties": "^13.1.1",
     "postcss-import": "^15.1.0",
