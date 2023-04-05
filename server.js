@@ -3,7 +3,7 @@ const path = require('path');
 const history = require('express-history-api-fallback');
 
 const app = express();
-const PORT = process.env.PORT || 3100;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.resolve(__dirname, './dist')));
 
